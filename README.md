@@ -2,12 +2,12 @@
 
 ## Rincón del Remo es una plataforma innovadora para la gestión de perchas en guarderías de kayaks y el alquiler de embarcaciones no utilizadas.
 
-###✨ Características principales
+✨ Características principales
 
-###🛋️ Administración de perchas y taquillas.
+🛋️ Administración de perchas y taquillas.
 
-###🌊 Alquiler de kayaks con aprobación del dueño.
+🌊 Alquiler de kayaks con aprobación del dueño.
 
-###🛠️ Panel intuitivo para reservas y gestión.
+🛠️ Panel intuitivo para reservas y gestión.
 
-###🔒 Seguridad y control sobre el uso de cada kayak.
+🔒 Seguridad y control sobre el uso de cada kayak.
