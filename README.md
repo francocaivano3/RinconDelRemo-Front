@@ -1,12 +1,13 @@
-# React + Vite
+⚓ Rincón del Remo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Rincón del Remo es una plataforma innovadora para la gestión de perchas en guarderías de kayaks y el alquiler de embarcaciones no utilizadas.
 
-Currently, two official plugins are available:
+✨ Características principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🛋️ Administración de perchas y taquillas.
 
-## Expanding the ESLint configuration
+🌊 Alquiler de kayaks con aprobación del dueño.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🛠️ Panel intuitivo para reservas y gestión.
+
+🔒 Seguridad y control sobre el uso de cada kayak.
