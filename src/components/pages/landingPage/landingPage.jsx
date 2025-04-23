@@ -1,8 +1,11 @@
 import React from "react";
 import imagen from '../../../assets/imagen de dos kayaks desde arriba.jpg'
+import Header from '../../../components/navbar/NavBar'
 
 export default function LandingPage() {
   return (
+  <>
+  <Header/>
     <div className="flex flex-col md:flex-row h-screen">
       <div className="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-green-50 to-white p-8 overflow-y-auto">
         <div className="w-full max-w-xl">
@@ -37,5 +40,6 @@ export default function LandingPage() {
        <img src={imagen} alt="Imagen de kayaks" className="object-cover w-full h-full" />
       </div>
     </div>
+    </>
   );
 }
