@@ -1,12 +1,16 @@
 import { useState } from 'react'
-import LandingPage from './components/pages/landingPage/landingPage'
+import { ThemeProvider } from './components/context/themeContext/ThemeContext';
+import ThemeBtn from './components/ThemeBtn/ThemeBtn';
+import LandingPage from './components/pages/landingPage/landingPage'; 
+import Register from "../src/components/pages/register/Register";
 
 function App() {
   
   return (
-    <>
-      <LandingPage/>
-    </>
+    <ThemeProvider>
+      <Register/>
+      <ThemeBtn/>
+    </ThemeProvider>
   )
 }
 
