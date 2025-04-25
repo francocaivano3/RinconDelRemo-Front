@@ -1,0 +1,44 @@
+
+* {
+  margin-bottom: 0px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  top: 0;
+  position: absolute;
+  background-color: #13837c;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.iconoKayak {
+  margin-right: 10px;
+  margin-left: 0;
+  padding-left: 0;
+  cursor:  pointer;
+}
+
+.header-text {
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 3px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
