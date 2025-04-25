@@ -11,7 +11,7 @@ function App() {
     <ThemeProvider>
       <Register/>
       <ThemeBtn/>
-    </ThemeProvider>
+   </ThemeProvider>
   );
 }
 

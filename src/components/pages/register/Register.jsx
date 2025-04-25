@@ -34,8 +34,8 @@ const Register = () => {
     }
 
     return (
-        <div className="transition-all duration-700 flex flex-row h-full bg-white dark:bg-[#003459] text-[#007178] dark:text-[#00A8E8]">
-            <div className="h-full w-full md:w-1/2 flex items-center justify-center p-8">
+        <div className="transition-all duration-700 flex flex-row h-full 2xl:h-screen bg-white dark:bg-[#003459] text-[#007178] dark:text-[#00A8E8]">
+            <div className="h-screen w-full md:w-1/2 flex items-center justify-center p-8">
                 <div className="w-full max-w-md p-8 rounded-xl">
                     <h2 className="text-2xl font-bold text-center mb-6">
                         Registrarse
@@ -72,7 +72,7 @@ const Register = () => {
 
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium mb-1">
-                                Email
+                                Correo Electrónico
                             </label>
                             <input
                                 type="email"
