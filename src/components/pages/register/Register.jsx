@@ -2,9 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../context/themeContext/ThemeContext";
 import imgLight from "../../../assets/pexels-jonathan-lassen-1263409-2404667.webp";
 import imgDark from "../../../assets/pexels-robertforevr-2611696.webp";
+import { useAlert } from "../../context/alertContext/AlertContext";
+
 
 const Register = () => {
     const {isDark, setIsDark} = useContext(ThemeContext);
+    const {showAlert} = useAlert();
     const imgUrl = isDark ? imgDark : imgLight;
     const [formData, setFormData] = useState({
         name: "",
@@ -28,7 +31,11 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("Formulario enviado"); // Después lo cambio por una alerta de alguna libreria
+        if(formData.name == "a"){ //PRUEBAS PARA MOSTRAR A TODOS
+            showAlert("mal", "error");
+            return;
+        } 
+        showAlert("Registro exitoso", "success");
 
         //falta la logica desde el back
     }
