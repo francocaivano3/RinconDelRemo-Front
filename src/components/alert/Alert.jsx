@@ -1,4 +1,4 @@
-//import Alert from "@mui/material/Alert";
+import Alert from "@mui/material/Alert";
 import { useAlert } from "../context/alertContext/AlertContext";
 
 export default function SimpleAlert() {

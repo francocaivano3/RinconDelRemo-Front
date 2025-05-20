@@ -5,10 +5,17 @@ import SimpleAlert from "./components/alert/Alert";
 import LandingPage from "./components/pages/landingPage/landingPage";
 import Register from "../src/components/pages/register/Register";
 import Perfil from "./components/pages/perfil/Perfil";
-import SuperAdmin from "./components/pages/superAdmin/SuperAdmin";
 
 function App() {
-  return <SuperAdmin />;
+  return (
+    <ThemeProvider>
+      <AlertProvider>
+        <SimpleAlert />
+        <Register />
+        <ThemeBtn />
+      </AlertProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;

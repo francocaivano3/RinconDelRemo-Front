@@ -1,6 +1,6 @@
 import { useContext } from "react";
-//import { Sun, Moon } from "lucide-react";
-//import { ThemeContext } from "../../context/themeContext/ThemeContext";
+import { Sun, Moon } from "lucide-react";
+import { ThemeContext } from "../context/themeContext/ThemeContext";
 
 const ThemeBtn = () => {
   const { isDark, setIsDark } = useContext(ThemeContext);
