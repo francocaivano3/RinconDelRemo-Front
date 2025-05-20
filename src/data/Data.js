@@ -1,0 +1,42 @@
+export const USERS_DATA = [
+  {
+    id: "1",
+    name: "Juan Pérez",
+    email: "juan@example.com",
+    role: "superadmin",
+    status: "active",
+    createdAt: "2023-05-10",
+  },
+  {
+    id: "2",
+    name: "María González",
+    email: "maria@example.com",
+    role: "encargado",
+    status: "active",
+    createdAt: "2023-06-15",
+  },
+  {
+    id: "3",
+    name: "Carlos Rodríguez",
+    email: "carlos@example.com",
+    role: "arrendatario",
+    status: "active",
+    createdAt: "2023-07-20",
+  },
+  {
+    id: "4",
+    name: "Ana Martínez",
+    email: "ana@example.com",
+    role: "dueno",
+    status: "inactive",
+    createdAt: "2023-08-25",
+  },
+  {
+    id: "5",
+    name: "Roberto Sánchez",
+    email: "roberto@example.com",
+    role: "arrendatario",
+    status: "active",
+    createdAt: "2023-09-30",
+  },
+];
