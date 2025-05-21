@@ -5,14 +5,15 @@ import SimpleAlert from "./components/alert/Alert";
 import LandingPage from "./components/pages/landingPage/landingPage";
 import Register from "../src/components/pages/register/Register";
 import Perfil from "./components/pages/perfil/Perfil";
+import MyKayaks from "./components/pages/myKayaks/myKayaks";
 
 function App() {
   return (
     <ThemeProvider>
       <AlertProvider>
-        <SimpleAlert />
-        <Register />
-        <ThemeBtn />
+        <SimpleAlert/>
+        <MyKayaks/>
+        <ThemeBtn/>  
       </AlertProvider>
     </ThemeProvider>
   );
