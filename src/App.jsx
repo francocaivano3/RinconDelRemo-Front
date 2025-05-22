@@ -5,6 +5,7 @@ import SimpleAlert from "./components/alert/Alert";
 import LandingPage from "./components/pages/landingPage/landingPage";
 import Register from "../src/components/pages/register/Register";
 import Perfil from "./components/pages/perfil/Perfil";
+import Dashboard from "./components/dashboard/Dashboard";
 import MyKayaks from "./components/pages/myKayaks/myKayaks";
 
 function App() {
