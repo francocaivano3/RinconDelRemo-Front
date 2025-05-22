@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import { useNavigate } from 'react-router-dom';
-// import { AuthContext } from "../../service/authContext/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
-import { useContext, useRef, useState } from "react";
+
+import { useRef, useState } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ const Login = () => {
     password: false,
   });
 
-//   const { handleLogin } = useContext(AuthContext);
+
   let userData = {}
 
   const handleSubmit = async (event) => {
@@ -77,7 +77,7 @@ const Login = () => {
   };
 
   return (
-    <div className='login-container' style={{ display: "flex", width: "100%", paddingTop: "5em", paddingLeft: "10px", paddingRight: "10px", paddingBottom: "20px", width: "100%", height: "100vh" }}>
+    <div className='login-container' style={{ display: "flex", paddingTop: "5em", paddingLeft: "10px", paddingRight: "10px", paddingBottom: "20px", width: "100%", height: "100vh" }}>
       <Form data-bs-theme="dark" style={{ maxWidth: "800px", margin: "auto" }}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
