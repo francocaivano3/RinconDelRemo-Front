@@ -1,11 +1,23 @@
-import Login from './components/pages/login/Login'
+import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
+import ThemeBtn from "./components/ThemeBtn/ThemeBtn";
+import AlertProvider from "./components/context/alertContext/AlertContext";
+import SimpleAlert from "./components/alert/Alert";
+import LandingPage from "./components/pages/landingPage/landingPage";
+import Register from "../src/components/pages/register/Register";
+import Perfil from "./components/pages/perfil/Perfil";
+import Dashboard from "./components/dashboard/Dashboard";
+import MyKayaks from "./components/pages/myKayaks/myKayaks";
 
 function App() {
-
-
   return (
-    <Login/>
-  )
+    <ThemeProvider>
+      <AlertProvider>
+        <SimpleAlert/>
+        <MyKayaks/>
+        <ThemeBtn/>  
+      </AlertProvider>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
