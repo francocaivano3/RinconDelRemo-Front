@@ -7,13 +7,14 @@ import Register from "../src/components/pages/register/Register";
 import Perfil from "./components/pages/perfil/Perfil";
 import Dashboard from "./components/dashboard/Dashboard";
 import MyKayaks from "./components/pages/myKayaks/myKayaks";
+import AppRouter from "./routers/AppRouters";
 
 function App() {
   return (
     <ThemeProvider>
       <AlertProvider>
         <SimpleAlert/>
-        <MyKayaks/>
+        <AppRouter/>
         <ThemeBtn/>  
       </AlertProvider>
     </ThemeProvider>
