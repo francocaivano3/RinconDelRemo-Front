@@ -5,16 +5,20 @@ import SimpleAlert from "./components/alert/Alert";
 import LandingPage from "./components/pages/landingPage/landingPage";
 import Register from "../src/components/pages/register/Register";
 import Perfil from "./components/pages/perfil/Perfil";
-
+import Dashboard from "./components/dashboard/Dashboard";
 function App() {
   return (
-    <ThemeProvider>
-      <AlertProvider>
-        <SimpleAlert />
-        <Register />
-        <ThemeBtn />
-      </AlertProvider>
-    </ThemeProvider>
+    <>
+      <ThemeProvider>
+        <AlertProvider>
+          <SimpleAlert />
+          <Register />
+
+          <ThemeBtn />
+        </AlertProvider>
+      </ThemeProvider>
+      <Dashboard />
+    </>
   );
 }
 
