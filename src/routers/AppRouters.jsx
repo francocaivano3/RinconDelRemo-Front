@@ -28,7 +28,7 @@ const AppRouter = () => {
       path: "/Dashboard", element: <Dashboard/>
     },
     {
-      path: "/my-kayaks", element: <MyKayaks/>
+      path: "/mis-kayaks", element: <MyKayaks/>
     },
     {
       path: "/sysadmin", element: <SuperAdmin/>

@@ -33,11 +33,11 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
-            <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl z-10 overflow-hidden" onClick={(e) => e.stopPropagation()}>
-                <div className="flex justify-between items-center p-5 border-b border-gray-100">
-                    <h2 className="text-xl font-bold text-gray-800">Añadir Nuevo Kayak</h2>
-                    <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
-                        <X size={20} className="text-gray-500" />
+            <div className="bg-white dark:bg-[#003459] rounded-2xl shadow-xl w-full max-w-2xl z-10 overflow-hidden" onClick={(e) => e.stopPropagation()}>
+                <div className="flex justify-between items-center p-5 border-b border-gray-100 dark:border-[#32495a]">
+                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">Añadir Nuevo Kayak</h2>
+                    <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#4b5c68] transition-colors cursor-pointer">
+                        <X size={20} className="text-gray-500 dark:text-white" />
                     </button>
                 </div>
 
@@ -50,7 +50,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                                         formData.imagen ? (
                                             <>
                                                 <img src={formData.imagen} alt="Vista previa" className="w-full h-full object-cover rounded-lg" />
-                                                <button type="button" className="absolute bottom-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50" onClick={() => setFormData((prev) => ({ ...prev, imagen: "" }))}><Trash size={16} className="text-gray-700" /></button>
+                                                <button type="button" className="absolute bottom-2 right-2 p-2 bg-[#003459] rounded-full shadow-md" onClick={() => setFormData((prev) => ({ ...prev, imagen: "" }))}><Trash size={16} className="text-white" /></button>
                                             </>
                                         ) : (
                                             <>
@@ -70,33 +70,33 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Nombre</label>
                             <input
                                 type="text"
                                 name="nombre"
                                 value={formData.nombre}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white placeholder-black border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 placeholder="Nombre del kayak"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Modelo</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Modelo</label>
                             <input
                                 type="text"
                                 name="modelo"
                                 value={formData.modelo}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 placeholder-black bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 placeholder="Ej: X-200"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Color</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Color</label>
                             <select
                                 name="color"
                                 value={formData.color}
@@ -114,20 +114,20 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Longitud</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Longitud</label>
                             <input
                                 type="text"
                                 name="longitud"
                                 value={formData.longitud}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white placeholder-black border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 placeholder="Ej: 3.5m"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Capacidad</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Capacidad</label>
                             <select
                                 name="capacidad"
                                 value={formData.capacidad}
@@ -144,7 +144,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Material</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Material</label>
                             <select
                                 name="material"
                                 value={formData.material}
@@ -161,7 +161,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de compra</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Fecha de compra</label>
                             <input
                                 type="date"
                                 name="fechaCompra"
@@ -177,7 +177,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 font-medium cursor-pointer"
+                            className="px-4 py-2 border border-gray-200 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-[#2b353b] font-medium cursor-pointer"
                         >
                             Cancelar
                         </button>
