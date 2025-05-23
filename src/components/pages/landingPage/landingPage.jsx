@@ -1,5 +1,5 @@
 import React from "react";
-import imagen from '../../../assets/imagen de dos kayaks desde arriba.jpg'
+import imagen from '../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg'
 import Header from '../../../components/navbar/NavBar'
 
 export default function LandingPage() {
