@@ -1,7 +1,9 @@
 import { colors } from "@mui/material";
 import cardImg from "../../../assets/imagen de dos kayaks desde arriba.jpg";
 import { Calendar, Ruler, Users, Package, Edit, Trash } from "lucide-react";
+
 const KayakCard = ({ kayak }) => {
+
     const colorMap = {
         Rojo: { bg: "bg-red-500", text: "text-red-500", light: "bg-red-50", border: "border-red-200" },
         Azul: { bg: "bg-blue-500", text: "text-blue-500", light: "bg-blue-50", border: "border-blue-200" },
@@ -19,7 +21,7 @@ const KayakCard = ({ kayak }) => {
 
 
     return (
-        <div className="bg-white rounded-xl shadow-md hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 group">
+        <div className="bg-white dark:bg-[#223849] rounded-xl shadow-md hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 dark:border-none group">
             <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
                     <div className="flex space-x-2">
@@ -35,27 +37,27 @@ const KayakCard = ({ kayak }) => {
             </div>
             <div className="p-5">
                 <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-gray-900">{kayak.nombre}</h3>
+                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-gray-900 dark:text-white dark:group-hover:text-gray-300">{kayak.nombre}</h3>
                     <div className={`flex items-center ${colorStyle.light} ${colorStyle.text} px-2.5 py-1 rounded-full text-xs font-medium`}>
                         <span className={`inline-block w-2 h-2 rounded-full mr-1.5 ${colorStyle.bg}`}></span>
                         {kayak.color}
                     </div>                    
                 </div>
                 <div className="grid grid-cols-2 gap-3 mt-4">
-                    <div className="flex items-center text-gray-600">
-                        <Ruler size={16} className="mr-2 text-gray-400"/>
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                        <Ruler size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{kayak.longitud}</span>
                     </div>
-                    <div className="flex items-center text-gray-600">
-                        <Users size={16} className="mr-2 text-gray-400"/>
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                        <Users size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{kayak.capacidad}</span>
                     </div>
-                    <div className="flex items-center text-gray-600">
-                        <Package size={16} className="mr-2 text-gray-400"/>
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                        <Package size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{kayak.material}</span>
                     </div>
-                    <div className="flex items-center text-gray-600">
-                        <Calendar size={16} className="mr-2 text-gray-400"/>
+                    <div className="flex items-center text-gray-600 dark:text-gray-300">
+                        <Calendar size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{kayak.fechaCompra}</span>
                     </div>
                 </div>
