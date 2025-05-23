@@ -117,14 +117,14 @@ const Register = () => {
                     </form>
                         <div className="text-center flex flex-col justify-center items-center dark:text-white text-[#007178] md:mt-6">
                             <p className='mt-2'>Ya tenés cuenta?</p>
-                            <a href='#' className='underline mt-2 w-fit'>Iniciar Sesión</a>
+                            <a href='login' className='underline mt-2 w-fit'>Iniciar Sesión</a>
 
                             <div className="flex items-center justify-center my-2 p-2 w-3/4">
                                 <span className="border-t border-[#007178] flex-grow"></span>
                                 <span className="mx-2">o</span>
                                 <span className="border-t border-[#007178] flex-grow"></span>
                             </div>
-                             <a href='#' className='underline w-fit mb-4'>Continua como invitado</a>
+                             <a href='/' className='underline w-fit mb-4'>Continua como invitado</a>
                         </div>
                 </div>
             </div>

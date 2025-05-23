@@ -1,22 +1,25 @@
 import { useContext } from "react";
-import { Sun, Moon } from "lucide-react";
 import { ThemeContext } from "../context/themeContext/ThemeContext";
+import { Sun, Moon } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
-const ThemeBtn = () => {
+export default function ThemeBtn() {
   const { isDark, setIsDark } = useContext(ThemeContext);
+  const location = useLocation();
+
+  const toggleTheme = () => setIsDark(!isDark);
+
+  const isAuthPage = ["/login", "/register"].includes(location.pathname);
+  const bottomClass = isAuthPage ? "bottom-4" : "bottom-20";
 
   return (
-    <button
-      onClick={() => setIsDark((prev) => !prev)}
-      className={
-        isDark
-          ? "p-4 rounded-full bg-[#00a8e8] text-yellow-300 fixed bottom-4 left-4 transition-all duration-500 shadow-xl hover:scale-105 cursor-pointer"
-          : "transition-all duration-500 fixed bottom-4 left-4 p-4 rounded-full bg-black text-white shadow-xl hover:scale-105 cursor-pointer"
-      }
+    <div
+      onClick={toggleTheme}
+      className={`fixed ${bottomClass} left-4 p-4 rounded-full shadow-xl cursor-pointer transition-all duration-500
+        ${isDark ? "bg-[#00a8e8] text-yellow-300" : "bg-black text-white hover:scale-105"}
+      `}
     >
-      {isDark ? <Sun /> : <Moon />}
-    </button>
+      {isDark ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+    </div>
   );
-};
-
-export default ThemeBtn;
+}
