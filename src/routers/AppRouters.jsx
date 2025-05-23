@@ -9,6 +9,7 @@ import Register from '../components/pages/register/Register';
 import Login from '../components/pages/login/Login';
 import Dashboard from '../components/dashboard/Dashboard';
 import SuperAdmin from '../components/pages/superAdmin/SuperAdmin';
+import PerchasPage from "../components/pages/perchasPage/PerchasPage";
 import NotFound from '../components/pages/notFound/NotFound';
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/sysadmin', element: <SuperAdmin /> },
       { path: '/register', element: <Register /> },
       { path: '/historial', element: <NotFound /> },
+      {path: "/perchas",element: <PerchasPage />,},
       { path: '*', element: <NotFound /> },
       { path: '/login', element: <Login /> },
     ],
@@ -30,5 +32,4 @@ const router = createBrowserRouter([
 ]);
 
 const AppRouter = () => <RouterProvider router={router} />;
-
 export default AppRouter;
