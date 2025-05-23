@@ -1,20 +1,24 @@
-import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
+import { Outlet, useLocation } from "react-router-dom";
+import BottomNavbar from "./components/navbar/NavBar";
 import ThemeBtn from "./components/ThemeBtn/ThemeBtn";
+import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
 import AlertProvider from "./components/context/alertContext/AlertContext";
 import SimpleAlert from "./components/alert/Alert";
-import LandingPage from "./components/pages/landingPage/landingPage";
-import Register from "../src/components/pages/register/Register";
-import Perfil from "./components/pages/perfil/Perfil";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HistorialKayaks from "./components/pages/historialKayaks/HistorialKayaks";
 
-function App() {
+export default function App() {
+  const location = useLocation();
+  const hideNavbarRoutes = ["/register", "/login"]; 
+  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
     <ThemeProvider>
       <AlertProvider>
         <SimpleAlert />
-        <HistorialKayaks />
+        <div className="pb-20">
+          <Outlet />
+        </div>
+        {!shouldHideNavbar && <BottomNavbar />}
         <ThemeBtn />
       </AlertProvider>
     </ThemeProvider>
@@ -22,3 +26,4 @@ function App() {
 }
 
 export default App;
+
