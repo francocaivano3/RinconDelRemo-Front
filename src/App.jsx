@@ -1,17 +1,24 @@
-
-import { useState } from 'react'
-import { ThemeProvider } from './components/context/themeContext/ThemeContext';
-import ThemeBtn from './components/ThemeBtn/ThemeBtn';
-import LandingPage from './components/pages/landingPage/landingPage'; 
+import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
+import ThemeBtn from "./components/ThemeBtn/ThemeBtn";
+import AlertProvider from "./components/context/alertContext/AlertContext";
+import SimpleAlert from "./components/alert/Alert";
+import LandingPage from "./components/pages/landingPage/landingPage";
 import Register from "../src/components/pages/register/Register";
 import Perfil from "./components/pages/perfil/Perfil";
 import GridPerchas from './components/perchasGrid/perchasGrid';
+import Dashboard from "./components/dashboard/Dashboard";
+import MyKayaks from "./components/pages/myKayaks/myKayaks";
+import AppRouter from "./routers/AppRouters";
 
 function App() {
   return (
     <ThemeProvider>
-      <GridPerchas/>
-   </ThemeProvider>
+      <AlertProvider>
+        <SimpleAlert/>
+        <AppRouter/>
+        <ThemeBtn/>  
+      </AlertProvider>
+    </ThemeProvider>
   );
 }
 
