@@ -4,13 +4,7 @@ import ThemeBtn from "./components/ThemeBtn/ThemeBtn";
 import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
 import AlertProvider from "./components/context/alertContext/AlertContext";
 import SimpleAlert from "./components/alert/Alert";
-import LandingPage from "./components/pages/landingPage/landingPage";
-import Register from "../src/components/pages/register/Register";
-import Perfil from "./components/pages/perfil/Perfil";
-import GridPerchas from './components/perchasGrid/perchasGrid';
-import Dashboard from "./components/dashboard/Dashboard";
-import MyKayaks from "./components/pages/myKayaks/myKayaks";
-import AppRouter from "./routers/AppRouters";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   const location = useLocation();
