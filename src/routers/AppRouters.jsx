@@ -11,6 +11,7 @@ import Dashboard from '../components/dashboard/Dashboard';
 import SuperAdmin from '../components/pages/superAdmin/SuperAdmin';
 import PerchasPage from "../components/pages/perchasPage/PerchasPage";
 import NotFound from '../components/pages/notFound/NotFound';
+import HistorialKayaks from '../components/pages/historialKayaks/HistorialKayaks';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       { path: '/dashboard', element: <Dashboard /> },
       { path: '/sysadmin', element: <SuperAdmin /> },
       { path: '/register', element: <Register /> },
-      { path: '/historial', element: <NotFound /> },
+      { path: '/historial', element: <HistorialKayaks /> },
       {path: "/perchas",element: <PerchasPage />,},
       { path: '*', element: <NotFound /> },
       { path: '/login', element: <Login /> },

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Camera, Trash } from "lucide-react";
-import img from "../../../assets/imagen de dos kayaks desde arriba.jpg";
+import img from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
 
 const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
     const [formData, setFormData] = useState({

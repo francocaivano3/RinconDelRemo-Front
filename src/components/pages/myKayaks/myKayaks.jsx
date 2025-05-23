@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Search, Filter, ChevronDown, Plus } from "lucide-react";
 import KayakCard from "./kayakCard";
 import AddKayakModal from "./addKayakModal";
-import cardImg from "../../../assets/imagen de dos kayaks desde arriba.jpg";
+import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
 
 
 //EJEMPLO PARA PROBAR

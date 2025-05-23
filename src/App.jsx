@@ -15,7 +15,7 @@ export default function App() {
     <ThemeProvider>
       <AlertProvider>
         <SimpleAlert />
-        <div className="pb-20">
+        <div className="pb-15">
           <Outlet />
         </div>
         {!shouldHideNavbar && <BottomNavbar />}
@@ -25,5 +25,4 @@ export default function App() {
   );
 }
 
-export default App;
 
