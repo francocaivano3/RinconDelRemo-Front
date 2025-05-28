@@ -10,6 +10,8 @@ import {
   Wind,
 } from "lucide-react";
 
+import WeatherWeek from "./WeatherWeek";
+
 const getIcon = (main, size = "w-8 h-8") => {
   const className = `${size}`;
   switch (main.toLowerCase()) {
@@ -30,12 +32,11 @@ const getIcon = (main, size = "w-8 h-8") => {
   }
 };
 
-const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 const API_KEY = "013c913a0cf675b5f5594d9cc0b8f7c3";
 
-function Clime() {
+export default function ClimaRosario() {
   const [clima, setClima] = useState(null);
-  const [pronostico, setPronostico] = useState([]);
+
   const [error, setError] = useState(null);
 
   const fetchClima = async () => {
@@ -47,47 +48,6 @@ function Clime() {
       if (!res.ok) throw new Error("Error al obtener el clima actual");
       const data = await res.json();
       setClima(data);
-    } catch (err) {
-      setError(err.message);
-    }
-
-    try {
-      // Pronóstico extendido
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=-32.9474&lon=-60.6305&units=metric&lang=es&appid=${API_KEY}`
-      );
-      if (!res.ok) throw new Error("Error al obtener el pronóstico");
-      const data = await res.json();
-
-      const agrupadosPorDia = {};
-      data.list.forEach((item) => {
-        const fecha = item.dt_txt.split(" ")[0];
-        if (!agrupadosPorDia[fecha]) {
-          agrupadosPorDia[fecha] = {
-            temp_min: item.main.temp_min,
-            temp_max: item.main.temp_max,
-            weather: item.weather[0],
-            dt_txt: item.dt_txt,
-            wind_speed: item.wind.speed,
-          };
-        } else {
-          agrupadosPorDia[fecha].temp_min = Math.min(
-            agrupadosPorDia[fecha].temp_min,
-            item.main.temp_min
-          );
-          agrupadosPorDia[fecha].temp_max = Math.max(
-            agrupadosPorDia[fecha].temp_max,
-            item.main.temp_max
-          );
-        }
-      });
-
-      const hoy = new Date().toISOString().split("T")[0];
-      const pronosticoDiario = Object.entries(agrupadosPorDia)
-        .map(([fecha, datos]) => ({ fecha, ...datos }))
-        .filter((dia) => dia.fecha !== hoy);
-
-      setPronostico(pronosticoDiario.slice(0, 5)); // 5 días
     } catch (err) {
       setError(err.message);
     }
@@ -103,7 +63,7 @@ function Clime() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-8">
-      {/*  Clima actual */}
+      {/* Clima actual */}
       {clima && (
         <div className="bg-blue-100 rounded-2xl shadow-md p-6 flex items-center justify-between">
           <div>
@@ -131,46 +91,8 @@ function Clime() {
         </div>
       )}
 
-      {/*Pronóstico */}
-      {pronostico.length > 0 && (
-        <div>
-          <h3 className="text-2xl font-semibold mb-4 text-center">
-            Pronóstico semanal
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {pronostico.map((item, idx) => {
-              const fecha = new Date(item.fecha);
-              const diaNombre = diasSemana[fecha.getDay()];
-              const main = item.weather.main;
-              const descripcion = item.weather.description;
-              const tempMin = Math.round(item.temp_min);
-              const tempMax = Math.round(item.temp_max);
-              const viento = item.wind_speed?.toFixed(1);
-              return (
-                <div
-                  key={idx}
-                  className="bg-white shadow-md rounded-2xl p-4 flex flex-col items-center gap-2"
-                >
-                  <span className="font-semibold text-lg">{diaNombre}</span>
-                  {getIcon(main)}
-                  <p className="capitalize text-sm text-gray-600">
-                    {descripcion}
-                  </p>
-                  <div className="flex gap-2 text-sm">
-                    <span className="text-blue-600">Min: {tempMin}°C</span>
-                    <span className="text-red-600">Max: {tempMax}°C</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-sm text-gray-700">
-                    <Wind className="w-4 h-4" />
-                    {viento} m/s
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+      {/* Pronóstico semanal */}
+      <WeatherWeek />
     </div>
   );
 }
-export default Clime;
