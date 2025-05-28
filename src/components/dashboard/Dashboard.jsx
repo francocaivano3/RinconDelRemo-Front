@@ -1,10 +1,11 @@
 import React from "react";
 import { Search, Calendar } from "lucide-react";
+import Clime from "../clime/Clime";
 
 const Dashboard = () => {
   return (
     <>
-      <section className="bg-gradient-to-r from-teal-700 to-teal-500 text-white py-40 px-6">
+      <section className="bg-gradient-to-r from-teal-700 to-teal-500 text-white py-28 px-6">
         <div className="max-w-5xl mx-auto text-left">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 ">
             Encuentra tu kayak perfecto
@@ -24,8 +25,8 @@ const Dashboard = () => {
           </div>
         </div>
       </section>
-      <section className="max-w-5xl mx-auto bg-white rounded-lg shadow-md p-6 mt-[30px]">
-        <div> Componente Clima </div>
+      <section className="max-w-5xl mx-auto px-6 mt-2">
+        <Clime />
       </section>
       <section className="max-w-5xl mx-auto bg-white rounded-lg shadow-md p-6 mt-[30px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
