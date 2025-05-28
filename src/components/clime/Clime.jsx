@@ -78,7 +78,7 @@ export default function ClimaRosario() {
             </div>
             <div className="flex items-center gap-2 text-sm mt-1 text-gray-700">
               <Wind className="w-4 h-4" />
-              Viento: {Math.round(clima.wind.speed)} m/s
+              Viento: {Math.round(clima.wind.speed)} km/h
             </div>
           </div>
           <div className="flex flex-col items-center">

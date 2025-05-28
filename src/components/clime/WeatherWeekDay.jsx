@@ -12,7 +12,7 @@ function WeatherWeekDay({ dia, icono, descripcion, tempMin, tempMax, viento }) {
       </div>
       <div className="flex items-center gap-1 text-sm text-gray-700">
         <Wind className="w-4 h-4" />
-        {viento} m/s
+        {viento} km/h
       </div>
     </div>
   );

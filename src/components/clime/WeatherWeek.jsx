@@ -31,7 +31,6 @@ const getIcon = (main, size = "w-8 h-8") => {
   }
 };
 const API_KEY = "013c913a0cf675b5f5594d9cc0b8f7c3";
-const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
 function WeatherWeek() {
   const [pronostico, setPronostico] = useState([]);
@@ -74,7 +73,7 @@ function WeatherWeek() {
         .filter((dia) => dia.fecha !== hoy);
       console.log(pronosticoDiario);
 
-      setPronostico(pronosticoDiario.slice(0, 5)); // 5 días
+      setPronostico(pronosticoDiario); // 5 días
     } catch (err) {
       setError(err.message);
     }
@@ -92,14 +91,19 @@ function WeatherWeek() {
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {pronostico.map((item, idx) => {
-          const fecha = new Date(item.fecha);
+          const [anio, mes, dia] = item.fecha.split("-").map(Number);
 
-          const diaNombre = diasSemana[fecha.getDay()];
+          // Crear una fecha local
+          const fechaObj = new Date(anio, mes - 1, dia);
+          const fechaFormateada = fechaObj.toLocaleDateString("es-AR", {
+            day: "numeric",
+            month: "long",
+          });
           const icono = getIcon(item.weather.main);
           return (
             <WeatherWeekDay
               key={idx}
-              dia={diaNombre}
+              dia={fechaFormateada}
               icono={icono}
               descripcion={item.weather.description}
               tempMin={Math.round(item.temp_min)}
