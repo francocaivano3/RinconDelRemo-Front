@@ -2,6 +2,11 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-* {
-    font-family: poppins;
+body {
+    scroll-behavior: smooth;
 }
+
+* {
+    font-family: outfit;
+}
+

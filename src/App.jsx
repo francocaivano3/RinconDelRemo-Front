@@ -4,18 +4,17 @@ import ThemeBtn from "./components/ThemeBtn/ThemeBtn";
 import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
 import AlertProvider from "./components/context/alertContext/AlertContext";
 import SimpleAlert from "./components/alert/Alert";
-// import 'bootstrap/dist/css/bootstrap.min.css'; SI LA DESCOMENTO NO ANDA TAILWIND
 
 export default function App() {
   const location = useLocation();
-  const hideNavbarRoutes = ["/register", "/login"]; 
+  const hideNavbarRoutes = ["/register", "/login", "/"]; 
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
     <ThemeProvider>
       <AlertProvider>
         <SimpleAlert />
-        <div className="pb-15">
+        <div className={shouldHideNavbar ? "" : "pb-15"}>
           <Outlet />
         </div>
         {!shouldHideNavbar && <BottomNavbar />}
