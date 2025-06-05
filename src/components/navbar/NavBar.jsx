@@ -17,7 +17,7 @@ export default function BottomNavbar() {
           <span className="text-xs mt-1">Mis Kayaks</span>
         </NavLink>
 
-        <NavLink to="/dashboard" className={({ isActive }) => `flex flex-col items-center ${isActive ? 'text-teal-600' : 'text-gray-500 hover:text-teal-600'}`}>
+        <NavLink to="/MisReservas" className={({ isActive }) => `flex flex-col items-center ${isActive ? 'text-teal-600' : 'text-gray-500 hover:text-teal-600'}`}>
           <CalendarCheck className="h-6 w-6" />
           <span className="text-xs mt-1">Reservas</span>
         </NavLink>

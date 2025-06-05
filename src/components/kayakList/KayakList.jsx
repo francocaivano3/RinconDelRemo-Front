@@ -36,7 +36,7 @@ const KayakList = () => {
         return(
             <>
                 
-                <div className="flex flex-col max-w-sm w-225 lg:max-w-full rounded-xl overflow-hidden shadow-md p-4 bg-gray-100">
+                <div className="flex flex-col max-w-sm w-300 lg:max-w-full rounded-xl overflow-hidden shadow-md p-4">
                     {kayaksMappedToShow}
                 </div>
             </>

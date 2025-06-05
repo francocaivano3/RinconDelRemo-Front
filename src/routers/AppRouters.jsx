@@ -12,6 +12,7 @@ import SuperAdmin from '../components/pages/superAdmin/SuperAdmin';
 import PerchasPage from "../components/pages/perchasPage/PerchasPage";
 import NotFound from '../components/pages/notFound/NotFound';
 import HistorialKayaks from '../components/pages/historialKayaks/HistorialKayaks';
+import MisReservas from '../components/pages/misReservas/MisReservas';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       {path: "/perchas",element: <PerchasPage />,},
       { path: '*', element: <NotFound /> },
       { path: '/login', element: <Login /> },
+      { path: '/MisReservas', element: <MisReservas /> },
     ],
   },
 ]);
