@@ -16,7 +16,7 @@ const KayakItem = ({ nameItem, descriptionItem, image }) => {
             <div className="w-full p-1 flex flex-col justify-between leading-normal">
                 <div className="mb-1 p-1.5">
                     <div className="text-gray-900 font-bold mb-1">{nameItem}</div>
-                    <p className="text-gray-700 text-base">
+                    <p className="text-gray-700 text-base line-clamp-1">
                         {descriptionItem}
                     </p>
                 </div>
