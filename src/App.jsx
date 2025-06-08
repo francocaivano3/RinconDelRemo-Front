@@ -4,6 +4,7 @@ import ThemeBtn from "./components/ThemeBtn/ThemeBtn";
 import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
 import AlertProvider from "./components/context/alertContext/AlertContext";
 import SimpleAlert from "./components/alert/Alert";
+import { TranslateProvider } from "./components/context/translationContext/TranslateLanguage";
 
 export default function App() {
   const location = useLocation();
@@ -11,6 +12,7 @@ export default function App() {
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
+    <TranslateProvider>
     <ThemeProvider>
       <AlertProvider>
         <SimpleAlert />
@@ -21,6 +23,7 @@ export default function App() {
         <ThemeBtn />
       </AlertProvider>
     </ThemeProvider>
+    </TranslateProvider>
   );
 }
 
