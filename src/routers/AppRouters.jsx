@@ -13,13 +13,15 @@ import PerchasPage from "../components/pages/perchasPage/PerchasPage";
 import NotFound from '../components/pages/notFound/NotFound';
 import HistorialKayaks from '../components/pages/historialKayaks/HistorialKayaks';
 import MisReservas from '../components/pages/misReservas/MisReservas';
+import Configuracion from '../components/pages/configuracion/Configuracion';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />, // layout con navbar
     children: [
       { path: '/', element: <LandingPage /> },
-      { path: '/perfil', element: <Perfil /> },
+      { path: '/configuracion', element: <Configuracion /> },
       { path: '/mis-kayaks', element: <MyKayaks /> },
       { path: '/dashboard', element: <Dashboard /> },
       { path: '/sysadmin', element: <SuperAdmin /> },

@@ -8,8 +8,9 @@ import {MsalProvider, AuthenticatedTemplate, useMsal, UnauthenticatedTemplate} f
 import { PublicClientApplication } from "@azure/msal-browser";
 import { msalConfig } from "../authConfig";
 import { loginRequest } from "../authConfig";
-
 const msalInstance = new PublicClientApplication(msalConfig);
+import { TranslateProvider } from "./components/context/translationContext/TranslateLanguage";
+
 
 export default function App() {
   const location = useLocation();
@@ -18,7 +19,8 @@ export default function App() {
 
   return (
     <MsalProvider instance={msalInstance}>
-    <ThemeProvider>
+      <TranslateProvider>
+      <ThemeProvider>
       <AlertProvider>
         <SimpleAlert />
         <div className={shouldHideNavbar ? "" : "pb-15"}>
@@ -27,7 +29,8 @@ export default function App() {
         {!shouldHideNavbar && <BottomNavbar />}
         <ThemeBtn />
       </AlertProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+      </TranslateProvider>
     </MsalProvider>
   );
 }
