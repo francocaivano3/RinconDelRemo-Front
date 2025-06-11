@@ -4,6 +4,12 @@ import ThemeBtn from "./components/ThemeBtn/ThemeBtn";
 import { ThemeProvider } from "./components/context/themeContext/ThemeContext";
 import AlertProvider from "./components/context/alertContext/AlertContext";
 import SimpleAlert from "./components/alert/Alert";
+import {MsalProvider, AuthenticatedTemplate, useMsal, UnauthenticatedTemplate} from "@azure/msal-react";
+import { PublicClientApplication } from "@azure/msal-browser";
+import { msalConfig } from "../authConfig";
+import { loginRequest } from "../authConfig";
+
+const msalInstance = new PublicClientApplication(msalConfig);
 
 export default function App() {
   const location = useLocation();
@@ -11,6 +17,7 @@ export default function App() {
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
+    <MsalProvider instance={msalInstance}>
     <ThemeProvider>
       <AlertProvider>
         <SimpleAlert />
@@ -21,6 +28,7 @@ export default function App() {
         <ThemeBtn />
       </AlertProvider>
     </ThemeProvider>
+    </MsalProvider>
   );
 }
 
