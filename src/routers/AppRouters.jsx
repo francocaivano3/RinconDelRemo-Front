@@ -13,8 +13,6 @@ import PerchasPage from "../components/pages/perchasPage/PerchasPage";
 import NotFound from '../components/pages/notFound/NotFound';
 import HistorialKayaks from '../components/pages/historialKayaks/HistorialKayaks';
 import MisReservas from '../components/pages/misReservas/MisReservas';
-import MainContent from "../components/MainContent";
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -31,7 +29,6 @@ const router = createBrowserRouter([
       { path: '*', element: <NotFound /> },
       { path: '/login', element: <Login /> },
       { path: '/MisReservas', element: <MisReservas /> },
-      { path: '/msal', element: <MainContent /> }, 
     ],
   },
 ]);
