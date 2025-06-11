@@ -27,7 +27,7 @@ export default function BottomNavbar() {
           <span className="text-xs mt-1">Historial</span>
         </NavLink>
 
-        <NavLink to="/perfil" className={({ isActive }) => `flex flex-col items-center ${isActive ? 'text-teal-600' : 'text-gray-500 hover:text-teal-600'}`}>
+        <NavLink to="/configuracion" className={({ isActive }) => `flex flex-col items-center ${isActive ? 'text-teal-600' : 'text-gray-500 hover:text-teal-600'}`}>
           <User className="h-6 w-6" />
           <span className="text-xs mt-1">Perfil</span>
         </NavLink>
