@@ -23,11 +23,19 @@ const NavBar = () => {
     }
 
     const handleRegister = () => {
-            instance.loginRedirect({
+            instance.loginPopup({
                 ...loginRequest,
                 prompt:"create",
             }).catch((error) => console.error(error)); 
     }
+
+    const handleLogin = () => {
+        console.log("Iniciar sesión");
+        instance.loginPopup({
+        ...loginRequest,
+        prompt: "login", 
+    }).catch((error) => console.error(error));
+  };
 
     return (<header className="flex fixed items-center justify-between w-full z-50 bg-white dark:bg-[#003459] backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center md:w-1/3">
@@ -65,8 +73,8 @@ const NavBar = () => {
         </nav>
 
         <div className="w-1/3 justify-end hidden md:flex">
-            <button className="mr-4 cursor-pointer hover:text-[#007178] dark:text-white dark:hover:text-gray-300">Iniciar Sesión</button>
-            <button className="mr-8 bg-[#04b8c5] hover:bg-[#007178] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer">Registrarse</button>
+            <button onClick={handleLogin} className="mr-4 cursor-pointer hover:text-[#007178] dark:text-white dark:hover:text-gray-300">Iniciar Sesión</button>
+            <button onClick={handleRegister} className="mr-8 bg-[#04b8c5] hover:bg-[#007178] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer">Registrarse</button>
         </div>
 
         {isMenuOpen && (
@@ -83,7 +91,7 @@ const NavBar = () => {
                         </a>
                     ))}
                     <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
-                        <button className="bg-[#007178] hover:bg-[#04b8c5] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer text-center">
+                        <button onClick={handleLogin} className="bg-[#007178] hover:bg-[#04b8c5] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer text-center">
                             Iniciar Sesión
                         </button>
                         <button onClick={handleRegister} className="bg-[#04b8c5] hover:bg-[#007178] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer text-center">
