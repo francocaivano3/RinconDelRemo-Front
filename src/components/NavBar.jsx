@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import logoLight from "../../src/assets/icono.png";
 import logoDark from "../../src/assets/turismo Borcelle.png";
 import {ThemeContext} from "../components/context/themeContext/ThemeContext";
@@ -9,6 +10,7 @@ const NavBar = () => {
     const { instance } = useMsal();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const {isDark} = useContext(ThemeContext);
+    const navigate = useNavigate();
 
     const navLinks = [
     { name: "Inicio", href: "#home" },
@@ -26,7 +28,10 @@ const NavBar = () => {
             instance.loginPopup({
                 ...loginRequest,
                 prompt:"create",
-            }).catch((error) => console.error(error)); 
+            }).then((response) => {
+            instance.setActiveAccount(response.account);
+            navigate("/dashboard");
+        }).catch((error) => console.error(error)); 
     }
 
     const handleLogin = () => {
@@ -34,6 +39,9 @@ const NavBar = () => {
         instance.loginPopup({
         ...loginRequest,
         prompt: "login", 
+    }).then((response) => {
+        instance.setActiveAccount(response.account);
+        navigate("/dashboard"); 
     }).catch((error) => console.error(error));
   };
 
