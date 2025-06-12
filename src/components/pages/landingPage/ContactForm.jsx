@@ -54,17 +54,17 @@ const ContactForm = () => {
     }
 
     return (
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-1/2 md:mx-4 mx-0 mt-4">
-            <h3 className="text-2xl font-bold mb-8 text-gray-800">Envìanos un Mensaje</h3>
+        <div className="bg-white dark:bg-[#00507A] p-8 rounded-lg shadow-lg w-full md:w-1/2 md:mx-4 mx-0 mt-4">
+            <h3 className="text-2xl font-bold mb-8 text-[#003459] dark:text-white">Envìanos un Mensaje</h3>
             <form className="space-y-6" onSubmit={handleSubmit}> 
-                <label className="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                <input type="text" placeholder="Juan Pérez" name="user_name" value={formData.user_name} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors" />
+                <label className="block text-sm font-medium text-[#003459] dark:text-white mb-2">Nombre</label>
+                <input type="text" placeholder="Juan Pérez" name="user_name" value={formData.user_name} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none focus:border-transparent transition-colors dark:placeholder:text-white" />
                 <br />
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <input placeholder="juanperez@gmail.com" type="email" name="user_email" value={formData.user_email} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors" />
+                <label className="block text-sm font-medium text-[#003459] dark:text-white mb-2">Email</label>
+                <input placeholder="juanperez@gmail.com" type="email" name="user_email" value={formData.user_email} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none focus:border-transparent transition-colors dark:placeholder:text-white" />
                 <br />            
-                <label className="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
-                <textarea name="message" value={formData.message} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors" placeholder="Contanos còmo podemos ayudarte..."></textarea>
+                <label className="block text-sm font-medium text-[#003459] dark:text-white mb-2">Mensaje</label>
+                <textarea name="message" value={formData.message} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none focus:border-transparent transition-colors dark:placeholder:text-white" placeholder="Contanos còmo podemos ayudarte..."></textarea>
                 <br />
                 <button type="submit" className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer">Enviar</button>
             </form>

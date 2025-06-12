@@ -1,5 +1,4 @@
 import { useState } from "react";
-import logo from "../../../assets/icono.png";
 import hero from "../../../assets/pexels-emil-rajan-807502-1682744.webp";
 import { Sailboat, Warehouse, UsersRound, CircleCheck } from "lucide-react";
 import grid1 from "../../../assets/pexels-jonathan-lassen-1263409-2404667.webp";
@@ -9,6 +8,7 @@ import grid4 from "../../../assets/pexels-rachel-claire-7263721.webp";
 import grid5 from "../../../assets/pexels-sabel-blanco-662810-1486581.webp";
 import grid6 from "../../../assets/pexels-spencergurley-1497587.webp";
 import ContactForm from "./ContactForm";
+import NavBar from "../../NavBar";
 
 const Mapa = () => {
   return (
@@ -26,7 +26,6 @@ const Mapa = () => {
 
 const LandingPage = () => {
   const [activeQuestion, setActiveQuestion] = useState(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleQuestion = (index) => {
     setActiveQuestion(activeQuestion === index ? null : index);
@@ -36,13 +35,6 @@ const LandingPage = () => {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  const navLinks = [
-    { name: "Inicio", href: "#home" },
-    { name: "Servicios", href: "#services" },
-    { name: "Galería", href: "#gallery" },
-    { name: "Información", href: "#faq" },
-    { name: "Contacto", href: "#contact" },
-  ];
 
   const services = [
     {
@@ -135,71 +127,7 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <header className="flex fixed items-center justify-between w-full z-50 bg-white backdrop-blur-sm shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center md:w-1/3">
-          <div className="flex items-center">
-            <img src={logo} alt="Logo" className="w-12 h-12" /><span className="font-bold text-xl text-[#007178]">ElRincónDelRemo</span>
-          </div>
-        </div>
-
-       <button className="md:hidden text-[#007178] focus:outline-none mr-4" onClick={toggleMenu}>
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {isMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-
-        <nav className="hidden md:flex space-x-8 mr-6 w-1/3">
-          {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              className="text-gray-700 hover:text-[#007178] transition-colors duration-300"
-            >
-              {link.name}
-            </a>
-          ))}
-        </nav>
-
-        <div className="w-1/3 justify-end hidden md:flex">
-          <button className="mr-4 cursor-pointer hover:text-[#007178]">Iniciar Sesión</button>
-          <button className="mr-8 bg-[#04b8c5] hover:bg-[#007178] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer">Registrarse</button>
-        </div>
-
-        {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-md py-4 px-4">
-          <nav className="flex flex-col space-y-4">
-            {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="text-gray-700 hover:text-[#007178] transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
-              <button className="bg-[#007178] hover:bg-[#04b8c5] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer text-center">
-                Iniciar Sesión
-              </button>
-              <button className="bg-[#04b8c5] hover:bg-[#007178] transition-colors duration-300 px-4 py-2 rounded-md text-white cursor-pointer text-center">
-                Registrarse
-              </button>
-            </div>
-          </nav>
-        </div>
-      )}
-      </header>
+      <NavBar/>
 
       <main>
         <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -215,11 +143,11 @@ const LandingPage = () => {
           </article>
         </section>
 
-        <section id="services" className="py-16">
+        <section id="services" className="py-16 dark:bg-[#003459]">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Nuestros Servicios</h2>
+            <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Nuestros Servicios</h2>
             <div className="w-24 h-1 bg-[#04b8c5] mx-auto"></div>
-            <p className="mt-6 text-gray-600 max-w-2xl mx-auto">
+            <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Ofrecemos servicios completos para todos los amantes del kayak, desde alquiler hasta guardería y tours
               guiados.
             </p>
@@ -250,12 +178,12 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section id="gallery" className="py-16 ">
+        <section id="gallery" className="py-16 dark:bg-[#003459]">
           <div className="container mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4 text-center">Galería</h2>
+              <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4 text-center">Galería</h2>
               <div className="w-24 h-1 bg-[#04b8c5] mx-auto"></div>
-              <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-center">
+              <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-center">
                 Descubrí la belleza de nuestros paisajes y la diversión de nuestros servicios a través de estas imágenes.
               </p>
             </div>
@@ -284,7 +212,7 @@ const LandingPage = () => {
                   <img
                     src={grid5}
                     alt="Guardería de kayaks"
-                    className="h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end">
                     <div className="p-6">
@@ -356,25 +284,25 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section id="faq" className="py-16 px-4">
+        <section id="faq" className="py-16 px-4 dark:bg-[#003459]">
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Preguntas Frecuentes</h2>
+              <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Preguntas Frecuentes</h2>
               <div className="w-24 h-1 bg-[#04b8c5] max-w-2xl mx-auto"></div>
-              <p className="mt-6 text-gray-600 max-w-2xl mx-auto">Resolvemos tus dudas sobre nuestros servicios de alquiler y guardería de kayaks.</p>
+              <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Resolvemos tus dudas sobre nuestros servicios de alquiler y guardería de kayaks.</p>
             </div>
 
             <div className="space-y-4">
               {faqItems.map((item, index) => (
                 <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
                   <button
-                    className={`w-full flex justify-between items-center p-5 text-left font-semibold ${activeQuestion === index ? "bg-teal-50 text-teal-700" : "bg-white text-gray-800"}`}
+                    className={`w-full dark:bg-[#003459] flex justify-between items-center p-5 text-left font-semibold ${activeQuestion === index ? "bg-teal-50 text-teal-700 dark:bg-blue-900" : "bg-white text-gray-800"}`}
                     onClick={() => toggleQuestion(index)}
                   >
-                    <span>{item.question}</span>
+                    <span className="dark:text-white">{item.question}</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className={`h-5 w-5 transition-transform ${activeQuestion === index ? "transform rotate-180" : ""}`}
+                      className={`h-5 w-5 dark:text-white transition-transform ${activeQuestion === index ? "transform rotate-180" : ""}`}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -385,8 +313,8 @@ const LandingPage = () => {
                   <div
                     className={`overflow-hidden transition-all duration-300 ${activeQuestion === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
                   >
-                    <div className="p-5 bg-white border-t border-gray-100">
-                      <p className="text-gray-600">{item.answer}</p>
+                    <div className="p-5 bg-white dark:bg-[#003459] border-t border-gray-100">
+                      <p className="text-gray-600 dark:text-white">{item.answer}</p>
                     </div>
                   </div>
                 </div>
@@ -395,12 +323,12 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section id="contact" className="py-16">
+        <section id="contact" className="py-16 dark:bg-[#003459]">
           <div className="container mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Contacto</h2>
+              <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Contacto</h2>
               <div className="w-24 h-1 bg-teal-500 mx-auto"></div>
-              <p className="mt-6 text-gray-600 max-w-2xl mx-auto">
+              <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 ¿Tienes preguntas o quieres hacer una reserva? Estamos aquí para ayudarte.
               </p>
             </div>
@@ -408,10 +336,10 @@ const LandingPage = () => {
 
 
           <div className="flex justify-between flex-col md:flex-row">
-            <div className="mx-auto w-full md:w-1/2 h-120 md:h-full p-8 bg-white rounded-lg shadow-lg mt-4">
+            <div className="md:mx-4 mx-0 w-full md:w-1/2 md:h-full p-8 bg-white dark:bg-[#00507A] rounded-lg shadow-lg mt-4">
             <div className="flex items-center flex-col text-center">
-                <h4 className="font-semibold text-gray-800 text-2xl">Dirección</h4>
-                <p className="text-gray-600 text-xl">
+                <h4 className="font-semibold text-[#003459] text-2xl dark:text-white">Dirección</h4>
+                <p className="text-[#003459] dark:text-white text-xl">
                   Puerto Rosario
                   <br />
                   Av. Costanera 1234
