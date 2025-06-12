@@ -14,6 +14,7 @@ import NotFound from '../components/pages/notFound/NotFound';
 import HistorialKayaks from '../components/pages/historialKayaks/HistorialKayaks';
 import MisReservas from '../components/pages/misReservas/MisReservas';
 import ProtectedRoutes from './ProtectedRoutes';
+import Configuracion from '../components/pages/configuracion/Configuracion';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <LandingPage /> },
       { path: '/perfil', element: <ProtectedRoutes><Perfil /></ProtectedRoutes> },
-      { path: '/mis-kayaks', element: <ProtectedRoutes><MyKayaks /></ProtectedRoutes> },
+      { path: '/configuracion', element: <Configuracion /> },
+      { path: '/mis-kayaks', element: <MyKayaks /> },
       { path: '/dashboard', element: <Dashboard /> },
       { path: '/sysadmin', element: <ProtectedRoutes><SuperAdmin /></ProtectedRoutes> },
       { path: '/register', element: <Register /> },
