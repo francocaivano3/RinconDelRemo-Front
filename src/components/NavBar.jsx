@@ -2,48 +2,48 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import logoLight from "../../src/assets/icono.png";
 import logoDark from "../../src/assets/turismo Borcelle.png";
-import {ThemeContext} from "../components/context/themeContext/ThemeContext";
+import { ThemeContext } from "../components/context/themeContext/ThemeContext";
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../authConfig";
 
 const NavBar = () => {
     const { instance } = useMsal();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {isDark} = useContext(ThemeContext);
+    const { isDark } = useContext(ThemeContext);
     const navigate = useNavigate();
 
     const navLinks = [
-    { name: "Inicio", href: "#home" },
-    { name: "Servicios", href: "#services" },
-    { name: "Galería", href: "#gallery" },
-    { name: "Información", href: "#faq" },
-    { name: "Contacto", href: "#contact" },
-  ];
+        { name: "Inicio", href: "#home" },
+        { name: "Servicios", href: "#services" },
+        { name: "Galería", href: "#gallery" },
+        { name: "Información", href: "#faq" },
+        { name: "Contacto", href: "#contact" },
+    ];
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     }
 
     const handleRegister = () => {
-            instance.loginPopup({
-                ...loginRequest,
-                prompt:"create",
-            }).then((response) => {
+        instance.loginPopup({
+            ...loginRequest,
+            prompt: "create",
+        }).then((response) => {
             instance.setActiveAccount(response.account);
             navigate("/dashboard");
-        }).catch((error) => console.error(error)); 
+        }).catch((error) => console.error(error));
     }
 
     const handleLogin = () => {
         console.log("Iniciar sesión");
         instance.loginPopup({
-        ...loginRequest,
-        prompt: "login", 
-    }).then((response) => {
-        instance.setActiveAccount(response.account);
-        navigate("/dashboard"); 
-    }).catch((error) => console.error(error));
-  };
+            ...loginRequest,
+            prompt: "login",
+        }).then((response) => {
+            instance.setActiveAccount(response.account);
+            navigate("/dashboard");
+        }).catch((error) => console.error(error));
+    };
 
     return (<header className="flex fixed items-center justify-between w-full z-50 bg-white dark:bg-[#003459] backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center md:w-1/3">
