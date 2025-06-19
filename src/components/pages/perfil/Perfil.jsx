@@ -176,11 +176,11 @@ const Perfil = ({ onVolver }) => {
                   </button>
                 </>
               ) : (
-                <button type="button" onClick={handleEdit} className="bg-[#007178] text-white px-6 py-2 rounded-md hover:bg-[#335c5f] transition">
+                <button type="button" onClick={handleEdit} className="bg-[#007178] cursor-pointer text-white px-6 py-2 rounded-md hover:bg-[#335c5f] transition">
                   Editar Perfil
                 </button>
               )}
-              <button type="button" onClick={onVolver} className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition">
+              <button type="button" onClick={onVolver} className="bg-red-500 cursor-pointer text-white px-6 py-2 rounded-md hover:bg-red-600 transition">
                 Volver
               </button>
             </div>

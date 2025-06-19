@@ -65,7 +65,7 @@ export default function ClimaRosario() {
     <div className="p-6 max-w-5xl mx-auto space-y-8 dark:bg-transparent dark:text-white">
       {/* Clima actual */}
       {clima && (
-        <div className="bg-blue-100 dark:bg-cyan-900 rounded-2xl shadow-md p-6 flex items-center justify-between">
+        <div className="bg-blue-100 dark:bg-sky-900 rounded-2xl shadow-md p-6 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold mb-1">
               Clima hoy en {clima.name}

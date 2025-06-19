@@ -337,7 +337,7 @@ const LandingPage = () => {
 
           <div className="flex justify-between flex-col">
             <ContactForm />
-            <div className="mt-8 py-16 text-center">
+            <div className="mt-8 pt-16 h-[25vh] text-center">
               <div className="mb-16">
                 <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Ubicación</h2>
                 <div className="w-24 h-1 bg-teal-500 mx-auto"></div>

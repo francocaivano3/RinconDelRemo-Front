@@ -100,7 +100,7 @@ function ToggleItem({ title, isDark, setIsDark }) {
       <label className="inline-flex items-center cursor-pointer">
         <input
           type="checkbox"
-          className="sr-only peer"
+          className="sr-only peer peer2"
           checked={isModeToggle ? isDark : language === "en"}
           onChange={
             isModeToggle
@@ -108,8 +108,8 @@ function ToggleItem({ title, isDark, setIsDark }) {
               : handleLanguageToggle
           }
         />
-        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-teal-600 relative">
-          <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition peer-checked:translate-x-5"></div>
+        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-teal-600 transition-all duration-200 relative">
+          <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition ball"></div>
         </div>
       </label>
     </div>

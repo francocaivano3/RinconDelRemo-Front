@@ -98,7 +98,7 @@ const myKayaks = () => {
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         <div className="mb-10 relative">
           <div className="relative">
-            <h1 className="text-4xl font-extrabold text-[#007178] tracking-tight dark:text-white">Mis Kayaks</h1>
+            <h1 className="text-4xl font-extrabold text-[#003459] tracking-tight dark:text-white">Mis Kayaks</h1>
             <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación.</p>
           </div>
         </div>

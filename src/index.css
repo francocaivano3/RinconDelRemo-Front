@@ -11,7 +11,7 @@ body {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0; 
+  opacity: 0;
 }
 
 ::-webkit-scrollbar {
@@ -28,5 +28,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #012138;
+  background: #012138
+}
+
+.dark ::-webkit-scrollbar {
+  background: #003459;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #fff; 
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #e2d5d5;
+}
+
+.peer2:checked ~ div .ball{
+  right: 0;
+  left: calc(90% - 1rem);
+
 }

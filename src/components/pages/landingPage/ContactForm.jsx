@@ -56,7 +56,7 @@ const ContactForm = () => {
 return (
 <div className="bg-white dark:bg-[#00507A] p-6 md:p-8 rounded-lg shadow-lg w-full max-w-3xl mx-4 md:mx-auto mt-4">
   <h3 className="text-2xl font-bold mb-8 text-[#003459] dark:text-white">
-    Envìanos un Mensaje
+    Envíanos un Mensaje
   </h3>
   <form className="space-y-6" onSubmit={handleSubmit}>
     <label className="block text-sm font-medium text-[#003459] dark:text-white mb-2">

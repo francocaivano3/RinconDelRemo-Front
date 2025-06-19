@@ -21,7 +21,7 @@ const KayakCard = ({ kayak }) => {
 
 
     return (
-        <div className="bg-white dark:bg-cyan-900 rounded-xl shadow-md hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 dark:border-none group">
+        <div className="bg-white dark:bg-sky-900 rounded-xl shadow-md hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 dark:border-none group">
             <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
                     <div className="flex space-x-2">

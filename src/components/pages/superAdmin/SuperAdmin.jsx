@@ -73,14 +73,14 @@ const SuperAdmin = () => {
   };
 
   return (
-    <div className="p-8 bg-gradient-to-br from-sky-50 to-white min-h-screen font-sans text-gray-800">
+    <div className="p-8 bg-sky-50 dark:bg-[#003459] min-h-screen font-sans text-gray-800">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-6">
-        <h2 className="text-4xl font-extrabold text-sky-900 tracking-tight">
+        <h2 className="text-4xl font-extrabold text-sky-900 dark:text-white tracking-tight">
           🌊 Usuarios del Sistema
         </h2>
         <button
           onClick={handleAddUser}
-          className="inline-flex items-center gap-2 bg-sky-700 hover:bg-sky-800 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg transition"
+          className="inline-flex cursor-pointer items-center gap-2 bg-sky-700 hover:bg-sky-800 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg transition"
           aria-label="Agregar Usuario"
         >
           <Plus size={20} />
@@ -96,26 +96,26 @@ const SuperAdmin = () => {
             placeholder="Buscar usuarios..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-slate-300 pl-11 pr-4 py-3 rounded-2xl w-full text-gray-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition"
+            className="border border-slate-300 pl-11 pr-4 py-3 rounded-2xl w-full text-gray-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition"
           />
         </div>
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="border border-slate-300 px-5 py-3 rounded-2xl w-full sm:w-1/4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition"
+          className="border border-slate-300 px-5 py-3 rounded-2xl w-full sm:w-1/4 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition"
           aria-label="Filtrar por rol"
         >
-          <option value="all">Todos los roles</option>
-          <option value="superadmin">Super Admin</option>
-          <option value="encargado">Encargado</option>
-          <option value="arrendatario">Arrendatario</option>
-          <option value="dueno">Dueño de Kayak</option>
+          <option value="all" className="dark:bg-[#003459]">Todos los roles</option>
+          <option value="superadmin" className="dark:bg-[#003459]">Super Admin</option>
+          <option value="encargado" className="dark:bg-[#003459]">Encargado</option>
+          <option value="arrendatario" className="dark:bg-[#003459]">Arrendatario</option>
+          <option value="dueno" className="dark:bg-[#003459]">Dueño de Kayak</option>
         </select>
       </div>
 
       <div className="overflow-x-auto bg-white rounded-3xl shadow-xl border mt-24 border-gray-200">
         <table className="min-w-full text-sm text-left text-gray-700">
-          <thead className="bg-sky-100 text-sky-900 uppercase text-xs tracking-wider select-none">
+          <thead className="bg-sky-100 text-sky-900 dark:bg-sky-700 dark:text-white uppercase text-xs tracking-wider select-none">
             <tr>
               {[
                 "Nombre",
@@ -133,10 +133,10 @@ const SuperAdmin = () => {
           </thead>
           <tbody>
             {filteredUsers.length === 0 ? (
-              <tr>
+              <tr className="dark:bg-blue-950">
                 <td
                   colSpan="6"
-                  className="text-center py-12 text-gray-400 italic font-medium"
+                  className="text-center py-12 text-gray-400 dark:text-white italic font-medium"
                 >
                   No se encontraron usuarios
                 </td>
@@ -145,7 +145,7 @@ const SuperAdmin = () => {
               filteredUsers.map((user) => (
                 <tr
                   key={user.id}
-                  className="hover:bg-sky-50 border-b border-gray-200 last:border-none transition"
+                  className="hover:bg-sky-50 dark:bg-[#003459] dark:hover:bg-sky-900 dark:text-white border-b border-gray-200 last:border-none transition"
                 >
                   <td className="p-5 font-medium">{user.name}</td>
                   <td className="p-5">{user.email}</td>
@@ -173,14 +173,14 @@ const SuperAdmin = () => {
                   <td className="p-5 flex gap-4">
                     <button
                       onClick={() => handleEditUser(user)}
-                      className="text-sky-600 hover:text-sky-800 transition"
+                      className="text-sky-600 hover:text-sky-800 dark:text-sky-400 dark:hover:text-sky-300 transition cursor-pointer"
                       aria-label={`Editar usuario ${user.name}`}
                     >
                       <Pencil size={20} />
                     </button>
                     <button
                       onClick={() => handleDeleteUser(user.id)}
-                      className="text-red-600 hover:text-red-800 transition"
+                      className="text-red-600 hover:text-red-800 dark:text-red-500 dark:hover:text-red-300 transition cursor-pointer"
                       aria-label={`Eliminar usuario ${user.name}`}
                     >
                       <Trash2 size={20} />
@@ -193,25 +193,26 @@ const SuperAdmin = () => {
         </table>
       </div>
 
-      {/* Modal */}
       {isModalOpen && selectedUser && (
         <div
-          className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm"
+          className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center z-50 backdrop-blur"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
+          onClick={() => setIsModalOpen(false)}
         >
-          <div className="bg-white rounded-3xl p-8 w-full max-w-lg shadow-2xl relative">
+          <div className="bg-white dark:bg-sky-900 rounded-3xl p-8 w-full max-w-lg shadow-2xl relative"
+          onClick={(e) => e.stopPropagation() }>
             <button
               onClick={() => setIsModalOpen(false)}
               className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition"
               aria-label="Cerrar modal"
             >
-              <X size={24} />
+              <X size={24} className="dark:text-white cursor-pointer" />
             </button>
             <h3
               id="modal-title"
-              className="text-2xl font-bold mb-6 text-sky-800 tracking-tight"
+              className="text-2xl font-bold mb-6 text-sky-800 dark:text-white tracking-tight"
             >
               {selectedUser.id && users.some((u) => u.id === selectedUser.id)
                 ? "Editar Usuario"
@@ -231,7 +232,7 @@ const SuperAdmin = () => {
                   setSelectedUser({ ...selectedUser, name: e.target.value })
                 }
                 placeholder="Nombre"
-                className="border border-gray-300 rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
+                className="border border-gray-300 dark:border-white dark:text-white dark:placeholder:text-white rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
                 required
               />
               <input
@@ -241,7 +242,7 @@ const SuperAdmin = () => {
                   setSelectedUser({ ...selectedUser, email: e.target.value })
                 }
                 placeholder="Email"
-                className="border border-gray-300 rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
+                className="border border-gray-300 dark:border-white dark:text-white dark:placeholder:text-white rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
                 required
               />
               <select
@@ -249,26 +250,26 @@ const SuperAdmin = () => {
                 onChange={(e) =>
                   setSelectedUser({ ...selectedUser, role: e.target.value })
                 }
-                className="border border-gray-300 rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
+                className="border border-gray-300 dark:border-white dark:text-white dark:placeholder:text-white rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
               >
-                <option value="superadmin">Super Admin</option>
-                <option value="encargado">Encargado</option>
-                <option value="arrendatario">Arrendatario</option>
-                <option value="dueno">Dueño de Kayak</option>
+                <option value="superadmin" className="dark:bg-sky-800">Super Admin</option>
+                <option value="encargado" className="dark:bg-sky-800">Encargado</option>
+                <option value="arrendatario" className="dark:bg-sky-800">Arrendatario</option>
+                <option value="dueno" className="dark:bg-sky-800">Dueño de Kayak</option>
               </select>
               <select
                 value={selectedUser.status}
                 onChange={(e) =>
                   setSelectedUser({ ...selectedUser, status: e.target.value })
                 }
-                className="border border-gray-300 rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
+                className="border border-gray-300 dark:border-white dark:text-white dark:placeholder:text-white rounded-xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-900"
               >
-                <option value="active">Activo</option>
-                <option value="inactive">Inactivo</option>
+                <option value="active" className="dark:bg-sky-800">Activo</option>
+                <option value="inactive" className="dark:bg-sky-800">Inactivo</option>
               </select>
               <button
                 type="submit"
-                className="bg-sky-700 text-white py-3 rounded-2xl font-semibold hover:bg-sky-800 transition"
+                className="bg-sky-700 cursor-pointer text-white py-3 rounded-2xl font-semibold hover:bg-green-800 transition"
               >
                 Guardar Cambios
               </button>
