@@ -21,7 +21,7 @@ const KayakCard = ({ kayak }) => {
 
 
     return (
-        <div className="bg-white dark:bg-[#223849] rounded-xl shadow-md hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 dark:border-none group">
+        <div className="bg-white dark:bg-cyan-900 rounded-xl shadow-md hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 dark:border-none group">
             <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
                     <div className="flex space-x-2">
@@ -45,19 +45,19 @@ const KayakCard = ({ kayak }) => {
                 </div>
                 <div className="grid grid-cols-2 gap-3 mt-4">
                     <div className="flex items-center text-gray-600 dark:text-gray-300">
-                        <Ruler size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
+                        <Ruler size={18} className="mr-2 text-gray-400 dark:text-white"/>
                         <span className="text-sm">{kayak.longitud}</span>
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-300">
-                        <Users size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
+                        <Users size={18} className="mr-2 text-gray-400 dark:text-white"/>
                         <span className="text-sm">{kayak.capacidad}</span>
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-300">
-                        <Package size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
+                        <Package size={18} className="mr-2 text-gray-400 dark:text-white"/>
                         <span className="text-sm">{kayak.material}</span>
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-300">
-                        <Calendar size={18} className="mr-2 text-gray-400 dark:text-gray-500"/>
+                        <Calendar size={18} className="mr-2 text-gray-400 dark:text-white"/>
                         <span className="text-sm">{kayak.fechaCompra}</span>
                     </div>
                 </div>
