@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { X, Camera, Trash } from "lucide-react";
+import React, { useState, useContext } from "react";
+import { X } from "lucide-react";
 import img from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
+import {ThemeContext} from "../../../components/context/themeContext/ThemeContext";
 
 const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
     const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
         fechaCompra: "",
         imagen: img,
     });
+
+    const {isDark} = useContext(ThemeContext);
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -28,12 +31,11 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
         onAddKayak(formData);
         onClose();
     }
-    console.log("haoshd")
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
-            <div className="bg-white dark:bg-[#003459] rounded-2xl shadow-xl w-full max-w-2xl z-10 overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-white dark:bg-[#003459] rounded-2xl shadow-xl w-full max-w-4xl z-10 overflow-hidden" onClick={(e) => e.stopPropagation()}>
                 <div className="flex justify-between items-center p-5 border-b border-gray-100 dark:border-[#32495a]">
                     <h2 className="text-xl font-bold text-gray-800 dark:text-white">Añadir Nuevo Kayak</h2>
                     <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-[#4b5c68] transition-colors cursor-pointer">
@@ -42,32 +44,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                 </div>
 
                 <form onSubmit={handleSumbit} className="p-5">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div className="md:col-span-2">
-                            <div className="mb-5 flex justify-center">
-                                <div className="relative w-full max-w-sm h-40 bg-gray-100 rounded-xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center">
-                                    {
-                                        formData.imagen ? (
-                                            <>
-                                                <img src={formData.imagen} alt="Vista previa" className="w-full h-full object-cover rounded-lg" />
-                                                <button type="button" className="absolute bottom-2 right-2 p-2 bg-[#003459] rounded-full shadow-md" onClick={() => setFormData((prev) => ({ ...prev, imagen: "" }))}><Trash size={16} className="text-white" /></button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Camera size={28} className="text-gray-400 mb-2" />
-                                                <p className="text-sm text-gray-500 mb-1">Arrastrá una imagen o hacé click para seleccionar</p>
-                                                <p className="text-xs text-gray-400">PNG, JPG o WEBP</p>
-                                            </>
-                                        )
-                                    }
-
-                                    <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onChange={(e) => {
-                                        //LOGICA CARGAR IMAGEN ? VER SI SE VA A HACER
-                                        setFormData((prev) => ({ ...prev, imagen: img }))
-                                    }} />
-                                </div>
-                            </div>
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Nombre</label>
@@ -76,7 +53,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                                 name="nombre"
                                 value={formData.nombre}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white placeholder-black border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white dark:bg-[#003459] placeholder-black dark:placeholder-gray-400 dark:text-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 placeholder="Nombre del kayak"
                                 required
                             />
@@ -89,7 +66,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                                 name="modelo"
                                 value={formData.modelo}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 placeholder-black bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 placeholder-black bg-white dark:bg-[#003459] placeholder-black dark:placeholder-gray-400 dark:text-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 placeholder="Ej: X-200"
                                 required
                             />
@@ -101,7 +78,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                                 name="color"
                                 value={formData.color}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white dark:bg-[#003459] placeholder-black dark:placeholder-gray-400 dark:text-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 required
                             >
                                 <option value="">Seleccionar color</option>
@@ -120,7 +97,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                                 name="longitud"
                                 value={formData.longitud}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white placeholder-black border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white placeholder-black dark:bg-[#003459] placeholder-black dark:placeholder-gray-400 dark:text-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 placeholder="Ej: 3.5m"
                                 required
                             />
@@ -132,7 +109,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                                 name="capacidad"
                                 value={formData.capacidad}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white dark:bg-[#003459] placeholder-black dark:placeholder-gray-400 dark:text-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 required
                             >
                                 <option value="">Seleccionar capacidad</option>
@@ -149,7 +126,7 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                                 name="material"
                                 value={formData.material}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white dark:bg-[#003459] placeholder-black dark:placeholder-gray-400 dark:text-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 required
                             >
                                 <option value="">Seleccionar material</option>
@@ -161,23 +138,23 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Fecha de compra</label>
+                            <label className="flex items-center text-sm font-medium text-gray-700 dark:text-white mb-1">Fecha de compra <svg className="h-5 w-6 ml-2 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 10H21M7 3V5M17 3V5M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke={isDark ? "White" : "Gray"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg></label>
                             <input
                                 type="date"
                                 name="fechaCompra"
                                 value={formData.fechaCompra}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                                className="w-full px-3 py-2 bg-white dark:bg-[#003459] placeholder-black dark:placeholder-gray-400 dark:text-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
                                 required
-                            />
-                        </div>
+                           />
+                           </div>
                     </div>
 
                     <div className="mt-6 flex justify-end space-x-3">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 border border-gray-200 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-[#2b353b] font-medium cursor-pointer"
+                            className="px-4 py-2 border border-gray-200 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-red-500 transition-colors duration-300 font-medium cursor-pointer"
                         >
                             Cancelar
                         </button>

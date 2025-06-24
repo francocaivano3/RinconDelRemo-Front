@@ -10,3 +10,41 @@ body {
     font-family: outfit;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #02497c;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #012138
+}
+
+.dark ::-webkit-scrollbar {
+  background: #003459;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #fff; 
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #e2d5d5;
+}
+
+.peer2:checked ~ div .ball{
+  right: 0;
+  left: calc(90% - 1rem);
+
+}

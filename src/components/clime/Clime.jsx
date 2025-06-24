@@ -62,21 +62,21 @@ export default function ClimaRosario() {
   }
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-8">
+    <div className="p-6 max-w-5xl mx-auto space-y-8 dark:bg-transparent dark:text-white">
       {/* Clima actual */}
       {clima && (
-        <div className="bg-blue-100 rounded-2xl shadow-md p-6 flex items-center justify-between">
+        <div className="bg-blue-100 dark:bg-sky-900 rounded-2xl shadow-md p-6 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold mb-1">
               Clima hoy en {clima.name}
             </h2>
-            <p className="text-gray-700 capitalize">
+            <p className="text-gray-700 dark:text-gray-200 capitalize">
               {clima.weather[0].description}
             </p>
             <div className="text-3xl font-semibold mt-2">
               {Math.round(clima.main.temp)}°C
             </div>
-            <div className="flex items-center gap-2 text-sm mt-1 text-gray-700">
+            <div className="flex items-center gap-2 text-sm mt-1 text-gray-700 dark:text-white">
               <Wind className="w-4 h-4" />
               Viento: {Math.round(clima.wind.speed)} km/h
             </div>

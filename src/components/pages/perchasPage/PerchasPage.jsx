@@ -36,13 +36,13 @@ export default function GuarderiaKayaks() {
   };
 
   return (
-    <div className="flex flex-col items-center p-8 min-h-screen bg-gradient-to-br from-blue-100 to-white">
+    <div className="flex flex-col items-center p-8 min-h-screen bg-blue-100 dark:bg-[#003459]">
       <div className="max-w-4xl w-full space-y-6">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-blue-800 mb-8">
-            🚣 El Rincon del Remo
+          <h1 className="text-3xl font-bold text-blue-800 dark:text-blue-100 mb-8">
+            El Rincon del Remo 🚣
           </h1>
-          <p className="text-gray-600 text-sm mt-2">
+          <p className="text-gray-600 dark:text-gray-300 text-md font-bold mt-2">
             Seleccione una percha disponible para guardar su kayak
           </p>
         </div>
@@ -51,15 +51,15 @@ export default function GuarderiaKayaks() {
         <div className="flex justify-center gap-8 text-sm mt-12 ">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-pink-400 border border-pink-500 shadow-sm" />
-            <span className="text-pink-600">Seleccionado</span>
+            <span className="text-pink-600 dark:text-pink-400">Seleccionado</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-black border border-gray-700 shadow-sm" />
-            <span className="text-gray-800">Ocupado</span>
+            <span className="text-gray-800 dark:text-gray-200">Ocupado</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-blue-300 border border-blue-400 shadow-sm" />
-            <span className="text-blue-700">Disponible</span>
+            <span className="text-blue-700 dark:text-blue-200">Disponible</span>
           </div>
         </div>
 

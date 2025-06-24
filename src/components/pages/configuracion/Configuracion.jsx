@@ -11,8 +11,8 @@ export default function Configuracion() {
   let navigate = useNavigate();
 
   return (
-    <div className={`min-h-screen w-full ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}>
-      <div className={`py-6 px-4 text-white flex items-center ${isDark ? "bg-gray-800" : "bg-teal-600"}`}>
+    <div className={`min-h-screen w-full ${isDark ? "bg-[#003459] text-white" : "bg-white text-gray-900"}`}>
+      {!editandoPerfil && <div className={`py-6 px-4 text-white flex items-center ${isDark ? "bg-[#003459]" : "bg-[#003459]"} shadow-md`}>
         <div className="bg-white text-teal-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg mr-4"> 
           JP 
         </div>
@@ -21,7 +21,7 @@ export default function Configuracion() {
           <p className="text-sm">juanperez@gmail.com</p>
           <p className="text-sm">+34 123334444</p>
         </div>
-      </div>
+      </div>}
 
       <div className="w-full max-w-4xl mx-auto py-6 px-4 space-y-4">
         {!editandoPerfil ? (
@@ -31,7 +31,7 @@ export default function Configuracion() {
             <SectionItem icon={<Clock />} title="Historial de alquileres" subtitle="Revisa tus alquileres anteriores" onClick={() => {navigate("/historial")}} />
             <SectionItem icon={<MapPin />} title="Ubicaciones favoritas" subtitle="Gestiona tus ubicaciones preferidas" />
 
-            <div className={`rounded-lg shadow p-4 ${isDark ? "bg-gray-800" : "bg-white"}`}>
+            <div className={`rounded-lg shadow p-4 transition-colors duration-300 ${isDark ? "bg-sky-900" : "bg-white"}`}>
               <h3 className="text-lg font-semibold mb-2">Preferencias</h3>
               <ToggleItem title="Modo oscuro" isDark={isDark} setIsDark={setIsDark} />
               <ToggleItem title="Idioma" />
@@ -40,7 +40,7 @@ export default function Configuracion() {
             <SectionItem icon={<LifeBuoy />} title="Centro de ayuda" subtitle="Preguntas frecuentes y soporte" />
             
 
-            <button className="w-full border border-red-500 text-red-500 py-2 rounded-lg flex items-center justify-center mt-4 hover:bg-red-50 dark:hover:bg-red-900">
+            <button className="w-full border border-red-500 text-red-500 py-2 rounded-lg flex items-center justify-center mt-4  cursor-pointer hover:bg-red-500 hover:text-white">
               <LogOut className="mr-2" size={16} />
               Cerrar sesión
             </button>
@@ -57,7 +57,7 @@ function SectionItem({ icon, title, subtitle, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+      className="bg-white dark:bg-sky-900 rounded-lg shadow p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-[#003459] transition-colors duration-200"
     >
       <div className="flex items-center">
         <div className="text-teal-600 mr-4">{icon}</div>
@@ -100,7 +100,7 @@ function ToggleItem({ title, isDark, setIsDark }) {
       <label className="inline-flex items-center cursor-pointer">
         <input
           type="checkbox"
-          className="sr-only peer"
+          className="sr-only peer peer2"
           checked={isModeToggle ? isDark : language === "en"}
           onChange={
             isModeToggle
@@ -108,8 +108,8 @@ function ToggleItem({ title, isDark, setIsDark }) {
               : handleLanguageToggle
           }
         />
-        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-teal-600 relative">
-          <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition peer-checked:translate-x-5"></div>
+        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-teal-600 transition-all duration-200 relative">
+          <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition ball"></div>
         </div>
       </label>
     </div>

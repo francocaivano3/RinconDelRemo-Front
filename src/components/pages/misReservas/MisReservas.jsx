@@ -57,13 +57,11 @@ const MisReservas = () => {
     
 
     return (
-        <div className="container mx-auto px-4 py-9 max-w-7xl">
+        <div className="dark:bg-[#003459] mx-auto px-4 py-9">
             <div className="w-full p-4">
                 <div className="mb-10 relative">
-                    <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-[#71c4ca] to-blue-500/20 dark:from-green-600 dark:to-blue-500 rounded-full blur-xl"></div>
-                    <div className="absolute -bottom-4 -right-6 w-32 h-32 bg-gradient-to-tr from-[#71c4ca] to-blue-500/20 dark:from-green-600 dark:to-blue-500 rounded-full blur-xl"></div>
                     <div className="relative">
-                        <h1 className="text-4xl font-extrabold text-[#007178] tracking-tight dark:text-white">Mis Reservas</h1>
+                        <h1 className="text-4xl font-extrabold text-[#003459] dark:text-white tracking-tight">Mis Reservas</h1>
                         <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">Explora tus reservas activas y pasadas.</p>
                     </div>
                 </div>
@@ -71,12 +69,11 @@ const MisReservas = () => {
             <div className="flex flex-col justify-center items-center">
 
                 <div className="flex justify-between max-w-4xl w-full bg-gray-200 rounded-xl overflow-hidden">
-
-                    <button className={`flex justify-center items-center w-1/2 p-1 ${isPress === 1 ? 'bg-white transition-transform duration-500 rounded-xl overflow-hidden shadow-xl border border-gray-200' : 'bg-gray-200 '} `} onClick={() => handleSetIsPress(1)}>Activas</button>
-                    <button className={`flex justify-center items-center w-1/2 p-1 ${isPress === 2 ? 'bg-white transition-transform duration-500 rounded-xl overflow-hidden shadow-xl border border-gray-200' : 'bg-gray-200 '} `} onClick={() => handleSetIsPress(2)}>Pasadas</button>
+                    <button className={`flex justify-center items-center w-1/2 p-1 ${isPress === 1 ? 'bg-white dark:bg-sky-900 dark:text-white transition-transform duration-500 rounded-xl overflow-hidden shadow-xl border border-gray-200' : 'bg-gray-200 '} `} onClick={() => handleSetIsPress(1)}>Activas</button>
+                    <button className={`flex justify-center items-center w-1/2 p-1 ${isPress === 2 ? 'bg-white dark:bg-sky-900 dark:text-white transition-transform duration-500 rounded-xl overflow-hidden shadow-xl border border-gray-200' : 'bg-gray-200 '} `} onClick={() => handleSetIsPress(2)}>Pasadas</button>
                 </div>
 
-                <div className="flex flex-col max-w-sm w-300 lg:max-w-full rounded-xl overflow-hidden shadow-md p-4">
+                <div className="flex flex-col items-center max-w-sm w-300 lg:max-w-full overflow-hidden p-4">
                     {kayaksToShow.map((kayak) => (
                         <KayakItem
                             key={kayak.id}

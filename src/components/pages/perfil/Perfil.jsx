@@ -76,9 +76,9 @@ const Perfil = ({ onVolver }) => {
   };
 
   return (
-    <div className={`flex items-center justify-center min-h-screen p-6 w-full ${isDark ? "dark bg-gray-900 text-white" : "bg-white text-gray-900"}`}>      
-      <div className={`flex flex-col md:flex-row ${isDark ? "bg-gray-800" : "bg-white"} shadow-lg rounded-xl overflow-hidden w-full max-w-5xl`}>
-        <div className={`${isDark ? "bg-gray-700" : "bg-gray-100"} flex justify-center items-center p-8 md:w-1/3`}>
+    <div className={`flex items-center justify-center w-full dark:bg-[#003459]`}>      
+      <div className={`flex flex-col md:flex-row h-fit ${isDark ? "bg-gray-800" : "bg-white"} shadow-lg rounded-xl overflow-hidden w-full max-w-5xl`}>
+        <div className={`${isDark ? "bg-sky-900" : "bg-gray-100"} flex justify-center items-center p-8 md:w-1/3`}>
           <img
             src={imagen}
             alt="Avatar"
@@ -100,7 +100,7 @@ const Perfil = ({ onVolver }) => {
                   value={user.name}
                   onChange={handleNameChange}
                   ref={nameRef}
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.name ? "border-red-500" : "border-gray-300"} dark:bg-gray-700 dark:text-white`}
+                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.name ? "border-red-500" : "border-gray-300"} dark:bg-sky-900 dark:text-white`}
                   placeholder="Ingresá tu nombre"
                 />
               ) : (
@@ -117,7 +117,7 @@ const Perfil = ({ onVolver }) => {
                   value={user.lastname}
                   onChange={handleLastnameChange}
                   ref={lastnameRef}
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.lastname ? "border-red-500" : "border-gray-300"} dark:bg-gray-700 dark:text-white`}
+                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.lastname ? "border-red-500" : "border-gray-300"} dark:bg-sky-900 dark:text-white`}
                   placeholder="Ingresá tu apellido"
                 />
               ) : (
@@ -134,7 +134,7 @@ const Perfil = ({ onVolver }) => {
                   value={user.phone}
                   onChange={handlePhoneChange}
                   ref={phoneRef}
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.phone ? "border-red-500" : "border-gray-300"} dark:bg-gray-700 dark:text-white`}
+                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.phone ? "border-red-500" : "border-gray-300"} dark:bg-sky-900 dark:text-white`}
                   placeholder="Ingresá tu teléfono"
                 />
               ) : (
@@ -151,7 +151,7 @@ const Perfil = ({ onVolver }) => {
                   value={user.email}
                   onChange={handleEmailChange}
                   ref={emailRef}
-                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.email ? "border-red-500" : "border-gray-300"} dark:bg-gray-700 dark:text-white`}
+                  className={`w-full px-3 py-2 border rounded-md shadow-sm ${errors.email ? "border-red-500" : "border-gray-300"} dark:bg-sky-900 dark:text-white`}
                   placeholder="Ingresá tu correo"
                 />
               ) : (
@@ -176,11 +176,11 @@ const Perfil = ({ onVolver }) => {
                   </button>
                 </>
               ) : (
-                <button type="button" onClick={handleEdit} className="bg-[#007178] text-white px-6 py-2 rounded-md hover:bg-[#335c5f] transition">
+                <button type="button" onClick={handleEdit} className="bg-[#007178] cursor-pointer text-white px-6 py-2 rounded-md hover:bg-[#335c5f] transition">
                   Editar Perfil
                 </button>
               )}
-              <button type="button" onClick={onVolver} className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition">
+              <button type="button" onClick={onVolver} className="bg-red-500 cursor-pointer text-white px-6 py-2 rounded-md hover:bg-red-600 transition">
                 Volver
               </button>
             </div>

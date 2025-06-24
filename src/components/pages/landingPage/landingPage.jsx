@@ -134,10 +134,10 @@ const LandingPage = () => {
           <img src={hero} alt="" className="object-cover w-screen h-screen brightness-50" />
 
           <article className="text-white absolute inset-0 flex flex-col items-center justify-center">
-            <h1 className="text-3xl uppercase font-bold text-center">Aventura que fluye, <span className="text-[#04b8c5]">recuerdos</span> que quedan</h1>
+            <h1 className="text-3xl uppercase font-bold text-center">Aventura que fluye, <span className="text-[#02bfcc]">recuerdos</span> que quedan</h1>
             <h2 className="mt-4 uppercase">Reservá ya una experiencia inolvidable</h2>
             <div className="flex flex-col md:flex-row w-1/2 md:w-1/4 justify-between mt-8">
-              <a href="#services" className="bg-[#04b8c5] hover:bg-[#007178] transition-colors duration-300 px-2 md:px-6 py-2 md:py-4 rounded-md cursor-pointer font-semibold uppercase text-center">Ver Servicios</a>
+              <a href="#services" className="bg-[#02bfcc] hover:bg-[#003459] transition-colors duration-300 px-2 md:px-6 py-2 md:py-4 rounded-md cursor-pointer font-semibold uppercase text-center">Ver Servicios</a>
               <a href="#contact" className="bg-transparent border-1 py-2 md:px-6 md:py-4 rounded-md cursor-pointer font-semibold hover:bg-white transition-colors duration-300 hover:text-[#007178] hover:border-white uppercase mt-4 md:mt-0 text-center">Contactar</a>
             </div>
           </article>
@@ -146,7 +146,7 @@ const LandingPage = () => {
         <section id="services" className="py-16 dark:bg-[#003459]">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Nuestros Servicios</h2>
-            <div className="w-24 h-1 bg-[#04b8c5] mx-auto"></div>
+            <div className="w-24 h-1 bg-[#02bfcc] mx-auto"></div>
             <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Ofrecemos servicios completos para todos los amantes del kayak, desde alquiler hasta guardería y tours
               guiados.
@@ -182,7 +182,7 @@ const LandingPage = () => {
           <div className="container mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4 text-center">Galería</h2>
-              <div className="w-24 h-1 bg-[#04b8c5] mx-auto"></div>
+              <div className="w-24 h-1 bg-[#02bfcc] mx-auto"></div>
               <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-center">
                 Descubrí la belleza de nuestros paisajes y la diversión de nuestros servicios a través de estas imágenes.
               </p>
@@ -288,7 +288,7 @@ const LandingPage = () => {
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Preguntas Frecuentes</h2>
-              <div className="w-24 h-1 bg-[#04b8c5] max-w-2xl mx-auto"></div>
+              <div className="w-24 h-1 bg-[#02bfcc] mx-auto-w-2xl mx-auto"></div>
               <p className="mt-6 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Resolvemos tus dudas sobre nuestros servicios de alquiler y guardería de kayaks.</p>
             </div>
 
@@ -335,21 +335,15 @@ const LandingPage = () => {
           </div>
 
 
-          <div className="flex justify-between flex-col md:flex-row">
-            <div className="md:mx-4 mx-0 w-full md:w-1/2 md:h-full p-8 bg-white dark:bg-[#00507A] rounded-lg shadow-lg mt-4">
-            <div className="flex items-center flex-col text-center">
-                <h4 className="font-semibold text-[#003459] text-2xl dark:text-white">Dirección</h4>
-                <p className="text-[#003459] dark:text-white text-xl">
-                  Puerto Rosario
-                  <br />
-                  Av. Costanera 1234
-                </p>
-            </div>
-            <div className="mt-8">
+          <div className="flex justify-between flex-col">
+            <ContactForm />
+            <div className="mt-8 pt-16 h-[25vh] text-center">
+              <div className="mb-16">
+                <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Ubicación</h2>
+                <div className="w-24 h-1 bg-teal-500 mx-auto"></div>
+              </div>
               <Mapa/>
             </div>
-            </div>
-            <ContactForm />
           </div>
         </section>
       </main>
