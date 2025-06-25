@@ -131,7 +131,7 @@ const LandingPage = () => {
 
       <main>
         <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-          <img src={hero} alt="" className="object-cover w-screen h-screen brightness-50" />
+          <img src={hero} alt="" className="object-cover w-full h-screen brightness-50" />
 
           <article className="text-white absolute inset-0 flex flex-col items-center justify-center">
             <h1 className="text-3xl uppercase font-bold text-center">Aventura que fluye, <span className="text-[#02bfcc]">recuerdos</span> que quedan</h1>
