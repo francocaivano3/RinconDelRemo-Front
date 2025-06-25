@@ -31,10 +31,6 @@ const ContactForm = () => {
             message: formData.message,
         };
 
-        console.log("serviceId:", serviceId);
-console.log("templateId:", templateId);
-console.log("publicKey:", publicKey);
-
         emailjs.send(
             serviceId,
             templateId,
