@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import WeatherWeek from "./WeatherWeek";
+import { climeHoy } from "../../service/clima";
 
 const getIcon = (main, size = "w-8 h-8") => {
   const className = `${size}`;
@@ -32,21 +33,15 @@ const getIcon = (main, size = "w-8 h-8") => {
   }
 };
 
-const API_KEY = "013c913a0cf675b5f5594d9cc0b8f7c3";
-
 export default function ClimaRosario() {
   const [clima, setClima] = useState(null);
-
   const [error, setError] = useState(null);
 
   const fetchClima = async () => {
     try {
       // Clima actual
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=-32.9474&lon=-60.6305&units=metric&lang=es&appid=${API_KEY}`
-      );
-      if (!res.ok) throw new Error("Error al obtener el clima actual");
-      const data = await res.json();
+      const data = await climeHoy();
+      console.log(data);
       setClima(data);
     } catch (err) {
       setError(err.message);
@@ -68,24 +63,24 @@ export default function ClimaRosario() {
         <div className="bg-blue-100 dark:bg-sky-900 rounded-2xl shadow-md p-6 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold mb-1">
-              Clima hoy en {clima.name}
+              Clima hoy en {clima.city}
             </h2>
             <p className="text-gray-700 dark:text-gray-200 capitalize">
-              {clima.weather[0].description}
+              {clima.description}
             </p>
             <div className="text-3xl font-semibold mt-2">
-              {Math.round(clima.main.temp)}°C
+              {Math.round(clima.temperature)}°C
             </div>
             <div className="flex items-center gap-2 text-sm mt-1 text-gray-700 dark:text-white">
               <Wind className="w-4 h-4" />
-              Viento: {Math.round(clima.wind.speed)} km/h
+              Viento: {Math.round(clima.windSpeed)} km/h
             </div>
           </div>
           <div className="flex flex-col items-center">
-            {getIcon(clima.weather[0].main, "w-14 h-14")}
+            {getIcon(clima.weather[0], "w-14 h-14")}
             <p className="text-sm mt-2">
-              Mín: {Math.round(clima.main.temp_min)}°C / Máx:{" "}
-              {Math.round(clima.main.temp_max)}°C
+              Mín: {Math.round(clima.minTemperature)}°C / Máx:{" "}
+              {Math.round(clima.maxTemperature)}°C
             </p>
           </div>
         </div>

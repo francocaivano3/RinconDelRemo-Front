@@ -1,6 +1,5 @@
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
-
-console.log(baseUrl);
+const baseUrl = import.meta.env.VITE_BASE_URL;
+console.log("BASE URL:", baseUrl); // Esto debería imprimir https://localhost:7148/api
 
 const apiClient = {
   get: (url) => request(url, { method: "GET" }),
@@ -39,11 +38,12 @@ const apiClient = {
 };
 
 const request = async (url, options) => {
+  console.log("Haciendo request a:", `${baseUrl}/${url}`);
   const response = await fetch(`${baseUrl}/${url}`, {
     credentials: "include",
     ...options,
   });
-
+  console.log("Respuesta recibida:", response.status);
   if (!response.ok) {
     if (response.status === 401) {
       const refreshOk = await refresh();
