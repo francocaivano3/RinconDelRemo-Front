@@ -111,8 +111,8 @@ const myKayaks = () => {
             <input type="text" placeholder="Buscar por nombre, modelo o color..." className="dark:bg-[#003459] dark:text-white pl-12 pr-4 py-3 w-full bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#007178] dark:focus:ring-white focus:border-transparent shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
 
-          <div className="relative">
-            <button className="flex items-center px-4 py-3 bg-white dark:bg-[#003459] border border-gray-200 rounded-xl hover:bg-gray-50 dark:hover:bg-[#003459] dark:text-white hover:cursor-pointer shadow-sm transition-colors" onClick={() => setFilterOpen(!filterOpen)}>
+          <div className="relative flex flex-col items-center justify-center">
+            <button className=" flex items-center px-4 py-3 bg-white dark:bg-[#003459] border border-gray-200 rounded-xl hover:bg-gray-50 dark:hover:bg-[#003459] dark:text-white hover:cursor-pointer shadow-sm transition-colors" onClick={() => setFilterOpen(!filterOpen)}>
               <Filter className="h-5 w-5 mr-2 text-gray-500 dark:text-white" />
               <span className="text-gray-700 dark:text-white font-medium">Filtros</span>
               <ChevronDown
@@ -121,7 +121,7 @@ const myKayaks = () => {
             </button>
 
             {filterOpen && (
-              <div className="absolute right-0 w-72 bg-white dark:bg-[#003459] border border-gray-100 rounded-xl shadow-lg z-10 p-5">
+              <div className="md:absolute right-0 w-72 bg-white dark:bg-[#003459] border border-gray-100 rounded-xl shadow-lg z-10 p-5">
                 <h3 className="text-sm font-semibold text-gray-700 dark:text-white mb-3">Filtrar por:</h3>
                 <div className="space-y-4">
                   <div>

@@ -57,7 +57,7 @@ const MisReservas = () => {
     
 
     return (
-        <div className="dark:bg-[#003459] mx-auto px-4 py-9">
+        <div className="dark:bg-[#003459] mx-auto h-screen px-4 py-9">
             <div className="w-full p-4">
                 <div className="mb-10 relative">
                     <div className="relative">
