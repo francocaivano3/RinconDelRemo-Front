@@ -1,5 +1,15 @@
 import { useState, useContext } from "react";
-import { User, CreditCard, Clock, MapPin, LifeBuoy, ShieldCheck, LogOut, Settings, Globe } from "lucide-react";
+import {
+  User,
+  CreditCard,
+  Clock,
+  MapPin,
+  LifeBuoy,
+  ShieldCheck,
+  LogOut,
+  Settings,
+  Globe,
+} from "lucide-react";
 import Perfil from "../perfil/Perfil";
 import { ThemeContext } from "../../context/themeContext/ThemeContext";
 import { useNavigate } from "react-router-dom";
@@ -11,34 +21,75 @@ export default function Configuracion() {
   let navigate = useNavigate();
 
   return (
-    <div className={`min-h-screen w-full ${isDark ? "bg-[#003459] text-white" : "bg-white text-gray-900"}`}>
-      {!editandoPerfil && <div className={`py-6 px-4 text-white flex items-center ${isDark ? "bg-[#003459]" : "bg-[#003459]"} shadow-md`}>
-        <div className="bg-white text-teal-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg mr-4"> 
-          JP 
+    <div
+      className={`min-h-screen w-full ${
+        isDark ? "bg-[#003459] text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      {!editandoPerfil && (
+        <div
+          className={`py-6 px-4 text-white flex items-center ${
+            isDark ? "bg-[#003459]" : "bg-[#003459]"
+          } shadow-md`}
+        >
+          <div className="bg-white text-teal-600 rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg mr-4">
+            JP
+          </div>
+          <div>
+            <p className="font-semibold text-lg">Juan Pérez</p>
+            <p className="text-sm">juanperez@gmail.com</p>
+            <p className="text-sm">+34 123334444</p>
+          </div>
         </div>
-        <div>
-          <p className="font-semibold text-lg">Juan Pérez</p>
-          <p className="text-sm">juanperez@gmail.com</p>
-          <p className="text-sm">+34 123334444</p>
-        </div>
-      </div>}
+      )}
 
       <div className="w-full max-w-4xl mx-auto py-6 px-4 space-y-4">
         {!editandoPerfil ? (
           <>
-            <SectionItem icon={<User />} title="Editar perfil" subtitle="Actualiza tu información personal" onClick={() => setEditandoPerfil(true)} />
-            <SectionItem icon={<CreditCard />} title="Métodos de pago" subtitle="Gestiona tus tarjetas y métodos de pago" />
-            <SectionItem icon={<Clock />} title="Historial de alquileres" subtitle="Revisa tus alquileres anteriores" onClick={() => {navigate("/historial")}} />
-            <SectionItem icon={<MapPin />} title="Ubicaciones favoritas" subtitle="Gestiona tus ubicaciones preferidas" />
+            <SectionItem
+              icon={<User />}
+              title="Editar perfil"
+              subtitle="Actualiza tu información personal"
+              onClick={() => setEditandoPerfil(true)}
+            />
+            <SectionItem
+              icon={<CreditCard />}
+              title="Métodos de pago"
+              subtitle="Gestiona tus tarjetas y métodos de pago"
+            />
+            <SectionItem
+              icon={<Clock />}
+              title="Historial de alquileres"
+              subtitle="Revisa tus alquileres anteriores"
+              onClick={() => {
+                navigate("/historial");
+              }}
+            />
+            <SectionItem
+              icon={<MapPin />}
+              title="Ubicaciones favoritas"
+              subtitle="Gestiona tus ubicaciones preferidas"
+            />
 
-            <div className={`rounded-lg shadow p-4 transition-colors duration-300 ${isDark ? "bg-sky-900" : "bg-white"}`}>
+            <div
+              className={`rounded-lg shadow p-4 transition-colors duration-300 ${
+                isDark ? "bg-sky-900" : "bg-white"
+              }`}
+            >
               <h3 className="text-lg font-semibold mb-2">Preferencias</h3>
-              <ToggleItem title="Modo oscuro" isDark={isDark} setIsDark={setIsDark} />
+              <ToggleItem
+                title="Modo oscuro"
+                isDark={isDark}
+                setIsDark={setIsDark}
+              />
               <ToggleItem title="Idioma" />
             </div>
 
-            <SectionItem icon={<LifeBuoy />} title="Centro de ayuda" subtitle="Preguntas frecuentes y soporte" />
-            
+            <SectionItem
+              icon={<LifeBuoy />}
+              title="Centro de ayuda"
+              subtitle="Preguntas frecuentes y soporte"
+            />
 
             <button className="w-full border border-red-500 text-red-500 py-2 rounded-lg flex items-center justify-center mt-4  cursor-pointer hover:bg-red-500 hover:text-white">
               <LogOut className="mr-2" size={16} />
@@ -103,9 +154,7 @@ function ToggleItem({ title, isDark, setIsDark }) {
           className="sr-only peer peer2"
           checked={isModeToggle ? isDark : language === "en"}
           onChange={
-            isModeToggle
-              ? () => setIsDark(!isDark)
-              : handleLanguageToggle
+            isModeToggle ? () => setIsDark(!isDark) : handleLanguageToggle
           }
         />
         <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-teal-600 transition-all duration-200 relative">

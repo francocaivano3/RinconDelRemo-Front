@@ -4,7 +4,6 @@ import KayakCard from "./kayakCard";
 import AddKayakModal from "./addKayakModal";
 import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
 
-
 //EJEMPLO PARA PROBAR
 const hardcodedKayaks = [
   {
@@ -65,32 +64,32 @@ const hardcodedKayaks = [
 ];
 //
 
-
-const myKayaks = () => {
+const MyKayaks = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    if(isModalOpen) {
+    if (isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = "auto"
-    }
+      document.body.style.overflow = "auto";
+    };
   }, [isModalOpen]);
 
   const handleAddKayak = (newKayak) => {
     return;
-  }
+  };
 
-  const filteredKayaks = hardcodedKayaks.filter((kayak) =>
-    kayak.nombre.toLowerCase().includes(searchTerm.toLocaleUpperCase()) ||
-    kayak.modelo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    kayak.color.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredKayaks = hardcodedKayaks.filter(
+    (kayak) =>
+      kayak.nombre.toLowerCase().includes(searchTerm.toLocaleUpperCase()) ||
+      kayak.modelo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      kayak.color.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -98,8 +97,13 @@ const myKayaks = () => {
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         <div className="mb-10 relative">
           <div className="relative">
-            <h1 className="text-4xl font-extrabold text-[#003459] tracking-tight dark:text-white">Mis Kayaks</h1>
-            <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación.</p>
+            <h1 className="text-4xl font-extrabold text-[#003459] tracking-tight dark:text-white">
+              Mis Kayaks
+            </h1>
+            <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">
+              Explora y administrá tu colección personal de kayaks. Mantené un
+              registro detallado de cada embarcación.
+            </p>
           </div>
         </div>
 
@@ -108,24 +112,41 @@ const myKayaks = () => {
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-gray-400" />
             </div>
-            <input type="text" placeholder="Buscar por nombre, modelo o color..." className="dark:bg-[#003459] dark:text-white pl-12 pr-4 py-3 w-full bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#007178] dark:focus:ring-white focus:border-transparent shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <input
+              type="text"
+              placeholder="Buscar por nombre, modelo o color..."
+              className="dark:bg-[#003459] dark:text-white pl-12 pr-4 py-3 w-full bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#007178] dark:focus:ring-white focus:border-transparent shadow-sm"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
 
           <div className="relative">
-            <button className="flex items-center px-4 py-3 bg-white dark:bg-[#003459] border border-gray-200 rounded-xl hover:bg-gray-50 dark:hover:bg-[#003459] dark:text-white hover:cursor-pointer shadow-sm transition-colors" onClick={() => setFilterOpen(!filterOpen)}>
+            <button
+              className="flex items-center px-4 py-3 bg-white dark:bg-[#003459] border border-gray-200 rounded-xl hover:bg-gray-50 dark:hover:bg-[#003459] dark:text-white hover:cursor-pointer shadow-sm transition-colors"
+              onClick={() => setFilterOpen(!filterOpen)}
+            >
               <Filter className="h-5 w-5 mr-2 text-gray-500 dark:text-white" />
-              <span className="text-gray-700 dark:text-white font-medium">Filtros</span>
+              <span className="text-gray-700 dark:text-white font-medium">
+                Filtros
+              </span>
               <ChevronDown
-                className={`h-4 w-4 ml-2 text-gray-500 dark:text-white transition-transform ${filterOpen ? "rotate-180" : ""}`}
+                className={`h-4 w-4 ml-2 text-gray-500 dark:text-white transition-transform ${
+                  filterOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
 
             {filterOpen && (
               <div className="absolute right-0 w-72 bg-white dark:bg-[#003459] border border-gray-100 rounded-xl shadow-lg z-10 p-5">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-white mb-3">Filtrar por:</h3>
+                <h3 className="text-sm font-semibold text-gray-700 dark:text-white mb-3">
+                  Filtrar por:
+                </h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">Color</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">
+                      Color
+                    </label>
                     <select className="w-full border border-gray-200 rounded-lg p-2.5 text-sm bg-white dark:bg-[#003459] dark:text-white focus:ring-2 focus:ring-[#007178] focus:border-transparent cursor-pointer">
                       <option value="">Todos los colores</option>
                       <option value="rojo">Rojo</option>
@@ -136,7 +157,9 @@ const myKayaks = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">Material</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">
+                      Material
+                    </label>
                     <select className="w-full border border-gray-200 rounded-lg p-2.5 text-sm bg-white dark:bg-[#003459] dark:text-white focus:ring-2 focus:ring-[#007178] focus:border-transparent cursor-pointer">
                       <option value="">Todos los materiales</option>
                       <option value="polietileno">Polietileno</option>
@@ -145,7 +168,9 @@ const myKayaks = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">Capacidad</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">
+                      Capacidad
+                    </label>
                     <select className="w-full border border-gray-200 rounded-lg p-2.5 text-sm bg-white dark:bg-[#003459] dark:text-white focus:ring-2 focus:ring-[#007178] focus:border-transparent cursor-pointer">
                       <option value="">Todas las capacidades</option>
                       <option value="1">1 persona</option>
@@ -162,7 +187,10 @@ const myKayaks = () => {
               </div>
             )}
           </div>
-          <button className="px-4 py-3 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-xl hover:cursor-pointer hover:from-blue-600 hover:to-green-600 flex items-center justify-center shadow-sm transition-all duration-300" onClick={() => setIsModalOpen(true)}>
+          <button
+            className="px-4 py-3 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-xl hover:cursor-pointer hover:from-blue-600 hover:to-green-600 flex items-center justify-center shadow-sm transition-all duration-300"
+            onClick={() => setIsModalOpen(true)}
+          >
             <Plus className="h-5 w-5 mr-2" />
             <span className="font-medium">Añadir kayak</span>
           </button>
@@ -173,9 +201,12 @@ const myKayaks = () => {
             <div className="mx-auto w-16 h-16 bg-gray-100 dark:bg-cyan-800 rounded-full flex items-center justify-center mb-4">
               <Search className="h-8 w-8 text-gray-400 dark:text-white" />
             </div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-white mt-4">No se encontraron kayaks ❌</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-white mt-4">
+              No se encontraron kayaks ❌
+            </h3>
             <p className="text-gray-500 dark:text-gray-300 max-w-md mx-auto mt-4">
-              No hay kayaks que coincidan con tu búsqueda. Intenta con otros términos o añade un nuevo kayak.
+              No hay kayaks que coincidan con tu búsqueda. Intenta con otros
+              términos o añade un nuevo kayak.
             </p>
           </div>
         )}
@@ -186,10 +217,14 @@ const myKayaks = () => {
           ))}
         </div>
       </div>
-      
-      <AddKayakModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAddKayak={handleAddKayak}/>
-    </div>
-  )
-}
 
-export default myKayaks;
+      <AddKayakModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAddKayak={handleAddKayak}
+      />
+    </div>
+  );
+};
+
+export default MyKayaks;

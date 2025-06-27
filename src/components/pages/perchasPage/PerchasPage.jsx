@@ -1,27 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getPerchas } from "../../../service/perchas";
 
 export default function GuarderiaKayaks() {
-  const ROWS = 16;
-  const COLS = 10;
-  const columnas = "ABCDEFGHIJ".split("");
-
-  const initialGrid = Array.from({ length: ROWS }, (_, row) =>
-    Array.from({ length: COLS }, (_, col) => {
-      const rand = Math.random();
-      let estado = "disponible";
-      if (rand < 0.15) estado = "ocupado";
-      return { id: `${row + 1}${columnas[col]}`, estado };
-    })
-  );
-
-  const [perchas, setPerchas] = useState(initialGrid);
+  const [perchas, setPerchas] = useState([]);
   const [perchaSeleccionada, setPerchaSeleccionada] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
 
+  const ROWS = 10;
+  const COLS = 10;
+  const columnas = "ABCDEFGHIJ".split("");
+
+  useEffect(() => {
+    const getAllPerchas = async () => {
+      try {
+        const data = await getPerchas(); // [{ location: '1A', isOccupied: false, kayakId: null }, ...]
+        console.log(data);
+        const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
+
+        data.forEach((percha) => {
+          const row = parseInt(percha.location.slice(0, -1)) - 1;
+          const col = columnas.indexOf(percha.location.slice(-1));
+
+          if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
+            grid[row][col] = {
+              id: percha.location,
+              estado: percha.isOccupied ? "ocupado" : "disponible",
+            };
+          }
+        });
+
+        setPerchas(grid);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getAllPerchas();
+  }, []);
+
   const handleSeleccion = (row, col) => {
     const percha = perchas[row][col];
-    if (percha.estado !== "disponible") return;
+    if (!percha || percha.estado !== "disponible") return;
     setPerchaSeleccionada({ row, col, id: percha.id });
     setMostrarModal(true);
   };
@@ -51,7 +71,9 @@ export default function GuarderiaKayaks() {
         <div className="flex justify-center gap-8 text-sm mt-12 ">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-pink-400 border border-pink-500 shadow-sm" />
-            <span className="text-pink-600 dark:text-pink-400">Seleccionado</span>
+            <span className="text-pink-600 dark:text-pink-400">
+              Seleccionado
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-black border border-gray-700 shadow-sm" />
@@ -63,10 +85,10 @@ export default function GuarderiaKayaks() {
           </div>
         </div>
 
-        {/* Grid con cabeceras */}
+        {/* Grid */}
         <div className="overflow-x-auto rounded-xl border border-gray-300 shadow-md bg-white p-4 text-center mt-4">
           <div className="inline-block">
-            {/* Encabezado de columnas */}
+            {/* Columnas */}
             <div className="grid grid-cols-[50px_repeat(10,28px)] gap-2 mb-2">
               <div></div>
               {columnas.map((letra) => (
@@ -90,6 +112,7 @@ export default function GuarderiaKayaks() {
                     {rowIdx + 1}
                   </div>
                   {fila.map((percha, colIdx) => {
+                    if (!percha) return <div key={colIdx} />;
                     const base =
                       "w-7 h-7 rounded-full cursor-pointer duration-200 shadow hover:scale-105";
                     let estilo = "";
