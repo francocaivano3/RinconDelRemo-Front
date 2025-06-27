@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import {
   User,
   CreditCard,
@@ -13,14 +13,14 @@ import Perfil from "../perfil/Perfil";
 import { ThemeContext } from "../../context/themeContext/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { TranslateContext } from "../../context/translationContext/TranslateLanguage";
-
-import { AuthContext } from "../../context/authContext/AuthContext";
+import { useAuth } from "../../context/authContext/AuthContext";
 export default function Configuracion() {
   const [editandoPerfil, setEditandoPerfil] = useState(false);
   const { isDark, setIsDark } = useContext(ThemeContext);
   const navigate = useNavigate();
 
-  const { userInfo, rol } = useContext(AuthContext);
+
+  const { userInfo, rol, logout } = useAuth();
 
   if (!userInfo) return <p className="p-4">Cargando datos...</p>;
 
@@ -93,7 +93,7 @@ export default function Configuracion() {
               subtitle="Preguntas frecuentes y soporte"
             />
 
-            <button className="w-full border border-red-500 text-red-500 py-2 rounded-lg flex items-center justify-center mt-4  cursor-pointer hover:bg-red-500 hover:text-white">
+            <button onClick={logout} className="w-full border border-red-500 text-red-500 py-2 rounded-lg flex items-center justify-center mt-4  cursor-pointer hover:bg-red-500 hover:text-white">
               <LogOut className="mr-2" size={16} />
               Cerrar sesión
             </button>
