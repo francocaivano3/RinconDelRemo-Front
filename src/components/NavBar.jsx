@@ -48,7 +48,7 @@ const NavBar = () => {
     return (<header className="flex fixed items-center justify-between w-full z-50 bg-white dark:bg-[#003459] backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center md:w-1/3">
             <div className="flex items-center">
-                <img src={isDark ? logoDark : logoLight} alt="Logo" className="w-12 h-12" /><span className="font-bold text-xl text-[#007178] dark:text-white">ElRincónDelRemo</span>
+                <img src={isDark ? logoDark : logoLight} alt="Logo" className="w-12 h-12" /><span className="font-bold text-xl text-[#007178] dark:text-white">RincónDelRemo</span>
             </div>
         </div>
 

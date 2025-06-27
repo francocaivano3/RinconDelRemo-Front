@@ -27,7 +27,6 @@ export default function App() {
           <Outlet />
         </div>
         {!shouldHideNavbar && <BottomNavbar />}
-        <ThemeBtn />
       </AlertProvider>
       </ThemeProvider>
       </TranslateProvider>
