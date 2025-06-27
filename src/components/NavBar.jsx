@@ -5,12 +5,16 @@ import logoDark from "../../src/assets/turismo Borcelle.png";
 import { ThemeContext } from "../components/context/themeContext/ThemeContext";
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../authConfig";
+import { AuthContext } from "./context/authContext/AuthContext";
+import { jwtDecode } from "jwt-decode";
+import apiClient from "../utils/api-client";
 
 const NavBar = () => {
     const { instance } = useMsal();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isDark } = useContext(ThemeContext);
     const navigate = useNavigate();
+    const { userInfo, rol } = useContext(AuthContext);
 
     const navLinks = [
         { name: "Inicio", href: "#home" },
@@ -25,14 +29,37 @@ const NavBar = () => {
     }
 
     const handleRegister = () => {
-        instance.loginPopup({
-            ...loginRequest,
-            prompt: "create",
-        }).then((response) => {
-            instance.setActiveAccount(response.account);
-            navigate("/dashboard");
-        }).catch((error) => console.error(error));
-    }
+        instance
+            .loginPopup({
+                ...loginRequest,
+                prompt: "create",
+            })
+            .then(async (response) => {
+                instance.setActiveAccount(response.account);
+
+                const decoded = jwtDecode(response.accessToken);
+                const newUser = {};
+                if(decoded["Tipo de usuario"] !== "DuenioKayak") {
+                    newUser = {
+                        name: decoded.name || response.account.name,
+                        email: decoded.preferred_username || response.account.username,
+                        OwnerId: decoded.oid,
+                    };
+                } else {
+                    newUser = {
+                        name: decoded.name || response.account.name,
+                        email: decoded.preferred_username || response.account.username,
+                        Id: decoded.oid,
+                    };
+                }
+                console.log("oid del usuario", decoded.oid);
+                const token = response.accessToken;
+                await registerOnBackend(newUser, token);
+
+                navigate("/dashboard");
+            })
+            .catch((error) => console.error("Error en loginPopup:", error));
+    };
 
     const handleLogin = () => {
         console.log("Iniciar sesión");
@@ -41,8 +68,34 @@ const NavBar = () => {
             prompt: "login",
         }).then((response) => {
             instance.setActiveAccount(response.account);
+            console.log(response.accessToken);
+            console.log("Usuario autenticado:", userInfo);
+            console.log("Rol del usuario:", rol);
             navigate("/dashboard");
         }).catch((error) => console.error(error));
+    };
+
+    const registerOnBackend = async (userData, token) => {
+        try {
+            const decoded = jwtDecode(token);
+            const rol = decoded["Tipo de usuario"]; 
+
+            console.log("Rol decodificado:", rol);
+
+            if (rol === "DuenioKayak") {
+                await apiClient.post("Owner/CreateOwner", userData);
+                console.log("Usuario registrado como DuenioKayak");
+            } else if (rol === "Cliente") {
+                await apiClient.post("Tenant/CreateTenant", userData);
+                console.log("Usuario registrado como Cliente");
+            } else {
+                console.warn("Rol desconocido, no se hizo post");
+            }
+
+            console.log("✅ Usuario registrado exitosamente en la BD");
+        } catch (error) {
+            console.error("❌ Error al registrar el usuario en el backend:", error);
+        }
     };
 
     return (<header className="flex fixed items-center justify-between w-full z-50 bg-white dark:bg-[#003459] backdrop-blur-sm shadow-sm">
