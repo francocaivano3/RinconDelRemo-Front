@@ -14,7 +14,7 @@ import HistorialKayaks from "../components/pages/historialKayaks/HistorialKayaks
 import MisReservas from "../components/pages/misReservas/MisReservas";
 import Configuracion from "../components/pages/configuracion/Configuracion";
 import KayaksDisponibles from "../components/pages/kayaksDisponibles/KayaksDisponibles";
-
+import EncargadoChecks from "../components/pages/encargadoChecks/EncargadoChecks";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -85,6 +85,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute userType="cliente">
             <MisReservas />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/EncargadoChecks",
+        element: (
+          <ProtectedRoute userType="encargado">
+            <EncargadoChecks />
           </ProtectedRoute>
         ),
       },
