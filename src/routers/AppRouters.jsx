@@ -88,13 +88,16 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
+      { path: "/KayaksDisponibles", 
+        element: (
+          <ProtectedRoute userType="admin">
+            <KayaksDisponibles />
+          </ProtectedRoute>
+        ) 
+      },
       // Ruta 404
       { path: "*", element: <NotFound /> },
-
-      { path: "/login", element: <Login /> },
-      { path: "/MisReservas", element: <MisReservas /> },
-      { path: "/KayaksDisponibles", element: <KayaksDisponibles /> },
+      
     ],
   },
 ]);
