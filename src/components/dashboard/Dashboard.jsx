@@ -1,8 +1,17 @@
 import { Search, Calendar } from "lucide-react";
 import Clime from "../clime/Clime";
 import bgImage from "../../assets/pexels-robertforevr-2611696.webp";
+import { Navigate, useNavigate } from "react-router-dom";
+
+
+
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleNavigateKayaksDisponibles = () => {
+    navigate("/KayaksDisponibles");
+  }
   return (
     <>
       <section className="relative text-white py-28 px-6" style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
@@ -19,7 +28,7 @@ const Dashboard = () => {
           <div className="flex flex-col sm:flex-row gap-4 py-4 ">
             <button
               className="bg-white font-bold px-4 py-2 rounded-md hover:bg-gray-200 text-[#003459] w-fit cursor-pointer"
-              onClick={() => alert("....")}
+              onClick={() => handleNavigateKayaksDisponibles()}
             >
               Ver kayaks disponibles
             </button>

@@ -13,6 +13,7 @@ import NotFound from "../components/pages/notFound/NotFound";
 import HistorialKayaks from "../components/pages/historialKayaks/HistorialKayaks";
 import MisReservas from "../components/pages/misReservas/MisReservas";
 import Configuracion from "../components/pages/configuracion/Configuracion";
+import KayaksDisponibles from "../components/pages/kayaksDisponibles/KayaksDisponibles";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
 
       // Ruta 404
       { path: "*", element: <NotFound /> },
+
+      { path: "/login", element: <Login /> },
+      { path: "/MisReservas", element: <MisReservas /> },
+      { path: "/KayaksDisponibles", element: <KayaksDisponibles /> },
     ],
   },
 ]);
