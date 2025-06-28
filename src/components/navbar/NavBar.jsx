@@ -29,6 +29,7 @@ const NAV_ITEMS = {
   ],
   encargado: [
     { path: "/dashboard", icon: Home, label: "Inicio" },
+    { path: "/EncargadoChecks", icon: CalendarCheck, label: "Check-In/out" },
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
   cliente: [

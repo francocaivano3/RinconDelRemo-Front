@@ -14,7 +14,7 @@ import HistorialKayaks from "../components/pages/historialKayaks/HistorialKayaks
 import MisReservas from "../components/pages/misReservas/MisReservas";
 import Configuracion from "../components/pages/configuracion/Configuracion";
 import KayaksDisponibles from "../components/pages/kayaksDisponibles/KayaksDisponibles";
-
+import EncargadoChecks from "../components/pages/encargadoChecks/EncargadoChecks";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -88,11 +88,17 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
+      {
+        path: "/EncargadoChecks",
+        element: (
+          <ProtectedRoute userType="encargado">
+            <EncargadoChecks />
+          </ProtectedRoute>
+        ),
+      },
       // Ruta 404
       { path: "*", element: <NotFound /> },
 
-      { path: "/login", element: <Login /> },
       { path: "/MisReservas", element: <MisReservas /> },
       { path: "/KayaksDisponibles", element: <KayaksDisponibles /> },
     ],
