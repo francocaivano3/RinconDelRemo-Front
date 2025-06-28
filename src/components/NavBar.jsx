@@ -37,6 +37,7 @@ const NavBar = () => {
       .then(async (response) => {
         instance.setActiveAccount(response.account);
         const decoded = jwtDecode(response.accessToken);
+        console.log("Usuario autenticado:", decoded);
 
         const fullName = decoded.name || response.account.name || "";
         const [firstName, ...lastParts] = fullName.split(" ");

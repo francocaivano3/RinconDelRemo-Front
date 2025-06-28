@@ -4,3 +4,6 @@ export const createDuenio = (userData, config) =>
 
 export const createTenant = (userData, config) =>
   apiClient.post("Tenant/CreateTenant", userData, config);
+
+export const createAttendant = (userData, config) =>
+  apiClient.post("Attendant/CreateAttendant", userData, config);
