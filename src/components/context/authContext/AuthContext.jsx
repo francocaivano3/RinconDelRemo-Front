@@ -1,13 +1,15 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { useMsal } from "@azure/msal-react";
 import { jwtDecode } from "jwt-decode";
+import { deleteTenant, createEncargado } from "../../../service/users";
+
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const { instance, accounts } = useMsal();
   const [userInfo, setUserInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getTokenInfo = async () => {
@@ -21,6 +23,36 @@ export const AuthProvider = ({ children }) => {
           const decoded = jwtDecode(response.accessToken);
           console.log(decoded);
           setUserInfo(decoded);
+
+          const fullName = decoded.name || response.account.name || "";
+          const [firstName, ...lastParts] = fullName.split(" ");
+          const lastName = lastParts.join(" ") || "Desconocido";
+          console.log("Este es el rol antes del if >0 : ", decoded.roles)
+          if (decoded.roles) {
+            console.log("este es el rol antes de usarlo en auth", decoded.roles[0])
+            const rolUser = decoded.roles[0]
+            console.log("este es el rol despues de pasarlo a una variable", rolUser)
+            if (rolUser) {
+              console.log("Este es el id que envio para eliminar", decoded.oid)
+              const id = decoded.oid
+              console.log("Este es el id que paso a una variable", id)
+              await deleteTenant(id)
+              let newUserInfo = {
+                Id: decoded.oid, // para Tenant también es "Id" según el DTO
+                Name: firstName,
+                LastName: lastName,
+                Email: decoded.preferred_username || response.account.username,
+              };
+              const token = response.accessToken;
+              const config = {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              };
+              console.log("Este es el usuario que convierto en encargado", newUserInfo)
+              await createEncargado(newUserInfo, config)
+            }
+          }
         } catch (err) {
           console.error("Error al obtener el token:", err);
         }

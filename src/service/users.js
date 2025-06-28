@@ -4,3 +4,9 @@ export const createDuenio = (userData, config) =>
 
 export const createTenant = (userData, config) =>
   apiClient.post("Tenant/CreateTenant", userData, config);
+
+export const createEncargado = (userData, config) =>
+  apiClient.post("Attendant/CreateAttendant", userData, config);
+
+export const deleteTenant = (id) =>
+  apiClient.delete(`Tenant/Delete/${id}`);
