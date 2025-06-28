@@ -1,5 +1,3 @@
-
-
 import { createContext, useEffect, useState, useContext } from "react";
 import { useMsal } from "@azure/msal-react";
 import { jwtDecode } from "jwt-decode";

@@ -5,17 +5,18 @@ import logoDark from "../../src/assets/turismo Borcelle.png";
 import { ThemeContext } from "../components/context/themeContext/ThemeContext";
 import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../authConfig";
-import { AuthContext } from "./context/authContext/AuthContext";
+import { useAuth } from "./context/authContext/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import {createDuenio, createTenant} from "../service/users";
-
+import { createDuenio, createTenant } from "../service/users";
 
 const NavBar = () => {
   const { instance } = useMsal();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isDark } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const { userInfo, rol } = useContext(AuthContext);
+  const { rol } = useAuth();
+
+  console.log("Rol del usuario:", rol);
 
   const navLinks = [
     { name: "Inicio", href: "#home" },
@@ -25,35 +26,41 @@ const NavBar = () => {
     { name: "Contacto", href: "#contact" },
   ];
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleRegister = () => {
     instance
       .loginPopup({
         ...loginRequest,
-        prompt: "create",
+        prompt: "login",
       })
       .then(async (response) => {
         instance.setActiveAccount(response.account);
-
         const decoded = jwtDecode(response.accessToken);
+
+        const fullName = decoded.name || response.account.name || "";
+        const [firstName, ...lastParts] = fullName.split(" ");
+        const lastName = lastParts.join(" ") || "Desconocido";
+
         let newUser = {};
-        if (decoded["Tipo de usuario"] !== "DuenioKayak") {
+        if (decoded["Tipo de usuario"] === "DuenioKayak") {
           newUser = {
-            name: decoded.name || response.account.name,
-            email: decoded.preferred_username || response.account.username,
-            OwnerId: decoded.oid,
+            OwnerId: decoded.oid, // para DuenioKayak se usa "Id"
+            Name: firstName,
+            LastName: lastName,
+            Email: decoded.preferred_username || response.account.username,
           };
-        } else {
+        } else if (decoded["Tipo de usuario"] === "Cliente") {
           newUser = {
-            name: decoded.name || response.account.name,
-            email: decoded.preferred_username || response.account.username,
-            Id: decoded.oid,
+            Id: decoded.oid, // para Tenant también es "Id" según el DTO
+            Name: firstName,
+            LastName: lastName,
+            Email: decoded.preferred_username || response.account.username,
           };
         }
-        console.log("oid del usuario", decoded.oid);
+
+        console.log("🧾 Usuario a registrar:", newUser);
+
         const token = response.accessToken;
         await registerOnBackend(newUser, token);
 
@@ -71,9 +78,12 @@ const NavBar = () => {
       })
       .then((response) => {
         instance.setActiveAccount(response.account);
-        console.log(response.accessToken);
-        console.log("Usuario autenticado:", userInfo);
-        console.log("Rol del usuario:", rol);
+        const decoded = jwtDecode(response.accessToken);
+        console.log("Usuario autenticado:", decoded);
+        console.log(
+          "Rol del usuario:",
+          decoded["Tipo de usuario"] || decoded.roles?.[0]
+        );
         navigate("/dashboard");
       })
       .catch((error) => console.error(error));
@@ -83,22 +93,29 @@ const NavBar = () => {
     try {
       const decoded = jwtDecode(token);
       const rol = decoded["Tipo de usuario"];
-
       console.log("Rol decodificado:", rol);
+      console.log("📦 Enviando a backend:", JSON.stringify(userData, null, 2));
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
       if (rol === "DuenioKayak") {
-        await createDuenio(userData);
-        console.log("Usuario registrado como DuenioKayak");
+        await createDuenio(userData, config);
+        console.log("✅ Usuario registrado como DuenioKayak");
       } else if (rol === "Cliente") {
-        await createTenant(userData);
-        console.log("Usuario registrado como Cliente");
+        await createTenant(userData, config);
+        console.log("✅ Usuario registrado como Cliente");
       } else {
-        console.warn("Rol desconocido, no se hizo post");
+        console.warn("⚠ Rol desconocido, no se hizo post");
       }
-
-      console.log("✅ Usuario registrado exitosamente en la BD");
     } catch (error) {
-      console.error("❌ Error al registrar el usuario en el backend:", error);
+      console.error(
+        "❌ Error al registrar el usuario en el backend:",
+        error.response?.data || error.message
+      );
     }
   };
 
@@ -126,7 +143,6 @@ const NavBar = () => {
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
         >
           {isMenuOpen ? (
             <path
