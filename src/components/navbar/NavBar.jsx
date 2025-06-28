@@ -34,7 +34,7 @@ const NAV_ITEMS = {
   ],
   cliente: [
     { path: "/dashboard", icon: Home, label: "Inicio" },
-    { path: "/MisReservas", icon: CalendarCheck, label: "Mis reservas" },
+    { path: "/KayaksDisponibles", icon: CalendarCheck, label: "Kayas Disponibles" },
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
   dueniokayak: [
