@@ -12,12 +12,15 @@ import {
 import Perfil from "../perfil/Perfil";
 import { ThemeContext } from "../../context/themeContext/ThemeContext";
 import { useNavigate } from "react-router-dom";
-import { TranslateContext } from "../../context/translationContext/TranslateLanguage";
+import { useTranslate } from "../../../hooks/useTranslate";
+import { TranslateContext } from "../../../components/context/translationContext/TranslateLanguage";
 import { useAuth } from "../../context/authContext/AuthContext";
 export default function Configuracion() {
   const [editandoPerfil, setEditandoPerfil] = useState(false);
   const { isDark, setIsDark } = useContext(ThemeContext);
   const navigate = useNavigate();
+  
+  const translate = useTranslate();
 
 
   const { userInfo, rol, logout } = useAuth();
@@ -52,25 +55,25 @@ export default function Configuracion() {
           <>
             <SectionItem
               icon={<User />}
-              title="Editar perfil"
-              subtitle="Actualiza tu información personal"
+              title={translate("Editar perfil")}
+              subtitle={translate("Actualiza tu información personal")}
               onClick={() => setEditandoPerfil(true)}
             />
             <SectionItem
               icon={<CreditCard />}
-              title="Métodos de pago"
-              subtitle="Gestiona tus tarjetas y métodos de pago"
+              title={translate("Métodos de pago")}
+              subtitle={translate("Gestiona tus tarjetas y métodos de pago")}
             />
             <SectionItem
               icon={<Clock />}
-              title="Historial de alquileres"
-              subtitle="Revisa tus alquileres anteriores"
+              title={translate("Historial de alquileres")}
+              subtitle={translate("Revisa tus alquileres anteriores")}
               onClick={() => navigate("/historial")}
             />
             <SectionItem
               icon={<MapPin />}
-              title="Ubicaciones favoritas"
-              subtitle="Gestiona tus ubicaciones preferidas"
+              title={translate("Ubicaciones favoritas")}
+              subtitle={translate("Gestiona tus ubicaciones preferidas")}
             />
 
             <div
@@ -78,7 +81,7 @@ export default function Configuracion() {
                 isDark ? "bg-sky-900" : "bg-white"
               }`}
             >
-              <h3 className="text-lg font-semibold mb-2">Preferencias</h3>
+              <h3 className="text-lg font-semibold mb-2">{translate("Preferencias")}</h3>
               <ToggleItem
                 title="Modo oscuro"
                 isDark={isDark}
@@ -89,13 +92,13 @@ export default function Configuracion() {
 
             <SectionItem
               icon={<LifeBuoy />}
-              title="Centro de ayuda"
-              subtitle="Preguntas frecuentes y soporte"
+              title={translate("Centro de ayuda")}
+              subtitle={translate("Preguntas frecuentes y soporte")}
             />
 
             <button onClick={logout} className="w-full border border-red-500 text-red-500 py-2 rounded-lg flex items-center justify-center mt-4  cursor-pointer hover:bg-red-500 hover:text-white">
               <LogOut className="mr-2" size={16} />
-              Cerrar sesión
+              {translate("Cerrar sesión")}
             </button>
           </>
         ) : (
