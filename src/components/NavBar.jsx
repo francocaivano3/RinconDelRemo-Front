@@ -117,6 +117,7 @@ const NavBar = () => {
                 "❌ Error al registrar el usuario en el backend:",
                 error.response?.data || error.message
             );
+
         }
     };
 

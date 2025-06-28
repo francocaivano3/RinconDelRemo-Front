@@ -10,3 +10,4 @@ export const createEncargado = (userData, config) =>
 
 export const deleteTenant = (id) =>
   apiClient.delete(`Tenant/Delete/${id}`);
+
