@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/perfil",
         element: (
-          <ProtectedRoute userType="Cliente">
+          <ProtectedRoute userType="cliente">
             <Perfil />
           </ProtectedRoute>
         ),
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       {
         path: "/configuracion",
         element: (
-          <ProtectedRoute userType="Cliente">
+          <ProtectedRoute userType="cliente" allowAllAuthenticated={true}>
             <Configuracion />
           </ProtectedRoute>
         ),
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       {
         path: "/mis-kayaks",
         element: (
-          <ProtectedRoute userType="DuenioKayak">
+          <ProtectedRoute userType="dueniokayak">
             <MyKayaks />
           </ProtectedRoute>
         ),
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: (
-          <ProtectedRoute userType="Cliente" allowAllAuthenticated={true}>
+          <ProtectedRoute userType="cliente" allowAllAuthenticated={true}>
             <Dashboard />
           </ProtectedRoute>
         ),
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       {
         path: "/historial",
         element: (
-          <ProtectedRoute userType="Cliente">
+          <ProtectedRoute userType="cliente">
             <HistorialKayaks />
           </ProtectedRoute>
         ),
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
       {
         path: "/MisReservas",
         element: (
-          <ProtectedRoute userType="Cliente">
+          <ProtectedRoute userType="cliente">
             <MisReservas />
           </ProtectedRoute>
         ),
