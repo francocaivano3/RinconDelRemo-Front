@@ -16,7 +16,7 @@ import { useTranslate } from "../../../hooks/useTranslate";
 import { TranslateContext } from "../../../components/context/translationContext/TranslateLanguage";
 import { useAuth } from "../../context/authContext/AuthContext";
 export default function Configuracion() {
-  const [editandoPerfil, setEditandoPerfil] = useState(false);
+  const [mostrandoPerfil, setMostrandoPerfil] = useState(false);
   const { isDark, setIsDark } = useContext(ThemeContext);
   const navigate = useNavigate();
   
@@ -33,7 +33,7 @@ export default function Configuracion() {
         isDark ? "bg-[#003459] text-white" : "bg-white text-gray-900"
       }`}
     >
-      {!editandoPerfil && (
+      {!mostrandoPerfil && (
         <div
           className={`py-6 px-4 text-white flex items-center ${
             isDark ? "bg-[#003459]" : "bg-[#003459]"
@@ -51,13 +51,13 @@ export default function Configuracion() {
       )}
 
       <div className="w-full max-w-4xl mx-auto py-6 px-4 space-y-4">
-        {!editandoPerfil ? (
+        {!mostrandoPerfil ? (
           <>
             <SectionItem
               icon={<User />}
               title={translate("Editar perfil")}
               subtitle={translate("Actualiza tu información personal")}
-              onClick={() => setEditandoPerfil(true)}
+              onClick={() => setMostrandoPerfil(true)}
             />
             <SectionItem
               icon={<CreditCard />}
@@ -102,7 +102,7 @@ export default function Configuracion() {
             </button>
           </>
         ) : (
-          <Perfil onVolver={() => setEditandoPerfil(false)} />
+          <Perfil onVolver={() => setMostrandoPerfil(false)} />
         )}
       </div>
     </div>

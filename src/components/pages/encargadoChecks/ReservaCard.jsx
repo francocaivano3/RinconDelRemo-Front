@@ -14,14 +14,6 @@ function ReservaCard({ reserva }) {
             <X className="h-4 w-4 mr-1" />
             Cancelar
           </button>
-          <div className="flex flex-col sm:flex-row gap-2">
-            <button className="inline-flex items-center justify-center rounded-md bg-blue-100 px-5 py-3 text-xs font-medium text-blue-800 ring-1 ring-inset ring-blue-600/20 cursor-pointer">
-              Check-In
-            </button>
-            <button className="inline-flex items-center justify-center rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-800 ring-1 ring-inset ring-red-600/20 cursor-pointer">
-              Check-Out
-            </button>
-          </div>
         </div>
         <div className="absolute top-4 left-4 bg-white/80 text-gray-800 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur">
           Reservado por: {reserva.user.name} {reserva.user.lastname}
@@ -59,6 +51,15 @@ function ReservaCard({ reserva }) {
             <Calendar className="h-4 w-4 text-teal-600" />
             Entrada: {reserva.fechaEntrada}
           </div>
+        </div>
+
+        <div className="mt-5 flex justify-between text-sm text-gray-700 dark:text-gray-300">
+          <button className="inline-flex items-center justify-center rounded-md bg-blue-100 px-6 py-3 text-xs font-medium text-blue-800 ring-1 ring-inset ring-blue-600/20 cursor-pointer">
+            Check-In
+          </button>
+          <button className="inline-flex items-center justify-center rounded-md bg-red-100  px-4.5 py-3 text-xs font-medium text-red-800 ring-1 ring-inset ring-red-600/20 cursor-pointer">
+            Check-Out
+          </button>
         </div>
       </div>
     </div>

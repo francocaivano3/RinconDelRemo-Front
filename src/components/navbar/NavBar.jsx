@@ -29,11 +29,12 @@ const NAV_ITEMS = {
   ],
   encargado: [
     { path: "/dashboard", icon: Home, label: "Inicio" },
+    { path: "/EncargadoChecks", icon: CalendarCheck, label: "Check-In/out" },
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
   cliente: [
     { path: "/dashboard", icon: Home, label: "Inicio" },
-    { path: "/MisReservas", icon: CalendarCheck, label: "Mis reservas" },
+    { path: "/KayaksDisponibles", icon: CalendarCheck, label: "Kayas Disponibles" },
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
   dueniokayak: [
