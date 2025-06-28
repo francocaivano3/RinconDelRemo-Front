@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl = import.meta.env.VITE_BASE_URL || "https://localhost:7148/api";
 console.log("BASE URL:", baseUrl); // Esto debería imprimir https://localhost:7148/api
 
 const apiClient = {

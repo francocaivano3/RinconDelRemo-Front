@@ -1,42 +1,4 @@
-// import { createContext, useContext, useState } from "react";
-
-// export const AuthContext = createContext();
-
-// export const AuthContextProvider = ({ children }) => {
-//   const [isLogin, setIsLogin] = useState(() => {
-//     const storedToken = localStorage.getItem("token");
-
-//     if (storedToken) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   });
-
-//   const handleLogin = () => {
-//     setIsLogin(true);
-//     localStorage.setItem("token", "true");
-//   };
-
-//   const handleLogaut = () => {
-//     setIsLogin(false);
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("loggedUser");
-//   };
-
-//   return (
-//     <AuthContext.Provider value={{ isLogin, handleLogin, handleLogaut }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useAuth = () => {
-//   const context = useContext(AuthContext);
-//   return context;
-// };
-
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import { useMsal } from "@azure/msal-react";
 import { jwtDecode } from "jwt-decode";
 
@@ -45,6 +7,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const { instance, accounts } = useMsal();
   const [userInfo, setUserInfo] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const getTokenInfo = async () => {
@@ -56,15 +19,24 @@ export const AuthProvider = ({ children }) => {
           });
 
           const decoded = jwtDecode(response.accessToken);
+          console.log(decoded);
           setUserInfo(decoded);
         } catch (err) {
           console.error("Error al obtener el token:", err);
         }
       }
+      setIsLoading(false);
     };
 
     getTokenInfo();
   }, [accounts, instance]);
+
+
+  const logout = () => {
+    instance.logoutRedirect({
+      postLogoutRedirectUri: window.location.origin,
+    });
+  };
 
   const getRol = () => {
     if (userInfo?.roles?.length > 0) return userInfo.roles[0];
@@ -73,8 +45,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ userInfo, rol: getRol() }}>
+    <AuthContext.Provider value={{ userInfo, rol: getRol(), isLoading, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error("Auth context must be within provider");
+  return context;
+};
+
