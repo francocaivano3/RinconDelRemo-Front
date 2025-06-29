@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const { instance, accounts } = useMsal();
   const [userInfo, setUserInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState();
 
   useEffect(() => {
     const getTokenInfo = async () => {
@@ -23,6 +24,7 @@ export const AuthProvider = ({ children }) => {
           const decoded = jwtDecode(response.accessToken);
           console.log(decoded);
           setUserInfo(decoded);
+          setToken(response.accessToken);
 
           const fullName = decoded.name || response.account.name || "";
           const [firstName, ...lastParts] = fullName.split(" ");
@@ -77,7 +79,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ userInfo, rol: getRol(), isLoading, logout }}>
+    <AuthContext.Provider value={{ userInfo, rol: getRol(), isLoading, logout, token }}>
       {children}
     </AuthContext.Provider>
   );

@@ -70,27 +70,63 @@ import { getAvailableKayak } from "../../../service/kayakDisponibles";
 
 const KayaksDisponibles = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterOpen, setFilterOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [kayakList, setKayakList] = useState([])
 
-  const handleGetKayaksDisponibles = async () =>{
-  try{
-    const response = await getAvailableKayak()
-    console.log(response)
-  }catch(error){
-    console.log(error)
+  useEffect(() => {
+    if(isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [isModalOpen]);
+
+  const handleAddKayak = (newKayak) => {
+    return;
   }
 
-}
+  const handleGetKayaksDisponibles = async () => {
+  try {
+    const response = await getAvailableKayak();
+
+    const normalized = response.map(k => ({
+      id: k.id,
+      nombre: k.name,
+      modelo: k.model,
+      color: k.color,
+      capacidad: k.capacity,
+      longitud: k.length,
+      material: k.material,
+      fechaCompra: k.publicationDate.slice(0, 10),
+      imagen: cardImg,
+    }));
+
+    setKayakList(normalized);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 useEffect(() => {
     handleGetKayaksDisponibles();
   }, []);
+  console.log("Esta es la lista de kayaks: ", kayakList)
+  const filteredKayaks = kayakList.filter((kayak) => {
+  const nombre = kayak?.nombre?.toLowerCase() || "";
+  const modelo = kayak?.modelo?.toLowerCase() || "";
+  const color = kayak?.color?.toLowerCase() || "";
+  const term = searchTerm.toLowerCase();
 
-  const filteredKayaks = response.filter((kayak) =>
-    kayak.nombre.toLowerCase().includes(searchTerm.toLocaleUpperCase()) ||
-    kayak.modelo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    kayak.color.toLowerCase().includes(searchTerm.toLowerCase())
+  return (
+    nombre.includes(term) ||
+    modelo.includes(term) ||
+    color.includes(term)
   );
+});
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#003459]">
@@ -109,62 +145,6 @@ useEffect(() => {
             </div>
             <input type="text" placeholder="Buscar por nombre, modelo o color..." className="dark:bg-[#003459] dark:text-white pl-12 pr-4 py-3 w-full bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#007178] dark:focus:ring-white focus:border-transparent shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
-
-          <div className="relative flex flex-col items-center justify-center">
-            <button className=" flex items-center px-4 py-3 bg-white dark:bg-[#003459] border border-gray-200 rounded-xl hover:bg-gray-50 dark:hover:bg-[#003459] dark:text-white hover:cursor-pointer shadow-sm transition-colors" onClick={() => setFilterOpen(!filterOpen)}>
-              <Filter className="h-5 w-5 mr-2 text-gray-500 dark:text-white" />
-              <span className="text-gray-700 dark:text-white font-medium">Filtros</span>
-              <ChevronDown
-                className={`h-4 w-4 ml-2 text-gray-500 dark:text-white transition-transform ${filterOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-
-            {filterOpen && (
-              <div className="md:absolute right-0 w-72 bg-white dark:bg-[#003459] border border-gray-100 rounded-xl shadow-lg z-10 p-5">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-white mb-3">Filtrar por:</h3>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">Color</label>
-                    <select className="w-full border border-gray-200 rounded-lg p-2.5 text-sm bg-white dark:bg-[#003459] dark:text-white focus:ring-2 focus:ring-[#007178] focus:border-transparent cursor-pointer">
-                      <option value="">Todos los colores</option>
-                      <option value="rojo">Rojo</option>
-                      <option value="azul">Azul</option>
-                      <option value="verde">Verde</option>
-                      <option value="amarillo">Amarillo</option>
-                      <option value="naranja">Naranja</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">Material</label>
-                    <select className="w-full border border-gray-200 rounded-lg p-2.5 text-sm bg-white dark:bg-[#003459] dark:text-white focus:ring-2 focus:ring-[#007178] focus:border-transparent cursor-pointer">
-                      <option value="">Todos los materiales</option>
-                      <option value="polietileno">Polietileno</option>
-                      <option value="fibra">Fibra de vidrio</option>
-                      <option value="kevlar">Kevlar</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-white mb-4 mt-4">Capacidad</label>
-                    <select className="w-full border border-gray-200 rounded-lg p-2.5 text-sm bg-white dark:bg-[#003459] dark:text-white focus:ring-2 focus:ring-[#007178] focus:border-transparent cursor-pointer">
-                      <option value="">Todas las capacidades</option>
-                      <option value="1">1 persona</option>
-                      <option value="2">2 personas</option>
-                      <option value="3+">3 o más personas</option>
-                    </select>
-                  </div>
-                  <div className="pt-2 flex justify-end">
-                    <button className="px-4 py-2 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-lg hover:cursor-pointer hover:from-blue-600 hover:to-green-600 text-sm font-medium shadow-sm transition-all">
-                      Aplicar filtros
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* <button className="px-4 py-3 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-xl hover:cursor-pointer hover:from-blue-600 hover:to-green-600 flex items-center justify-center shadow-sm transition-all duration-300" onClick={() => setIsModalOpen(true)}>
-            <Plus className="h-5 w-5 mr-2" />
-            <span className="font-medium">Añadir kayak</span>
-          </button> */}
         </div>
 
         {filteredKayaks.length === 0 && (
@@ -181,11 +161,11 @@ useEffect(() => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {filteredKayaks.map((kayak) => (
-            <KayakCard key={kayak.id} kayak={kayak} />
+            <KayakCard key={kayak.id} kayak={kayak} onClick={() => setIsModalOpen(true)} />
           ))}
         </div>
       </div>
-      
+      <AddKayakModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAddKayak={handleAddKayak}/>
     </div>
   )
 }
