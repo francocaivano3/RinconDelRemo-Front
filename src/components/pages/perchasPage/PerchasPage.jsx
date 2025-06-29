@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { getPerchas, crearPercha } from "../../../service/perchas";
 import { useAuth } from "../../context/authContext/AuthContext";
+import AddKayakModal from "../myKayaks/addKayakModal";
 
 export default function GuarderiaKayaks() {
   const [perchas, setPerchas] = useState([]);
   const [perchaSeleccionada, setPerchaSeleccionada] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
+  const [perchaId, setPerchaId] = useState(null);
 
   const { userInfo } = useAuth();
 
@@ -16,32 +19,45 @@ export default function GuarderiaKayaks() {
   const PRECIO_POR_PERCHA = 1500;
 
   useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
+  useEffect(() => {
     const getAllPerchas = async () => {
       try {
         const data = await getPerchas();
+        console.log("📋 Perchas obtenidas del servidor:", data);
+
         const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
 
         data.forEach((percha) => {
-          const row = parseInt(percha.location.slice(0, -1)) - 1;
+          const row = Number.parseInt(percha.location.slice(0, -1)) - 1;
           const col = columnas.indexOf(percha.location.slice(-1));
-
           if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
             grid[row][col] = {
               id: percha.location,
               estado: percha.isOccupied ? "ocupado" : "disponible",
+              perchaData: percha, // Guardar datos completos para debug
             };
           }
         });
 
         setPerchas(grid);
       } catch (error) {
-        console.error(error);
+        console.error("Error al obtener perchas:", error);
       }
     };
 
     getAllPerchas();
   }, []);
-
   const handleSeleccion = (row, col) => {
     const percha = perchas[row][col];
     if (!percha || percha.estado !== "disponible") return;
@@ -63,7 +79,6 @@ export default function GuarderiaKayaks() {
     const actualizadas = [...perchas];
     actualizadas[row][col].estado = "seleccionado";
     setPerchas(actualizadas);
-
     setPerchaSeleccionada({ row, col, id: percha.id });
     setMostrarModal(true);
   };
@@ -82,24 +97,29 @@ export default function GuarderiaKayaks() {
   const handleCreate = async () => {
     try {
       if (!perchaSeleccionada) return;
-
-      const tienePercha = perchas.some((row) =>
-        row.some(
-          (percha) =>
-            percha?.estado === "ocupado" && seleccionadas.includes(percha.id)
-        )
-      );
-
-      if (tienePercha) {
+      if (!userInfo?.oid) {
         alert(
-          "Ya tienes una percha ocupada. No puedes ocupar más de una percha."
+          "Error: No se pudo obtener el ID del usuario. Por favor, inicia sesión nuevamente."
         );
         return;
       }
-
       const id = perchaSeleccionada.id;
-      const row = parseInt(id.slice(0, -1));
-      const column = id.slice(-1);
+      console.log("🆔 ID de percha seleccionada:", id);
+
+      // Verificar si la percha ya existe en los datos del servidor
+      const perchaActual =
+        perchas[perchaSeleccionada.row][perchaSeleccionada.col];
+      console.log("📊 Datos actuales de la percha:", perchaActual);
+
+      const match = id.match(/^(\d+)([A-J])$/);
+      if (!match) {
+        console.error("❌ Formato de ID inválido:", id);
+        alert("Error: Formato de percha inválido");
+        return;
+      }
+
+      const rowFromId = Number.parseInt(match[1]);
+      const columnFromId = match[2];
 
       if (!userInfo?.oid) {
         console.error("No se encontró el ID del usuario");
@@ -108,9 +128,9 @@ export default function GuarderiaKayaks() {
       }
 
       const data = {
-        Row: row,
-        Column: column,
-        OwnerId: userInfo.oid,
+        row: rowFromId,
+        column: columnFromId,
+        userId: userInfo.oid,
       };
 
       const response = await crearPercha(data);
@@ -118,6 +138,7 @@ export default function GuarderiaKayaks() {
 
       const perchaId = response.id || response.perchaId;
       console.log("ID de la percha creada:", perchaId);
+      setPerchaId(perchaId);
 
       const actualizadas = [...perchas];
       const [fila, columna] = perchaSeleccionada.id.split("");
@@ -131,6 +152,9 @@ export default function GuarderiaKayaks() {
       } else {
         console.error("No se pudo encontrar la percha en la matriz");
       }
+
+      // Aquí abrimos el modal de AddKayak
+      setIsModalOpen(true);
 
       setMostrarModal(false);
     } catch (error) {
@@ -273,7 +297,11 @@ export default function GuarderiaKayaks() {
           </div>
         </div>
       </div>
-
+      <AddKayakModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        perchaId={perchaId}
+      />
       {/* Modal */}
       {mostrarModal && (
         <div className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm">
