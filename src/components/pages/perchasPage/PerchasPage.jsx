@@ -6,7 +6,6 @@ import { useTranslate } from "../../../hooks/useTranslate";
 import AddKayakModal from "../myKayaks/addKayakModal";
 
 export default function GuarderiaKayaks() {
-
   const [perchas, setPerchas] = useState([]);
   const [perchaSeleccionada, setPerchaSeleccionada] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
@@ -14,6 +13,7 @@ export default function GuarderiaKayaks() {
   const [showPaymet, setShowPaymet] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
   const [perchaId, setPerchaId] = useState(null);
+
   const translate = useTranslate();
   const { userInfo } = useAuth();
 
@@ -23,25 +23,24 @@ export default function GuarderiaKayaks() {
   const PRECIO_POR_PERCHA = 20000;
 
   const totalPerchasOcupadas = perchas
-  .flat()
-  .filter((p) => p?.estado === "ocupado").length;
+    .flat()
+    .filter((p) => p?.estado === "ocupado").length;
 
-const totalAPagar = totalPerchasOcupadas * PRECIO_POR_PERCHA;
+  const totalAPagar = totalPerchasOcupadas * PRECIO_POR_PERCHA;
 
-const [formData, setFormData] = useState({
-  amount: totalAPagar,
-  description: "",
-  email: "",
-});
+  const [formData, setFormData] = useState({
+    amount: totalAPagar,
+    description: "",
+    email: "",
+  });
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData((prev) => ({
-    ...prev,
-    [name]: value,
-  }));
-};
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     const getAllPerchas = async () => {
@@ -86,7 +85,6 @@ const handleChange = (e) => {
         translate(
           "Ya tienes una percha ocupada. No puedes ocupar más de una percha."
         )
-
       );
       return;
     }
@@ -115,17 +113,16 @@ const handleChange = (e) => {
     try {
       const data = {
         amount: totalAPagar,
-        description: formData.description || "Pago por alquiler de percha",  // Usamos un valor por defecto si no hay descripción
+        description: formData.description || "Pago por alquiler de percha", // Usamos un valor por defecto si no hay descripción
         email: formData.email,
       };
       const response = await paymetMp(data);
       console.log("Pago exitoso", response);
-      const linkPago = response.paymentUrl
+      const linkPago = response.paymentUrl;
       console.log("Link de pago:", linkPago);
-      
-// Abrir en nueva pestaña
-window.open(linkPago, '_blank');
-    
+
+      // Abrir en nueva pestaña
+      window.open(linkPago, "_blank");
 
       setMostrarModal(false);
       setShowPaymet(false);
@@ -197,10 +194,8 @@ window.open(linkPago, '_blank');
     }
   };
 
-
-
   const handlePagar = () => {
-    alert(translate("Gracias por tu pago de $") + totalAPagar + "!");
+    setShowPaymet(true);
   };
 
   return (
@@ -236,7 +231,6 @@ window.open(linkPago, '_blank');
             <span className="text-blue-700 dark:text-blue-200">
               {translate("Disponible")}
             </span>
-
           </div>
         </div>
 
@@ -302,7 +296,6 @@ window.open(linkPago, '_blank');
             <p className="text-sm text-gray-600">
               <strong>{translate("Total:")}</strong> {totalPerchasOcupadas}{" "}
               {translate("percha(s) ocupada(s)")}
-
             </p>
             {totalPerchasOcupadas > 0 && (
               <div className="mt-1 flex flex-wrap gap-2">
@@ -341,10 +334,10 @@ window.open(linkPago, '_blank');
         <div className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-xl shadow-2xl text-center space-y-4 w-80 animate-fade-in">
             <h2 className="text-xl font-bold text-gray-800">
-              {translate("Confirmar selección")}
+              Confirmar selección
             </h2>
             <p className="text-gray-600">
-              {translate("¿Deseas guardar tu kayak en la percha")}{" "}
+              ¿Deseas guardar tu kayak en la percha{" "}
               <strong className="text-blue-700">{perchaSeleccionada.id}</strong>
               ?
             </p>
@@ -353,104 +346,104 @@ window.open(linkPago, '_blank');
                 onClick={handleCancelar}
                 className="bg-gray-300 cursor-pointer text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
               >
-                {translate("Cancelar")}
+                Cancelar
               </button>
               <button
                 onClick={handleCreate}
                 className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600 shadow-sm"
               >
-                {translate("Confirmar")}
+                Confirmar
               </button>
             </div>
           </div>
         </div>
       )}
-     {showPaymet && (
-  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4">
-    <div className="bg-white dark:bg-[#003459] p-6 rounded-xl shadow-2xl max-w-md w-full animate-fade-in">
-      <div className="space-y-6">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-            Confirmar Pago
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Total a pagar:
-            <strong className="text-blue-700 dark:text-blue-300 ml-2">
-              ${totalAPagar}
-            </strong>
-          </p>
-        </div>
+      {showPaymet && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+          <div className="bg-white dark:bg-[#003459] p-6 rounded-xl shadow-2xl max-w-md w-full animate-fade-in">
+            <div className="space-y-6">
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                  Confirmar Pago
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Total a pagar:
+                  <strong className="text-blue-700 dark:text-blue-300 ml-2">
+                    ${totalAPagar}
+                  </strong>
+                </p>
+              </div>
 
-        <form onSubmit={handleSumbit} className="space-y-4">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Monto
-            </label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">
-              ${totalAPagar}
-              </span>
-              <input
-      type="number"
-      step="0.01"
-      min="0"
-      className="w-full pl-10 pr-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#003459] border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
-      value={totalAPagar}
-      disabled
-    />
+              <form onSubmit={handleSumbit} className="space-y-4">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Monto
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                      ${totalAPagar}
+                    </span>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      className="w-full pl-10 pr-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#003459] border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                      value={totalAPagar}
+                      disabled
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Descripción
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    name="descripcion"
+                    value={formData.descripcion}
+                    type="text"
+                    className="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#003459] border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                    placeholder="Ej: Pago por percha"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Email
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    name="email"
+                    value={formData.email}
+                    type="email"
+                    className="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#003459] border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
+                    placeholder="ejemplo@email.com"
+                    required
+                  />
+                </div>
+
+                <div className="flex justify-end space-x-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowPaymet(false)}
+                    className="px-4 py-2 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-[#4b5c68] transition-colors duration-300 font-medium"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-lg hover:from-blue-500 hover:to-green-600 font-medium shadow-sm transition-colors duration-300"
+                  >
+                    Confirmar Pago
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
-
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Descripción
-            </label>
-            <input
-            onChange={handleChange}
-            name="descripcion"
-            value={formData.descripcion}
-                  type="text"
-              className="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#003459] border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
-              placeholder="Ej: Pago por percha"
-              required
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Email
-            </label>
-            <input
-            onChange={handleChange}
-            name="email"
-            value={formData.email}
-              type="email"
-              className="w-full px-4 py-2 text-gray-900 dark:text-white bg-white dark:bg-[#003459] border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007178] focus:border-transparent"
-              placeholder="ejemplo@email.com"
-              required
-            />
-          </div>
-
-          <div className="flex justify-end space-x-3">
-            <button
-              type="button"
-              onClick={() => setShowPaymet(false)}
-              className="px-4 py-2 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-[#4b5c68] transition-colors duration-300 font-medium"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-lg hover:from-blue-500 hover:to-green-600 font-medium shadow-sm transition-colors duration-300"
-            >
-              Confirmar Pago
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-)}
+        </div>
+      )}
       <AddKayakModal
         isOpen={mostrarModalAddKayak}
         onClose={() => setMostrarModalAddKayak(false)}
