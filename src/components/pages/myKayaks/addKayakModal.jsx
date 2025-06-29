@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { X } from "lucide-react";
 import { useAuth } from "../../context/authContext/AuthContext";
 import { createKayak } from "../../../service/kayakPercha";
+import { useNavigate } from "react-router-dom";
 
 const AddKayakModal = ({ isOpen, onClose, perchaId }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: "",
     modelo: "",
@@ -197,6 +199,7 @@ const AddKayakModal = ({ isOpen, onClose, perchaId }) => {
               Cancelar
             </button>
             <button
+              onClick={() => navigate("/mis-kayaks")}
               type="submit"
               className="px-4 py-2 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-lg hover:from-blue-500 hover:to-green-600 font-medium shadow-sm cursor-pointer"
             >
