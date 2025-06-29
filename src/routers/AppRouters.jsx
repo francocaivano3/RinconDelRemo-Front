@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: "/mis-kayaks",
         element: (
-          <ProtectedRoute userType="admin">
+          <ProtectedRoute userType="dueniokayak">
             <MyKayaks />
           </ProtectedRoute>
         ),
@@ -100,17 +100,18 @@ const router = createBrowserRouter([
       {
         path: "/KayaksDisponibles",
         element: (
-          <ProtectedRoute userType="admin">
+          <ProtectedRoute userType="cliente">
             <KayaksDisponibles />
           </ProtectedRoute>
         ),
       },
-      { path: "/KayaksDisponibles/Reserva/:id", 
+      {
+        path: "/KayaksDisponibles/Reserva/:id",
         element: (
-          <ProtectedRoute userType="admin">
+          <ProtectedRoute userType="cliente">
             <KayakReservationDetails/>
           </ProtectedRoute>
-        ) 
+        ),
       },
       // Ruta 404
       { path: "*", element: <NotFound /> },

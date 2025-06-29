@@ -11,6 +11,7 @@ import {
   updateRole,
 } from "../../../service/userAdmin";
 import { useTranslate } from "../../../hooks/useTranslate";
+// import { useAuth } from "../../context/authContext/AuthContext";
 
 const getRoleName = (role) =>
   ({
@@ -36,14 +37,22 @@ const SuperAdmin = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [newRole, setNewRole] = useState("");
   const translate = useTranslate();
+    // const {token } = useAuth();
 
   const handleShowAllUsers = async () => {
     try {
+      
+      // const config = {
+      //           headers: {
+      //               Authorization: `Bearer ${token}`,
+      //           },
+      //       };
       // Hacemos las dos llamadas
       const tenantsResponse = await getUserTenants();
       console.log(tenantsResponse);
       const ownersResponse = await getUserOwner();
       const encargadosResponse = await getUserEncargados();
+
 
       // Agregamos los campos necesarios (ajustá los roles según corresponda)
       const tenantsWithDefaults = tenantsResponse.map((u) => ({
