@@ -13,7 +13,6 @@ export default function GuarderiaKayaks() {
   const [mostrarModalAddKayak, setMostrarModalAddKayak] = useState(false);
   const [showPaymet, setShowPaymet] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
-  const translate = useTranslate();
   const [perchaId, setPerchaId] = useState(null);
   const translate = useTranslate();
   const { userInfo } = useAuth();
