@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../../context/authContext/AuthContext";
 const NotFound = () => {
   const navigate = useNavigate();
-
+  const { rol } = useAuth();
   const goBack = () => {
-    navigate("/");
+    console.log(rol);
+    if (rol == "Invitado") {
+      navigate("/");
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -27,5 +32,3 @@ const NotFound = () => {
     </div>
   );
 };
-
-export default NotFound;
