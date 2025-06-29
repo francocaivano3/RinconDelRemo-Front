@@ -42,21 +42,25 @@ const NavBar = () => {
                 const fullName = decoded.name || response.account.name || "";
                 const [firstName, ...lastParts] = fullName.split(" ");
                 const lastName = lastParts.join(" ") || "Desconocido";
-
+                const tipoUsuario = decoded["Tipo de usuario"];
                 let newUser = {};
-                if (decoded["Tipo de usuario"] === "DuenioKayak") {
+                if (tipoUsuario === "DuenioKayak") {
                     newUser = {
-                        OwnerId: decoded.oid, // para DuenioKayak se usa "Id"
-                        Name: firstName,
-                        LastName: lastName,
-                        Email: decoded.preferred_username || response.account.username,
+                        ownerId: decoded.oid,
+                        name: firstName,
+                        lastName: lastName,
+                        email: decoded.preferred_username || response.account.username,
+                        role: rol
                     };
-                } else if (decoded["Tipo de usuario"] === "Cliente") {
+                    
+
+                } else if (tipoUsuario === "Cliente") {
                     newUser = {
-                        Id: decoded.oid, // para Tenant también es "Id" según el DTO
-                        Name: firstName,
-                        LastName: lastName,
-                        Email: decoded.preferred_username || response.account.username,
+                        id: decoded.oid,
+                        name: firstName,
+                        lastName: lastName,
+                        email: decoded.preferred_username || response.account.username,
+                        role: rol
                     };
                 }
 
