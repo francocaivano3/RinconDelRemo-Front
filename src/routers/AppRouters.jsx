@@ -100,7 +100,7 @@ const router = createBrowserRouter([
       {
         path: "/KayaksDisponibles",
         element: (
-          <ProtectedRoute userType="admin">
+          <ProtectedRoute userType="cliente">
             <KayaksDisponibles />
           </ProtectedRoute>
         ),
@@ -108,8 +108,8 @@ const router = createBrowserRouter([
       {
         path: "/KayaksDisponibles/Reserva/:id",
         element: (
-          <ProtectedRoute userType="admin">
-            <KayakReservationDetails />
+          <ProtectedRoute userType="cliente">
+            <KayakReservationDetails/>
           </ProtectedRoute>
         ),
       },

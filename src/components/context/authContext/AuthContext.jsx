@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
                 Name: firstName,
                 LastName: lastName,
                 Email: decoded.preferred_username || response.account.username,
+                role: decoded.roles[0]
               };
               const token = response.accessToken;
               const config = {
