@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Search, Filter, ChevronDown, Plus } from "lucide-react";
 import KayakCard from "./kayakCard";
-import AddKayakModal from "./addKayakModal";
 import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
+import { useNavigate } from "react-router-dom";
 
 
 //EJEMPLO PARA PROBAR
@@ -69,23 +69,10 @@ const hardcodedKayaks = [
 const MyKayaks = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    if(isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+  const navigate = useNavigate();
 
-    return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [isModalOpen]);
-
-  const handleAddKayak = () => {
-    return;
-  }
+ 
 
   const filteredKayaks = hardcodedKayaks.filter((kayak) =>
     kayak.nombre.toLowerCase().includes(searchTerm.toLocaleUpperCase()) ||
@@ -162,10 +149,12 @@ const MyKayaks = () => {
               </div>
             )}
           </div>
-          <button className="px-4 py-3 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-xl hover:cursor-pointer hover:from-blue-600 hover:to-green-600 flex items-center justify-center shadow-sm transition-all duration-300" onClick={() => setIsModalOpen(true)}>
-            <Plus className="h-5 w-5 mr-2" />
-            <span className="font-medium">Añadir kayak</span>
-          </button>
+          <button 
+    onClick={() => navigate("/perchas")}
+    className="px-4 py-3 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-xl hover:cursor-pointer hover:from-blue-600 hover:to-green-600 flex items-center justify-center shadow-sm transition-all duration-300">
+    <Plus className="h-5 w-5 mr-2" />
+    <span className="font-medium">Añadir kayak</span>
+</button>
         </div>
 
         {filteredKayaks.length === 0 && (
@@ -187,7 +176,7 @@ const MyKayaks = () => {
         </div>
       </div>
       
-      <AddKayakModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAddKayak={handleAddKayak}/>
+     
     </div>
   )
 }
