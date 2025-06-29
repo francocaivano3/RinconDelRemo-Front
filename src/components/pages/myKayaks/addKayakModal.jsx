@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { X } from "lucide-react";
 import img from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
-import {ThemeContext} from "../../../components/context/themeContext/ThemeContext";
 
 const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
     const [formData, setFormData] = useState({
@@ -13,8 +12,6 @@ const AddKayakModal = ({ isOpen, onClose, onAddKayak }) => {
         material: "",
         imagen: img,
     });
-
-    const {isDark} = useContext(ThemeContext);
 
     const handleChange = (e) => {
         const { name, value } = e.target

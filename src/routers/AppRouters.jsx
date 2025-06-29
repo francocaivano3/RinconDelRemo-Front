@@ -75,7 +75,7 @@ const router = createBrowserRouter([
       {
         path: "/perchas",
         element: (
-          <ProtectedRoute userType="encargado">
+          <ProtectedRoute userType="dueniokayak">
             <PerchasPage />
           </ProtectedRoute>
         ),
@@ -96,16 +96,16 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: "/KayaksDisponibles", 
+      {
+        path: "/KayaksDisponibles",
         element: (
           <ProtectedRoute userType="admin">
             <KayaksDisponibles />
           </ProtectedRoute>
-        ) 
+        ),
       },
       // Ruta 404
       { path: "*", element: <NotFound /> },
-      
     ],
   },
 ]);
