@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getPerchas, crearPercha } from "../../../service/perchas";
 import { useAuth } from "../../context/authContext/AuthContext";
+import {useTranslate } from "../../../hooks/useTranslate";
 import AddKayakModal from "../myKayaks/addKayakModal";
 
 export default function GuarderiaKayaks() {
@@ -9,8 +10,8 @@ export default function GuarderiaKayaks() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
+  const translate = useTranslate();
   const [perchaId, setPerchaId] = useState(null);
-
   const { userInfo } = useAuth();
 
   const ROWS = 10;
@@ -71,7 +72,7 @@ export default function GuarderiaKayaks() {
 
     if (tienePercha) {
       alert(
-        "Ya tienes una percha ocupada. No puedes ocupar más de una percha."
+        translate("Ya tienes una percha ocupada. No puedes ocupar más de una percha.")
       );
       return;
     }
@@ -170,7 +171,7 @@ export default function GuarderiaKayaks() {
   const totalAPagar = totalPerchasOcupadas * PRECIO_POR_PERCHA;
 
   const handlePagar = () => {
-    alert(`Gracias por tu pago de $${totalAPagar}!`);
+    alert(translate("Gracias por tu pago de $") + totalAPagar + "!");
   };
 
   return (
@@ -181,7 +182,7 @@ export default function GuarderiaKayaks() {
             El Rincon del Remo 🚣
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-md font-bold mt-2">
-            Seleccione una percha disponible para guardar su kayak
+            {translate("Seleccione una percha disponible para guardar su kayak")}
           </p>
         </div>
 
@@ -190,16 +191,16 @@ export default function GuarderiaKayaks() {
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-pink-400 border border-pink-500 shadow-sm" />
             <span className="text-pink-600 dark:text-pink-400">
-              Seleccionado
+              {translate("Seleccionado")}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-black border border-gray-700 shadow-sm" />
-            <span className="text-gray-800 dark:text-gray-200">Ocupado</span>
+            <span className="text-gray-800 dark:text-gray-200">{translate("Ocupado")}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-blue-300 border border-blue-400 shadow-sm" />
-            <span className="text-blue-700 dark:text-blue-200">Disponible</span>
+            <span className="text-blue-700 dark:text-blue-200">{translate("Disponible")}</span>
           </div>
         </div>
 
@@ -260,11 +261,10 @@ export default function GuarderiaKayaks() {
         <div className="bg-white rounded-lg p-4 shadow-md border border-gray-200 space-y-4">
           <div>
             <h3 className="text-lg font-semibold text-gray-700 mb-2">
-              Tus perchas
+              {translate("Tus perchas")}
             </h3>
             <p className="text-sm text-gray-600">
-              <strong>Total:</strong> {totalPerchasOcupadas} percha(s)
-              ocupada(s)
+              <strong>{translate("Total:")}</strong> {totalPerchasOcupadas} {translate("percha(s) ocupada(s)")}
             </p>
             {totalPerchasOcupadas > 0 && (
               <div className="mt-1 flex flex-wrap gap-2">
@@ -285,14 +285,14 @@ export default function GuarderiaKayaks() {
 
           <div className="flex justify-between items-center border-t pt-4 mt-2">
             <p className="text-md font-semibold text-gray-700">
-              Total a pagar:
+              {translate("Total a pagar:")}
               <span className="text-blue-700 ml-2">${totalAPagar}</span>
             </p>
             <button
               onClick={handlePagar}
               className="bg-green-500 hover:bg-green-600 cursor-pointer text-white text-sm font-medium px-4 py-2 rounded shadow"
             >
-              Pagar
+              {translate("Pagar")}
             </button>
           </div>
         </div>
@@ -307,10 +307,10 @@ export default function GuarderiaKayaks() {
         <div className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-xl shadow-2xl text-center space-y-4 w-80 animate-fade-in">
             <h2 className="text-xl font-bold text-gray-800">
-              Confirmar selección
+              {translate("Confirmar selección")}
             </h2>
             <p className="text-gray-600">
-              ¿Deseas guardar tu kayak en la percha{" "}
+              {translate("¿Deseas guardar tu kayak en la percha")}{" "}
               <strong className="text-blue-700">{perchaSeleccionada.id}</strong>
               ?
             </p>
@@ -319,13 +319,13 @@ export default function GuarderiaKayaks() {
                 onClick={handleCancelar}
                 className="bg-gray-300 cursor-pointer text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
               >
-                Cancelar
+                {translate("Cancelar")}
               </button>
               <button
                 onClick={handleCreate}
                 className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600 shadow-sm"
               >
-                Confirmar
+                {translate("Confirmar")}
               </button>
             </div>
           </div>

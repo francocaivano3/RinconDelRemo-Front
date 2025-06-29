@@ -83,11 +83,11 @@ export default function Configuracion() {
             >
               <h3 className="text-lg font-semibold mb-2">{translate("Preferencias")}</h3>
               <ToggleItem
-                title="Modo oscuro"
+                title={translate("Modo oscuro")}
                 isDark={isDark}
                 setIsDark={setIsDark}
               />
-              <ToggleItem title="Idioma" />
+              <ToggleItem title={translate("Idioma")} />
             </div>
 
             <SectionItem
@@ -128,6 +128,8 @@ function SectionItem({ icon, title, subtitle, onClick }) {
 }
 
 function ToggleItem({ title, isDark, setIsDark }) {
+  const translate = useTranslate();
+
   const isModeToggle = title === "Modo oscuro";
   const { language, changeLanguage } = useContext(TranslateContext);
 
@@ -146,8 +148,8 @@ function ToggleItem({ title, isDark, setIsDark }) {
           <p className="text-sm font-medium">{title}</p>
           <p className="text-xs text-gray-500 dark:text-gray-300">
             {isModeToggle
-              ? "Activa el tema claro u oscuro"
-              : "Active para cambiar el idioma a Inglés"}
+              ? translate("Activa el tema claro u oscuro")
+              : translate("Active para cambiar el idioma a Inglés")}
           </p>
         </div>
       </div>

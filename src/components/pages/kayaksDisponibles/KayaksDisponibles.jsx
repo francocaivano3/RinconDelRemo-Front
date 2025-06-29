@@ -5,7 +5,7 @@ import AddKayakModal from "../myKayaks/addKayakModal";
 import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
 import { useNavigate } from "react-router-dom";
 import { getAvailableKayak } from "../../../service/kayakDisponibles";
-
+import { useTranslate } from "../../../hooks/useTranslate";
 
 //EJEMPLO PARA PROBAR
 // const hardcodedKayaks = [
@@ -72,7 +72,7 @@ const KayaksDisponibles = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [kayakList, setKayakList] = useState([])
-
+  const translate = useTranslate();
   useEffect(() => {
     if(isModalOpen) {
       document.body.style.overflow = "hidden";
@@ -133,8 +133,8 @@ useEffect(() => {
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         <div className="mb-10 relative">
           <div className="relative">
-            <h1 className="text-4xl font-extrabold text-[#003459] tracking-tight dark:text-white">Kayaks disponibles para alquilar</h1>
-            <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">Explora y reserva el kayak perfecto para vos y tu familia.</p>
+            <h1 className="text-4xl font-extrabold text-[#003459] tracking-tight dark:text-white">{translate("Kayaks disponibles para alquilar")}</h1>
+            <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">{translate("Explora y reserva el kayak perfecto para vos y tu familia.")}</p>
           </div>
         </div>
 
@@ -143,7 +143,7 @@ useEffect(() => {
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-gray-400" />
             </div>
-            <input type="text" placeholder="Buscar por nombre, modelo o color..." className="dark:bg-[#003459] dark:text-white pl-12 pr-4 py-3 w-full bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#007178] dark:focus:ring-white focus:border-transparent shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <input type="text" placeholder={translate("Buscar por nombre, modelo o color...")} className="dark:bg-[#003459] dark:text-white pl-12 pr-4 py-3 w-full bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#007178] dark:focus:ring-white focus:border-transparent shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
         </div>
 
@@ -152,9 +152,9 @@ useEffect(() => {
             <div className="mx-auto w-16 h-16 bg-gray-100 dark:bg-cyan-800 rounded-full flex items-center justify-center mb-4">
               <Search className="h-8 w-8 text-gray-400 dark:text-white" />
             </div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-white mt-4">No se encontraron kayaks ❌</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-white mt-4">{translate("No se encontraron kayaks ❌")}</h3>
             <p className="text-gray-500 dark:text-gray-300 max-w-md mx-auto mt-4">
-              No hay kayaks que coincidan con tu búsqueda. Intenta con otros términos o añade un nuevo kayak.
+              {translate("No hay kayaks que coincidan con tu búsqueda. Intenta con otros términos o añade un nuevo kayak.")}
             </p>
           </div>
         )}

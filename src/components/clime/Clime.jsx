@@ -12,6 +12,7 @@ import {
 
 import WeatherWeek from "./WeatherWeek";
 import { climeHoy } from "../../service/clima";
+import { useTranslate } from "../../hooks/useTranslate";
 
 const getIcon = (main, size = "w-8 h-8") => {
   const className = `${size}`;
@@ -36,6 +37,7 @@ const getIcon = (main, size = "w-8 h-8") => {
 export default function ClimaRosario() {
   const [clima, setClima] = useState(null);
   const [error, setError] = useState(null);
+  const translate = useTranslate();
 
   const fetchClima = async () => {
     try {
@@ -63,7 +65,7 @@ export default function ClimaRosario() {
         <div className="bg-blue-100 dark:bg-sky-900 rounded-2xl shadow-md p-6 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold mb-1">
-              Clima hoy en {clima.city}
+              {translate("Clima hoy en")} {clima.city}
             </h2>
             <p className="text-gray-700 dark:text-gray-200 capitalize">
               {clima.description}
@@ -73,7 +75,7 @@ export default function ClimaRosario() {
             </div>
             <div className="flex items-center gap-2 text-sm mt-1 text-gray-700 dark:text-white">
               <Wind className="w-4 h-4" />
-              Viento: {Math.round(clima.windSpeed)} km/h
+              {translate("Viento:")} {Math.round(clima.windSpeed)} km/h
             </div>
           </div>
           <div className="flex flex-col items-center">

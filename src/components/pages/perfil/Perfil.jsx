@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import imagen from "../../../assets/foto-de-perfil.png";
 import { ThemeContext } from "../../context/themeContext/ThemeContext";
 import { useAuth } from "../../context/authContext/AuthContext";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 const Perfil = ({ onVolver }) => {
   const { isDark } = useContext(ThemeContext);
   const { userInfo, rol } = useAuth();
-
+  const translate = useTranslate();
   const fullName = userInfo.name || "";
   const [firstName, ...lastParts] = fullName.split(" ");
   const lastName = lastParts.join(" ") || "Desconocido";
@@ -22,26 +22,26 @@ const Perfil = ({ onVolver }) => {
 
         <div className="flex flex-col justify-center p-8 md:w-2/3">
           <h2 className="text-3xl font-bold text-[#007178] mb-6 text-center md:text-left">
-            Perfil del Usuario
+            {translate("Perfil del Usuario")} 
           </h2>
 
           <div>
-            <p className="text-sm font-medium">Nombre</p>
+            <p className="text-sm font-medium">{translate("Nombre")}</p>
             <p className="text-lg font-semibold">{firstName}</p>
           </div>
 
           <div>
-            <p className="text-sm font-medium">Apellido</p>
+            <p className="text-sm font-medium">{translate("Apellido")}</p>
             <p className="text-lg font-semibold">{lastName}</p>
           </div>
 
           <div>
-            <p className="text-sm font-medium">Email</p>
+            <p className="text-sm font-medium">{translate("Email")}</p>
             <p className="text-lg font-semibold">{userInfo.preferred_username}</p>
           </div>
 
           <div>
-            <p className="text-sm font-medium">Rol</p>
+            <p className="text-sm font-medium">{translate("Rol")}</p>
             <p className="text-lg font-semibold">{rol}</p>
           </div>
 
@@ -51,7 +51,7 @@ const Perfil = ({ onVolver }) => {
               onClick={onVolver}
               className="bg-red-500 cursor-pointer text-white px-6 py-2 rounded-md hover:bg-red-600 transition"
             >
-              Volver
+              {translate("Volver")}
             </button>
           </div>
         </div>
