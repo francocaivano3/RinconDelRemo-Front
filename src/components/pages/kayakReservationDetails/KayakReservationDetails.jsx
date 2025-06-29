@@ -1,10 +1,10 @@
 import KayakCard from "../myKayaks/kayakCard";
 import { useLocation } from "react-router-dom";
-
+import { useTranslate } from "../../../hooks/useTranslate";
 
 const KayakReservationDetails = () => {
 
-
+    const translate = useTranslate();
     const location = useLocation();
     const kayak = location.state;
     return (
@@ -14,8 +14,8 @@ const KayakReservationDetails = () => {
                 <div className="w-full p-4">
                     <div className="mb-10 relative">
                         <div className="relative">
-                            <h1 className="text-4xl font-extrabold text-[#003459] tracking-tight dark:text-white">Reserva de Kayak</h1>
-                            <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">Datos de Reserva</p>
+                            <h1 className="text-4xl font-extrabold text-[#003459] tracking-tight dark:text-white">{translate("Reserva de Kayak")}</h1>
+                            <p className="text-gray-500 dark:text-gray-300 max-w-2xl mt-4">{translate("Datos de Reserva")}</p>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,6 @@ const KayakReservationDetails = () => {
                     <KayakCard key={kayak.id} kayak={kayak} />
                 </div>
             </div>
-
         </div>
     )
 }

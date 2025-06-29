@@ -10,6 +10,7 @@ import {
   deleteTenantSwagger,
   updateRole,
 } from "../../../service/userAdmin";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 const getRoleName = (role) =>
   ({
@@ -34,6 +35,7 @@ const SuperAdmin = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [newRole, setNewRole] = useState("");
+  const translate = useTranslate();
 
   const handleShowAllUsers = async () => {
     try {
@@ -146,7 +148,7 @@ const SuperAdmin = () => {
     <div className="p-8 bg-sky-50 dark:bg-[#003459] min-h-screen font-sans text-gray-800">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-6">
         <h2 className="text-4xl font-extrabold text-sky-900 dark:text-white tracking-tight">
-          🌊 Usuarios del Sistema
+          {translate("🌊 Usuarios del Sistema")}
         </h2>
       </div>
 
@@ -155,7 +157,7 @@ const SuperAdmin = () => {
           <Search className="absolute left-4 top-3 text-slate-400" size={20} />
           <input
             type="text"
-            placeholder="Buscar usuarios..."
+            placeholder={translate("Buscar usuarios...")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="border border-slate-300 pl-11 pr-4 py-3 rounded-2xl w-full text-gray-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition"
@@ -173,7 +175,7 @@ const SuperAdmin = () => {
               : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
           }`}
         >
-          Todos
+        {translate("Todos")}
         </button>
         <button
           onClick={() => setRoleFilter("superadmin")}
@@ -183,7 +185,7 @@ const SuperAdmin = () => {
               : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
           }`}
         >
-          Super Admin
+          {translate("Super Admin")}
         </button>
         <button
           onClick={() => setRoleFilter("encargado")}
@@ -193,7 +195,7 @@ const SuperAdmin = () => {
               : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
           }`}
         >
-          Encargado
+          {translate("Encargado")}
         </button>
         <button
           onClick={() => setRoleFilter("dueno")}
@@ -203,7 +205,7 @@ const SuperAdmin = () => {
               : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
           }`}
         >
-          Dueño Kayak
+          {translate("Dueño Kayak")}
         </button>
         <button
           onClick={() => setRoleFilter("arrendatario")}
@@ -213,7 +215,7 @@ const SuperAdmin = () => {
               : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
           }`}
         >
-          Arrendatario
+          {translate("Arrendatario")}
         </button>
       </div>
 
@@ -221,7 +223,7 @@ const SuperAdmin = () => {
         <table className="min-w-full text-sm text-left text-gray-700">
           <thead className="bg-sky-100 text-sky-900 dark:bg-sky-700 dark:text-white uppercase text-xs tracking-wider select-none">
             <tr>
-              {["Nombre", "Email", "Rol", "Estado", "Acciones"].map(
+              {[translate("Nombre"), translate("Email"), translate("Rol"), translate("Estado"), translate("Acciones")].map(
                 (heading) => (
                   <th key={heading} className="p-5 font-semibold">
                     {heading}
@@ -238,7 +240,7 @@ const SuperAdmin = () => {
                   colSpan="6"
                   className="text-center py-12 text-gray-400 dark:text-white italic font-medium"
                 >
-                  No se encontraron usuarios
+                  {translate("No se encontraron usuarios")}
                 </td>
               </tr>
             ) : (
