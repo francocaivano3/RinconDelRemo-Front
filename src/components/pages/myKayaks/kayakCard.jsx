@@ -4,12 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createKayakReservation } from "../../../service/kayakReservation";
 import { useAuth } from "../../context/authContext/AuthContext";
-
+import { disableKayak } from "../../../service/kayakDisponibles";
+import { useAlert } from "../../context/alertContext/AlertContext";
 
 const KayakCard = ({ kayak }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { userInfo, token } = useAuth();
+    const {showAlert} = useAlert();
     const [showEditModal, setShowEditModal] = useState(false);
     const handleEditClick = () => {
         setShowEditModal(true);
@@ -22,9 +24,12 @@ const KayakCard = ({ kayak }) => {
     const now = new Date();
     const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000); // suma 1 hora
 
+    const stringNow = now.toISOString()
+    const stringOneHourLater = now.toISOString()
+
     const data = {
-        fechaInicio: now.toISOString(),        // ✅ formato correcto
-        fechaFin: oneHourLater.toISOString(),  // ✅ formato correcto
+        fechaInicio: now.toISOString(),        
+        fechaFin: oneHourLater.toISOString(),  
         kayakId: kayak.id,
         tenantId: userInfo.oid,
     };
@@ -32,6 +37,9 @@ const KayakCard = ({ kayak }) => {
     const handleReservationCofirm = async () => {
 
         await createKayakReservation(data, config);
+        await disableKayak(kayak.id);
+        setShowEditModal(false);
+        showAlert("Registro exitoso", "success");
     }
     const colorMap = {
         Rojo: { bg: "bg-red-500", text: "text-red-500", light: "bg-red-50", border: "border-red-200" },
@@ -129,11 +137,11 @@ const KayakCard = ({ kayak }) => {
                                     </div>
                                     <div className="flex items-center text-gray-600 dark:text-gray-300">
                                         <Calendar size={18} className="mr-2 text-gray-400 dark:text-white" />
-                                        <span className="text-sm">Tu reserva comienza : {now}</span>
+                                        <span className="text-sm">Tu reserva comienza : {stringNow}</span>
                                     </div>
                                     <div className="flex items-center text-gray-600 dark:text-gray-300">
                                         <Calendar size={18} className="mr-2 text-gray-400 dark:text-white" />
-                                        <span className="text-sm">Tu reserva finaliza : {oneHourLater}</span>
+                                        <span className="text-sm">Tu reserva finaliza : {stringOneHourLater}</span>
                                     </div>
                                 </div>
                                 <div className="flex justify-end gap-3">

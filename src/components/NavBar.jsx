@@ -50,7 +50,7 @@ const NavBar = () => {
                         name: firstName,
                         lastName: lastName,
                         email: decoded.preferred_username || response.account.username,
-                        role: rol
+                        role: tipoUsuario
                     };
                     
 
@@ -60,7 +60,7 @@ const NavBar = () => {
                         name: firstName,
                         lastName: lastName,
                         email: decoded.preferred_username || response.account.username,
-                        role: rol
+                        role: tipoUsuario
                     };
                 }
 
