@@ -3,20 +3,42 @@ export const diccionary = {
     //Componente Configuracion.jsx
     { key: "Cerrar sesión", value: "Cerrar sesión" },
     { key: "Editar perfil", value: "Editar perfil" },
-    { key: "Actualiza tu información personal", value: "Actualiza tu información personal" },
+    {
+      key: "Actualiza tu información personal",
+      value: "Actualiza tu información personal",
+    },
     { key: "Métodos de pago", value: "Métodos de pago" },
-    { key: "Gestiona tus tarjetas y métodos de pago", value: "Gestiona tus tarjetas y métodos de pago" },
+    {
+      key: "Gestiona tus tarjetas y métodos de pago",
+      value: "Gestiona tus tarjetas y métodos de pago",
+    },
     { key: "Historial de alquileres", value: "Historial de alquileres" },
-    { key: "Revisa tus alquileres anteriores", value: "Revisa tus alquileres anteriores" },
+    {
+      key: "Revisa tus alquileres anteriores",
+      value: "Revisa tus alquileres anteriores",
+    },
     { key: "Ubicaciones favoritas", value: "Ubicaciones favoritas" },
-    { key: "Gestiona tus ubicaciones preferidas", value: "Gestiona tus ubicaciones preferidas" },
+    {
+      key: "Gestiona tus ubicaciones preferidas",
+      value: "Gestiona tus ubicaciones preferidas",
+    },
     { key: "Preferencias", value: "Preferencias" },
     { key: "Modo oscuro", value: "Modo oscuro" },
-    { key: "Activa el tema claro u oscuro", value: "Activa el tema claro u oscuro" },
+    {
+      key: "Activa el tema claro u oscuro",
+      value: "Activa el tema claro u oscuro",
+    },
     { key: "Idioma", value: "Idioma" },
-    { key: "Active para cambiar el idioma a Inglés", value: "Active para cambiar el idioma a Inglés" },
+    {
+      key: "Active para cambiar el idioma a Inglés",
+      value: "Active para cambiar el idioma a Inglés",
+    },
     { key: "Centro de ayuda", value: "Centro de ayuda" },
-    { key: "Preguntas frecuentes y soporte", value: "Preguntas frecuentes y soporte" },
+    {
+      key: "Preguntas frecuentes y soporte",
+      value: "Preguntas frecuentes y soporte",
+    },
+
     //Componente Perfil.jsx
     { key: "Perfil del Usuario", value: "Perfil del Usuario" },
     { key: "Nombre", value: "Nombre" },
@@ -34,7 +56,12 @@ export const diccionary = {
     { key: "Mis kayaks", value: "Mis kayaks" },
     //Componente Dashboard.jsx
     { key: "Encontrá tu kayak perfecto", value: "Encontrá tu kayak perfecto" },
-    { key: "Explorá nuestro catálogo de kayaks disponibles para alquilar y viví una experiencia única en el agua.", value: "Explorá nuestro catálogo de kayaks disponibles para alquilar y viví una experiencia única en el agua." },
+    {
+      key: "Explorá nuestro catálogo de kayaks disponibles para alquilar y viví una experiencia única en el agua.",
+      value:
+        "Explorá nuestro catálogo de kayaks disponibles para alquilar y viví una experiencia única en el agua.",
+    },
+
     { key: "Ver kayaks disponibles", value: "Ver kayaks disponibles" },
     //Componente Clime.jsx
     { key: "Clima hoy en", value: "Clima hoy en" },
@@ -45,13 +72,26 @@ export const diccionary = {
     { key: "Pronóstico semanal", value: "Pronóstico semanal" },
     //Componente NotFound.jsx
     { key: "¡Uy! Página a la deriva", value: "¡Uy! Página a la deriva." },
-    { key: "Parece que este sitio se perdió río abajo. 🚣‍♂️", value: "Parece que este sitio se perdió río abajo. 🚣‍♂️" },
-    { key: "Pero no te preocupes, podés volver al inicio y retomar el rumbo.", value: "Pero no te preocupes, podés volver al inicio y retomar el rumbo." },
+    {
+      key: "Parece que este sitio se perdió río abajo. 🚣‍♂️",
+      value: "Parece que este sitio se perdió río abajo. 🚣‍♂️",
+    },
+    {
+      key: "Pero no te preocupes, podés volver al inicio y retomar el rumbo.",
+      value: "Pero no te preocupes, podés volver al inicio y retomar el rumbo.",
+    },
     { key: "Volver a iniciar sesión", value: "Volver a iniciar sesión" },
     //Componente MyKayaks.jsx
     { key: "Mis Kayaks", value: "Mis Kayaks" },
-    { key: "Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación.", value: "Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación."},
-    { key: "Buscar por nombre, modelo o color...", value: "Buscar por nombre, modelo o color..." },
+    {
+      key: "Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación.",
+      value:
+        "Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación.",
+    },
+    {
+      key: "Buscar por nombre, modelo o color...",
+      value: "Buscar por nombre, modelo o color...",
+    },
     //Componente PerchasPage.jsx
     { key: "Tus perchas", value: "Tus perchas" },
     { key: "Total:", value: "Total:" },
@@ -61,46 +101,51 @@ export const diccionary = {
     { key: "Disponible", value: "Disponible" },
     { key: "Total a pagar:", value: "Total a pagar:" },
     { key: "Pagar", value: "Pagar" },
-    { key: "Seleccione una percha disponible para guardar su kayak", value: "Seleccione una percha disponible para guardar su kayak" },
-    { key: "Ya tienes una percha ocupada. No puedes ocupar más de una percha.", value: "Ya tienes una percha ocupada. No puedes ocupar más de una percha." },
-    { key: "Confirmar selección", value: "Confirmar selección" },
-    { key: "¿Deseas guardar tu kayak en la percha", value: "¿Deseas guardar tu kayak en la percha" },
-    { key: "Cancelar", value: "Cancelar" },
-    { key: "Confirmar", value: "Confirmar" },
-    { key: "Gracias por tu pago de $", value: "Gracias por tu pago de $" },
-    //Componente MisReservas.jsx
-    { key: "Mis Reservas", value: "Mis Reservas" },
-    { key: "Explora tus reservas activas y pasadas.", value: "Explora tus reservas activas y pasadas." },
-    { key: "Activas", value: "Activas" },
-    { key: "Pasadas", value: "Pasadas" },
-    //Componente kayaksDisponibles.jsx
-    { key: "Kayaks disponibles para alquilar", value: "Kayaks disponibles para alquilar" },
-    { key: "Explora y reserva el kayak perfecto para vos y tu familia.", value: "Explora y reserva el kayak perfecto para vos y tu familia." },
-    { key: "No se encontraron kayaks ❌", value: "No se encontraron kayaks ❌" },
-    { key: "No hay kayaks que coincidan con tu búsqueda. Intenta con otros términos o añade un nuevo kayak.", value: "No hay kayaks que coincidan con tu búsqueda. Intenta con otros términos o añade un nuevo kayak." },
-    //Componente KayakReservationDetails.jsx
-    { key: "Reserva de Kayak", value: "Kayak Reservation" },
-    { key: "Datos de Reserva", value: "Reservation Details" },
-    //Componente HistorialKayaks.jsx
-    { key: "Historial", value: "Historial" },
-    { key: "Explora y administrá tu historial personal de kayaks.", value: "Explora y administrá tu historial personal de kayaks." },
+    {
+      key: "Seleccione una percha disponible para guardar su kayak",
+      value: "Seleccione una percha disponible para guardar su kayak",
+    },
+    {
+      key: "Ya tienes una percha ocupada. No puedes ocupar más de una percha.",
+      value:
+        "Ya tienes una percha ocupada. No puedes ocupar más de una percha.",
+    },
+
   ],
   en: [
     //Componente Configuracion.jsx
     { key: "Cerrar sesión", value: "Close session" },
     { key: "Editar perfil", value: "Edit profile" },
-    { key: "Actualiza tu información personal", value: "Update your personal information" },
+    {
+      key: "Actualiza tu información personal",
+      value: "Update your personal information",
+    },
     { key: "Métodos de pago", value: "Payment methods" },
-    { key: "Gestiona tus tarjetas y métodos de pago", value: "Manage your cards and payment methods" },
+    {
+      key: "Gestiona tus tarjetas y métodos de pago",
+      value: "Manage your cards and payment methods",
+    },
     { key: "Historial de alquileres", value: "Rental history" },
-    { key: "Revisa tus alquileres anteriores", value: "Review your past rentals" },
+    {
+      key: "Revisa tus alquileres anteriores",
+      value: "Review your past rentals",
+    },
     { key: "Ubicaciones favoritas", value: "Favorite locations" },
-    { key: "Gestiona tus ubicaciones preferidas", value: "Manage your preferred locations" },
+    {
+      key: "Gestiona tus ubicaciones preferidas",
+      value: "Manage your preferred locations",
+    },
     { key: "Preferencias", value: "Preferences" },
     { key: "Modo oscuro", value: "Dark mode" },
-    { key: "Activa el tema claro u oscuro", value: "Switch between light and dark theme" },
+    {
+      key: "Activa el tema claro u oscuro",
+      value: "Switch between light and dark theme",
+    },
     { key: "Idioma", value: "Language" },
-    { key: "Active para cambiar el idioma a Inglés", value: "Activate to switch language to English" },
+    {
+      key: "Active para cambiar el idioma a Inglés",
+      value: "Activate to switch language to English",
+    },
     { key: "Centro de ayuda", value: "Help center" },
     { key: "Preguntas frecuentes y soporte", value: "FAQs and support" },
     //Componente Perfil.jsx
@@ -120,7 +165,12 @@ export const diccionary = {
     { key: "Mis kayaks", value: "My Kayaks" },
     //Componente Dashboard.jsx
     { key: "Encontrá tu kayak perfecto", value: "Find your perfect kayak" },
-    { key: "Explorá nuestro catálogo de kayaks disponibles para alquilar y viví una experiencia única en el agua.", value: "Explore our catalog of available kayaks for rent and enjoy a unique experience on the water." },
+    {
+      key: "Explorá nuestro catálogo de kayaks disponibles para alquilar y viví una experiencia única en el agua.",
+      value:
+        "Explore our catalog of available kayaks for rent and enjoy a unique experience on the water.",
+    },
+
     { key: "Ver kayaks disponibles", value: "View available kayaks" },
     //Componente Clime.jsx
     { key: "Clima hoy en", value: "Weather today in" },
@@ -131,14 +181,28 @@ export const diccionary = {
     { key: "Pronóstico semanal", value: "Weekly forecast" },
     //Componente NotFound.jsx
     { key: "¡Uy! Página a la deriva", value: "Oops! Page adrift" },
-    { key: "Parece que este sitio se perdió río abajo. 🚣‍♂️", value: "It seems this site got lost downstream. 🚣‍♂️" },
-    { key: "Pero no te preocupes, podés volver al inicio y retomar el rumbo.", value: "But don't worry, you can go back to the start and get back on track." },
+    {
+      key: "Parece que este sitio se perdió río abajo. 🚣‍♂️",
+      value: "It seems this site got lost downstream. 🚣‍♂️",
+    },
+    {
+      key: "Pero no te preocupes, podés volver al inicio y retomar el rumbo.",
+      value:
+        "But don't worry, you can go back to the start and get back on track.",
+    },
     { key: "Volver a iniciar sesión", value: "Return to login" },
     //Componente MyKayaks.jsx
     { key: "Mis Kayaks", value: "My Kayaks" },
-    { key: "Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación.", value: "Explore and manage your personal kayak collection. Keep a detailed record of each vessel."},
-    { key: "Buscar por nombre, modelo o color...", value: "Search by name, model or color..." }, 
-  //Componente PerchasPage.jsx
+    {
+      key: "Explora y administrá tu colección personal de kayaks. Mantené un registro detallado de cada embarcación.",
+      value:
+        "Explore and manage your personal kayak collection. Keep a detailed record of each vessel.",
+    },
+    {
+      key: "Buscar por nombre, modelo o color...",
+      value: "Search by name, model or color...",
+    },
+    //Componente PerchasPage.jsx
     { key: "Tus perchas", value: "Your hangers" },
     { key: "Total:", value: "Total:" },
     { key: "percha(s) ocupada(s)", value: "occupied hanger(s)" },
@@ -147,43 +211,15 @@ export const diccionary = {
     { key: "Disponible", value: "Available" },
     { key: "Total a pagar:", value: "Total to pay:" },
     { key: "Pagar", value: "Pay" },
-    { key: "Seleccione una percha disponible para guardar su kayak", value: "Select an available hanger to store your kayak" },
-    { key: "Ya tienes una percha ocupada. No puedes ocupar más de una percha.", value: "You already have an occupied hanger. You cannot occupy more than one hanger." },
-    { key: "Confirmar selección", value: "Confirm selection" },
-    { key: "¿Deseas guardar tu kayak en la percha", value: "Do you want to store your kayak in the hanger" },
-    { key: "Cancelar", value: "Cancel" },
-    { key: "Confirmar", value: "Confirm" },
-    { key: "Gracias por tu pago de $", value: "Thank you for your payment of $" },
-    //Componente MisReservas.jsx
-    { key: "Mis Reservas", value: "My Reservations" },
-    { key: "Explora tus reservas activas y pasadas.", value: "Explore your active and past reservations." },
-    { key: "Activas", value: "Active" },
-    { key: "Pasadas", value: "Past" },
-    //Componente kayaksDisponibles.jsx
-    { key: "Kayaks disponibles para alquilar", value: "Kayaks available for rent" },
-    { key: "Explora y reserva el kayak perfecto para vos y tu familia.", value: "Explore and book the perfect kayak for you and your family." },
-    { key: "No se encontraron kayaks ❌", value: "No kayaks found ❌" },
-    { key: "No hay kayaks que coincidan con tu búsqueda. Intenta con otros términos o añade un nuevo kayak.", value: "No kayaks match your search. Try different terms or add a new kayak." },
-    //Componente kayakReservationDetails.jsx
-    { key: "Reserva de Kayak", value: "Kayak Reservation" },
-    { key: "Datos de Reserva", value: "Reservation Details" },
-    //Componente HistorialKayaks.jsx
-    { key: "Historial", value: "History" },
-    { key: "Explora y administrá tu historial personal de kayaks.", value: "Explore and manage your personal kayak history." },
-    //Componente SuperAdmin.jsx
-    { key: "No se encontraron usuarios", value: "No users found" },
-    { key: "Todos", value: "All" },
-    { key: "Super Admin", value: "Super Admin" },
-    { key: "Encargado", value: "Manager" },
-    { key: "Dueño Kayak", value: "Kayak Owner" },
-    { key: "Arrendatario", value: "Renter" },
-    { key: "Nombre", value: "Name" },
-    { key: "Email", value: "Email" },
-    { key: "Rol", value: "Role" },
-    { key: "Estado", value: "Status" },
-    { key: "Acciones", value: "Actions" },
-    { key :"🌊 Usuarios del Sistema", value: "🌊 System Users"},
-    { key: "Buscar usuarios...", value: "Search users..." },
-    
-  ]
+    {
+      key: "Seleccione una percha disponible para guardar su kayak",
+      value: "Select an available hanger to store your kayak",
+    },
+    {
+      key: "Ya tienes una percha ocupada. No puedes ocupar más de una percha.",
+      value:
+        "You already have an occupied hanger. You cannot occupy more than one hanger.",
+    },
+  ],
+
 };
