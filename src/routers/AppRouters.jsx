@@ -15,6 +15,7 @@ import MisReservas from "../components/pages/misReservas/MisReservas";
 import Configuracion from "../components/pages/configuracion/Configuracion";
 import KayaksDisponibles from "../components/pages/kayaksDisponibles/KayaksDisponibles";
 import EncargadoChecks from "../components/pages/encargadoChecks/EncargadoChecks";
+import KayakReservationDetails from "../components/pages/kayakReservationDetails/KayakReservationDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: "/mis-kayaks",
         element: (
-          <ProtectedRoute userType="dueniokayak">
+          <ProtectedRoute userType="admin">
             <MyKayaks />
           </ProtectedRoute>
         ),
@@ -100,6 +101,13 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute userType="admin">
             <KayaksDisponibles />
+          </ProtectedRoute>
+        ) 
+      },
+      { path: "/KayaksDisponibles/Reserva/:id", 
+        element: (
+          <ProtectedRoute userType="admin">
+            <KayakReservationDetails/>
           </ProtectedRoute>
         ) 
       },
