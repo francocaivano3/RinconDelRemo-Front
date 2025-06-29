@@ -10,6 +10,7 @@ import {
   Droplets,
   CloudSun,
 } from "lucide-react";
+import { useTranslate } from "../../hooks/useTranslate";
 
 // Función para obtener el ícono según el clima
 const getIcon = (main, size = "w-8 h-8") => {
@@ -35,6 +36,7 @@ const getIcon = (main, size = "w-8 h-8") => {
 function WeatherWeek() {
   const [pronostico, setPronostico] = useState([]);
   const [error, setError] = useState(null);
+  const translate = useTranslate();
 
   const fetchPronostico = async () => {
     try {
@@ -56,7 +58,7 @@ function WeatherWeek() {
   return (
     <div>
       <h3 className="text-2xl font-semibold mb-4 text-center">
-        Pronóstico semanal
+        {translate("Pronóstico semanal")}
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {pronostico.map((item, idx) => {

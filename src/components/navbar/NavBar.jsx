@@ -2,9 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Home, CalendarCheck, History, User, ShipWheel } from "lucide-react";
 import { useAuth } from "../../components/context/authContext/AuthContext";
+import { useTranslate } from "../../hooks/useTranslate";
 
 const determineUserType = (userInfo) => {
   if (!userInfo) return null;
+
+  
 
   // Si tiene roles, usamos el primero (para admin y encargado)
   if (userInfo.roles && userInfo.roles.length > 0) {
@@ -22,9 +25,10 @@ const determineUserType = (userInfo) => {
 };
 
 const NAV_ITEMS = {
+  
   admin: [
-    { path: "/dashboard", icon: Home, label: "Inicio" },
-    { path: "/sysadmin", icon: History, label: "Administración" },
+    { path: "/dashboard", icon: Home, label: "Inicio"},
+    { path: "/sysadmin", icon: History, label: "Administración"},
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
   encargado: [
@@ -38,7 +42,7 @@ const NAV_ITEMS = {
     {
       path: "/KayaksDisponibles",
       icon: CalendarCheck,
-      label: "Kayas Disponibles",
+      label: "Kayaks Disponibles",
     },
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
@@ -51,6 +55,7 @@ const NAV_ITEMS = {
 };
 
 export default function BottomNavbar() {
+  const translate = useTranslate();
   const { userInfo, isLoading } = useAuth();
 
   if (isLoading) {
@@ -103,7 +108,7 @@ export default function BottomNavbar() {
             }
           >
             <item.icon className="h-6 w-6" />
-            <span className="text-xs mt-1">{item.label}</span>
+            <span className="text-xs mt-1">{translate(item.label)}</span>
           </NavLink>
         ))}
       </div>

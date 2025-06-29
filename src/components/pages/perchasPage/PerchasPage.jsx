@@ -13,9 +13,8 @@ export default function GuarderiaKayaks() {
   const [mostrarModalAddKayak, setMostrarModalAddKayak] = useState(false);
   const [showPaymet, setShowPaymet] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
+  const translate = useTranslate();
   const [perchaId, setPerchaId] = useState(null);
-
-
   const translate = useTranslate();
   const { userInfo } = useAuth();
 
@@ -88,6 +87,7 @@ const handleChange = (e) => {
         translate(
           "Ya tienes una percha ocupada. No puedes ocupar más de una percha."
         )
+
       );
       return;
     }
@@ -201,7 +201,7 @@ window.open(linkPago, '_blank');
 
 
   const handlePagar = () => {
-    setShowPaymet(true);
+    alert(translate("Gracias por tu pago de $") + totalAPagar + "!");
   };
 
   return (
@@ -237,6 +237,7 @@ window.open(linkPago, '_blank');
             <span className="text-blue-700 dark:text-blue-200">
               {translate("Disponible")}
             </span>
+
           </div>
         </div>
 
@@ -302,6 +303,7 @@ window.open(linkPago, '_blank');
             <p className="text-sm text-gray-600">
               <strong>{translate("Total:")}</strong> {totalPerchasOcupadas}{" "}
               {translate("percha(s) ocupada(s)")}
+
             </p>
             {totalPerchasOcupadas > 0 && (
               <div className="mt-1 flex flex-wrap gap-2">
@@ -340,10 +342,10 @@ window.open(linkPago, '_blank');
         <div className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-xl shadow-2xl text-center space-y-4 w-80 animate-fade-in">
             <h2 className="text-xl font-bold text-gray-800">
-              Confirmar selección
+              {translate("Confirmar selección")}
             </h2>
             <p className="text-gray-600">
-              ¿Deseas guardar tu kayak en la percha{" "}
+              {translate("¿Deseas guardar tu kayak en la percha")}{" "}
               <strong className="text-blue-700">{perchaSeleccionada.id}</strong>
               ?
             </p>
@@ -352,13 +354,13 @@ window.open(linkPago, '_blank');
                 onClick={handleCancelar}
                 className="bg-gray-300 cursor-pointer text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
               >
-                Cancelar
+                {translate("Cancelar")}
               </button>
               <button
                 onClick={handleCreate}
                 className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600 shadow-sm"
               >
-                Confirmar
+                {translate("Confirmar")}
               </button>
             </div>
           </div>

@@ -38,6 +38,7 @@ export const diccionary = {
       key: "Preguntas frecuentes y soporte",
       value: "Preguntas frecuentes y soporte",
     },
+
     //Componente Perfil.jsx
     { key: "Perfil del Usuario", value: "Perfil del Usuario" },
     { key: "Nombre", value: "Nombre" },
@@ -60,6 +61,7 @@ export const diccionary = {
       value:
         "Explorá nuestro catálogo de kayaks disponibles para alquilar y viví una experiencia única en el agua.",
     },
+
     { key: "Ver kayaks disponibles", value: "Ver kayaks disponibles" },
     //Componente Clime.jsx
     { key: "Clima hoy en", value: "Clima hoy en" },
@@ -108,6 +110,7 @@ export const diccionary = {
       value:
         "Ya tienes una percha ocupada. No puedes ocupar más de una percha.",
     },
+
   ],
   en: [
     //Componente Configuracion.jsx
@@ -167,6 +170,7 @@ export const diccionary = {
       value:
         "Explore our catalog of available kayaks for rent and enjoy a unique experience on the water.",
     },
+
     { key: "Ver kayaks disponibles", value: "View available kayaks" },
     //Componente Clime.jsx
     { key: "Clima hoy en", value: "Weather today in" },
@@ -217,4 +221,5 @@ export const diccionary = {
         "You already have an occupied hanger. You cannot occupy more than one hanger.",
     },
   ],
+
 };
