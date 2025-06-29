@@ -19,27 +19,14 @@ const KayakCard = ({ kayak }) => {
             Authorization: `Bearer ${token}`,
         },
     }
-    const formatDateTime = (date) => {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // los meses van de 0 a 11
-        const year = date.getFullYear();
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-
-        return `${day}/${month}/${year} ${hours}:${minutes}`;
-    };
-
-    const rightNow = new Date();
-    const oneHourLater = new Date(rightNow.getTime() + 60 * 60 * 1000); // 1 hora más
-
-    const stringRightNow = formatDateTime(rightNow).toString()
-    const stringOneHourLater = formatDateTime(oneHourLater).toString()
+    const now = new Date();
+    const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000); // suma 1 hora
 
     const data = {
-        fechaInicio: new Date(),
-        fechaFin: new Date() + 1,
+        fechaInicio: now.toISOString(),        // ✅ formato correcto
+        fechaFin: oneHourLater.toISOString(),  // ✅ formato correcto
         kayakId: kayak.id,
-        tenantId: userInfo.oid
+        tenantId: userInfo.oid,
     };
     console.log("Este es el json que envio para reservar: ", data)
     const handleReservationCofirm = async () => {
@@ -142,11 +129,11 @@ const KayakCard = ({ kayak }) => {
                                     </div>
                                     <div className="flex items-center text-gray-600 dark:text-gray-300">
                                         <Calendar size={18} className="mr-2 text-gray-400 dark:text-white" />
-                                        <span className="text-sm">Tu reserva comienza : {stringRightNow}</span>
+                                        <span className="text-sm">Tu reserva comienza : {now}</span>
                                     </div>
                                     <div className="flex items-center text-gray-600 dark:text-gray-300">
                                         <Calendar size={18} className="mr-2 text-gray-400 dark:text-white" />
-                                        <span className="text-sm">Tu reserva finaliza : {stringOneHourLater}</span>
+                                        <span className="text-sm">Tu reserva finaliza : {oneHourLater}</span>
                                     </div>
                                 </div>
                                 <div className="flex justify-end gap-3">
