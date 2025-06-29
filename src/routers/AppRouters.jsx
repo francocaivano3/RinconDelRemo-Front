@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {
         path: "/mis-kayaks",
         element: (
-          <ProtectedRoute userType="admin">
+          <ProtectedRoute userType="dueniokayak">
             <MyKayaks />
           </ProtectedRoute>
         ),
