@@ -66,7 +66,7 @@ const hardcodedKayaks = [
 //
 
 
-const myKayaks = () => {
+const MyKayaks = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,7 +83,7 @@ const myKayaks = () => {
     }
   }, [isModalOpen]);
 
-  const handleAddKayak = (newKayak) => {
+  const handleAddKayak = () => {
     return;
   }
 
@@ -192,4 +192,4 @@ const myKayaks = () => {
   )
 }
 
-export default myKayaks;
+export default MyKayaks;

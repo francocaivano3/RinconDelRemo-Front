@@ -1,4 +1,3 @@
-import { colors } from "@mui/material";
 import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
 import { Calendar, Ruler, Users, Package, Edit, Trash } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
