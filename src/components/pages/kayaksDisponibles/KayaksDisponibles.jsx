@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Search, Filter, ChevronDown, Plus } from "lucide-react";
+import { Search } from "lucide-react";
 import KayakCard from "../myKayaks/kayakCard";
-import AddKayakModal from "../myKayaks/addKayakModal";
-import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
-import { useNavigate } from "react-router-dom";
+
 import { getAvailableKayak } from "../../../service/kayakDisponibles";
 import { useTranslate } from "../../../hooks/useTranslate";
+
 
 //EJEMPLO PARA PROBAR
 // const hardcodedKayaks = [
@@ -67,6 +66,7 @@ import { useTranslate } from "../../../hooks/useTranslate";
 // ];
 //
 
+
 const KayaksDisponibles = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -84,9 +84,11 @@ const KayaksDisponibles = () => {
     };
   }, [isModalOpen]);
 
+
   const handleAddKayak = (newKayak) => {
     return;
   };
+
 
   const handleGetKayaksDisponibles = async () => {
     try {
@@ -109,6 +111,7 @@ const KayaksDisponibles = () => {
       console.log(error);
     }
   };
+
 
   useEffect(() => {
     handleGetKayaksDisponibles();
@@ -171,7 +174,6 @@ const KayaksDisponibles = () => {
             </p>
           </div>
         )}
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {filteredKayaks.map((kayak) => (
             <KayakCard
@@ -182,6 +184,7 @@ const KayaksDisponibles = () => {
           ))}
         </div>
       </div>
+
       <AddKayakModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

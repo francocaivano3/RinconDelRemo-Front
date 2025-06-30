@@ -64,6 +64,7 @@ const KayakCard = ({ kayak }) => {
       console.error("Error al habilitar kayak:", error);
       showAlert("❌ No se pudo habilitar el kayak", "error");
     }
+
   };
 
   const colorMap = {
@@ -210,12 +211,20 @@ const KayakCard = ({ kayak }) => {
 
         {/* Botón para reservar */}
         {location.pathname.startsWith("/KayaksDisponibles/Reserva/") && (
+          <div>
           <button
             className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
             onClick={() => handleEditClick()}
           >
             Reservar
           </button>
+          <button
+            className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
+            onClick={ () => navigate("/KayaksDisponibles")}
+          >
+            Cancelar
+          </button>
+          </div>
         )}
 
         {/* Modal */}
