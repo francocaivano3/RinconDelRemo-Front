@@ -41,6 +41,7 @@ const KayakCard = ({ kayak, response }) => {
     await disableKayak(kayak.id);
     setShowEditModal(false);
     showAlert("Registro exitoso", "success");
+    navigate("/KayaksDisponibles");
   };
   const colorMap = {
     Rojo: {
@@ -160,12 +161,20 @@ const KayakCard = ({ kayak, response }) => {
           </div>
         </div>
         {location.pathname.startsWith("/KayaksDisponibles/Reserva/") && (
+          <div>
           <button
             className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
             onClick={() => handleEditClick()}
           >
             Reservar
           </button>
+          <button
+            className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
+            onClick={ () => navigate("/KayaksDisponibles")}
+          >
+            Cancelar
+          </button>
+          </div>
         )}
         {showEditModal && (
           <>
