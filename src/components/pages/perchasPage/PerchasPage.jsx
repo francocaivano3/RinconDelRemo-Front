@@ -14,7 +14,9 @@ export default function GuarderiaKayaks() {
   const [seleccionadas, setSeleccionadas] = useState([]);
   const [perchaId, setPerchaId] = useState(null);
 
+
   const translate = useTranslate();
+
   const { userInfo } = useAuth();
 
   const ROWS = 10;
