@@ -1,7 +1,16 @@
-import KayakList from "../../kayakList/KayakList";
-
+import { useEffect } from "react";
+import ReservaKayakItem from "./ReservaKayakItem";
+import { getEndKayakReservation } from "../../../service/kayakReservation";
 
 const HistorialKayaks = () => {
+
+  const handleGetEndKayaksReservations = async ()=>{
+    const reservationsKayakList = await getEndKayakReservation();
+  };
+
+  useEffect(() => {
+    handleGetEndKayaksReservations();
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#003459]">
       <div className="container mx-auto px-4 py-12 max-w-7xl">
@@ -14,7 +23,9 @@ const HistorialKayaks = () => {
           </div>
         </div>
         <div className="flex justify-center w-full m-auto">
-          <KayakList />
+          <ReservaKayakItem
+
+          />
         </div>
       </div>
 
