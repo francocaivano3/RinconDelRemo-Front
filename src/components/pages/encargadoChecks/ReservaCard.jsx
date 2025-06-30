@@ -1,11 +1,182 @@
+// import { Calendar, X } from "lucide-react";
+// import {
+//   getAvailableKayakId,
+//   postCheckInId,
+//   postCheckInOut,
+// } from "../../../service/encargadoChck";
+// import { useEffect, useState } from "react";
+// function ReservaCard({ reserva }) {
+//   console.log(reserva);
+//   const [checks, setChecks] = useState([]);
+//   const handleCheckIn = async () => {
+//     const CheckIn = await postCheckInId(reserva.id);
+//     console.log("###################  Check-Int ################### ");
+//     console.log(CheckIn);
+//   };
+//   const handleCheckOut = async () => {
+//     const CheckOut = await postCheckInOut(reserva.id);
+//     console.log("###################  Check-Out ################### ");
+//     console.log(CheckOut);
+//   };
+//   const handleGetKayaksDisponibles = async () => {
+//     try {
+//       const response = await getAvailableKayakId(reserva.kayakId);
+
+//       setChecks(response);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   useEffect(() => {
+//     handleGetKayaksDisponibles();
+//   }, []);
+//   const isDisabled =
+//     reserva.statusReservation === "Finished" ||
+//     reserva.statusReservation === "Canceled";
+//   return (
+//     <div className="bg-white dark:bg-[#223849] rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 dark:border-none group">
+//       <div className="relative">
+//         <img
+//           src={reserva.imag || ""}
+//           alt="Reserva"
+//           className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
+//         />
+//         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+//           <button className="p-2 bg-white/90 rounded-md text-red-600 hover:bg-white flex items-center">
+//             <X className="h-4 w-4 mr-1" />
+//             Cancelar
+//           </button>
+//         </div>
+//         {/* <div className="absolute top-4 left-4 bg-white/80 text-gray-800 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur">
+//           Reservado por: {reserva.user.name} {reserva.user.lastname}
+//         </div> */}
+//       </div>
+
+//       <div className="p-5">
+//         <div className="flex justify-between items-start mb-3">
+//           <div>
+//             <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+//               {checks.name}
+//             </h3>
+//           </div>
+//         </div>
+
+//         <div className="grid grid-cols-2 gap-3 mt-4 text-sm text-gray-600 dark:text-gray-300">
+//           <div>Modelo:{checks.name} </div>
+//           <div>Color: {checks.color}</div>
+//           <div>Longitud: {checks.length} </div>
+//           <div>Capacidad: {checks.capacity}</div>
+//           <div>Material: {checks.material} </div>
+//           <div>Estado: {reserva.statusReservation}</div>
+//         </div>
+
+//         <div className="mt-5 flex justify-between text-sm text-gray-700 dark:text-gray-300">
+//           <div className="flex items-center gap-2">
+//             <Calendar className="h-4 w-4 text-teal-600" />
+//             Inicio: {reserva.fechaInicio}
+//           </div>
+//           <div className="flex items-center gap-2">
+//             <Calendar className="h-4 w-4 text-teal-600" />
+//             Entrada: {reserva.fechaFin}
+//           </div>
+//         </div>
+
+//         <div className="mt-5 flex justify-between text-sm text-gray-700 dark:text-gray-300">
+//           <button
+//             disabled={isDisabled}
+//             className={`inline-flex items-center justify-center rounded-md px-6 py-3 text-xs font-medium ring-1 ring-inset transition-colors ${
+//               isDisabled
+//                 ? "bg-gray-200 text-gray-500 ring-gray-300 cursor-not-allowed"
+//                 : "bg-blue-100 text-blue-800 ring-blue-600/20 cursor-pointer"
+//             }`}
+//             onClick={handleCheckIn}
+//           >
+//             Check-In
+//           </button>
+//           <button
+//             disabled={isDisabled}
+//             className={`inline-flex items-center justify-center rounded-md px-4.5 py-3 text-xs font-medium ring-1 ring-inset transition-colors ${
+//               isDisabled
+//                 ? "bg-gray-200 text-gray-500 ring-gray-300 cursor-not-allowed"
+//                 : "bg-red-100 text-red-800 ring-red-600/20 cursor-pointer"
+//             }`}
+//             onClick={handleCheckOut}
+//           >
+//             Check-Out
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default ReservaCard;
 import { Calendar, X } from "lucide-react";
+import {
+  getAvailableKayakId,
+  postCheckInId,
+  postCheckInOut,
+} from "../../../service/encargadoChck";
+import { useEffect, useState } from "react";
 
 function ReservaCard({ reserva }) {
+  const [checks, setChecks] = useState([]);
+  const [reservaData, setReservaData] = useState(reserva);
+
+  const handleCheckIn = async () => {
+    try {
+      const checkIn = await postCheckInId(reservaData.id);
+      console.log("########## Check-In ##########");
+      console.log(checkIn);
+
+      // Actualiza el estado local si el backend devuelve uno nuevo
+      setReservaData((prev) => ({
+        ...prev,
+        statusReservation: checkIn.statusReservation || "Finished",
+      }));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleCheckOut = async () => {
+    try {
+      const checkOut = await postCheckInOut(reservaData.id);
+      console.log("########## Check-Out ##########");
+      console.log(checkOut);
+
+      // Actualiza el estado local si el backend devuelve uno nuevo
+      setReservaData((prev) => ({
+        ...prev,
+        statusReservation: checkOut.statusReservation || "Finished",
+      }));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleGetKayaksDisponibles = async () => {
+    try {
+      const response = await getAvailableKayakId(reservaData.kayakId);
+      setChecks(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetKayaksDisponibles();
+  }, []);
+
+  const isDisabled =
+    reservaData.statusReservation === "Finished" ||
+    reservaData.statusReservation === "Canceled";
+
   return (
     <div className="bg-white dark:bg-[#223849] rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 dark:border-none group">
       <div className="relative">
         <img
-          src={reserva.detalles.imag || ""}
+          src={reservaData.imagen || ""}
           alt="Reserva"
           className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -15,49 +186,59 @@ function ReservaCard({ reserva }) {
             Cancelar
           </button>
         </div>
-        <div className="absolute top-4 left-4 bg-white/80 text-gray-800 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur">
-          Reservado por: {reserva.user.name} {reserva.user.lastname}
-        </div>
       </div>
 
       <div className="p-5">
         <div className="flex justify-between items-start mb-3">
           <div>
             <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-              {reserva.detalles.nombre}
+              {checks.name}
             </h3>
-          </div>
-          <div className="text-sm text-gray-700 dark:text-gray-200 font-semibold">
-            <p>${reserva.total}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-3 mt-4 text-sm text-gray-600 dark:text-gray-300">
-          <div>Modelo: {reserva.detalles.modelo}</div>
-          <div>Color: {reserva.detalles.color}</div>
-          <div>Longitud: {reserva.detalles.longitud}</div>
-          <div>Capacidad: {reserva.detalles.capacidad}</div>
-          <div>Material: {reserva.detalles.material}</div>
-          <div>Percha: {reserva.percha || "No asignada"}</div>
-          <div>Codigo: {reserva.codigo}</div>
+          <div>Modelo: {checks.name}</div>
+          <div>Color: {checks.color}</div>
+          <div>Longitud: {checks.length}</div>
+          <div>Capacidad: {checks.capacity}</div>
+          <div>Material: {checks.material}</div>
+          <div>Estado: {reservaData.statusReservation}</div>
         </div>
 
         <div className="mt-5 flex justify-between text-sm text-gray-700 dark:text-gray-300">
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4 text-teal-600" />
-            Salida: {reserva.fechaSalida}
+            Inicio: {reservaData.fechaInicio}
           </div>
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4 text-teal-600" />
-            Entrada: {reserva.fechaEntrada}
+            Entrada: {reservaData.fechaFin}
           </div>
         </div>
 
         <div className="mt-5 flex justify-between text-sm text-gray-700 dark:text-gray-300">
-          <button className="inline-flex items-center justify-center rounded-md bg-blue-100 px-6 py-3 text-xs font-medium text-blue-800 ring-1 ring-inset ring-blue-600/20 cursor-pointer">
+          <button
+            disabled={isDisabled}
+            onClick={handleCheckIn}
+            className={`inline-flex items-center justify-center rounded-md px-6 py-3 text-xs font-medium ring-1 ring-inset transition-colors ${
+              isDisabled
+                ? "bg-gray-200 text-gray-500 ring-gray-300 cursor-not-allowed"
+                : "bg-blue-100 text-blue-800 ring-blue-600/20 cursor-pointer"
+            }`}
+          >
             Check-In
           </button>
-          <button className="inline-flex items-center justify-center rounded-md bg-red-100  px-4.5 py-3 text-xs font-medium text-red-800 ring-1 ring-inset ring-red-600/20 cursor-pointer">
+
+          <button
+            disabled={isDisabled}
+            onClick={handleCheckOut}
+            className={`inline-flex items-center justify-center rounded-md px-4.5 py-3 text-xs font-medium ring-1 ring-inset transition-colors ${
+              isDisabled
+                ? "bg-gray-200 text-gray-500 ring-gray-300 cursor-not-allowed"
+                : "bg-red-100 text-red-800 ring-red-600/20 cursor-pointer"
+            }`}
+          >
             Check-Out
           </button>
         </div>
