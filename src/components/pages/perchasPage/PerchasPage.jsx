@@ -12,8 +12,10 @@ export default function GuarderiaKayaks() {
   const [mostrarModalAddKayak, setMostrarModalAddKayak] = useState(false);
   const [showPaymet, setShowPaymet] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
-  const translate = useTranslate();
   const [perchaId, setPerchaId] = useState(null);
+
+
+  const translate = useTranslate();
 
   const { userInfo } = useAuth();
 
@@ -195,7 +197,7 @@ export default function GuarderiaKayaks() {
   };
 
   const handlePagar = () => {
-    alert(translate("Gracias por tu pago de $") + totalAPagar + "!");
+    setShowPaymet(true);
   };
 
   return (
@@ -334,10 +336,10 @@ export default function GuarderiaKayaks() {
         <div className="fixed inset-0 bg-transparent bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-xl shadow-2xl text-center space-y-4 w-80 animate-fade-in">
             <h2 className="text-xl font-bold text-gray-800">
-              {translate("Confirmar selección")}
+              Confirmar selección
             </h2>
             <p className="text-gray-600">
-              {translate("¿Deseas guardar tu kayak en la percha")}{" "}
+              ¿Deseas guardar tu kayak en la percha{" "}
               <strong className="text-blue-700">{perchaSeleccionada.id}</strong>
               ?
             </p>
@@ -346,13 +348,13 @@ export default function GuarderiaKayaks() {
                 onClick={handleCancelar}
                 className="bg-gray-300 cursor-pointer text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
               >
-                {translate("Cancelar")}
+                Cancelar
               </button>
               <button
                 onClick={handleCreate}
                 className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600 shadow-sm"
               >
-                {translate("Confirmar")}
+                Confirmar
               </button>
             </div>
           </div>

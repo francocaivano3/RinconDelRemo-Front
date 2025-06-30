@@ -1,71 +1,9 @@
 import { useState, useEffect } from "react";
-import { Search, Filter, ChevronDown, Plus } from "lucide-react";
+import { Search } from "lucide-react";
 import KayakCard from "../myKayaks/kayakCard";
-import AddKayakModal from "../myKayaks/addKayakModal";
-import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
-import { useNavigate } from "react-router-dom";
+
 import { getAvailableKayak } from "../../../service/kayakDisponibles";
 import { useTranslate } from "../../../hooks/useTranslate";
-
-//EJEMPLO PARA PROBAR
-// const hardcodedKayaks = [
-//   {
-//     id: 1,
-//     nombre: "Kayak Explorer",
-//     modelo: "X-200",
-//     color: "Rojo",
-//     longitud: "3.5m",
-//     capacidad: "1 persona",
-//     material: "Polietileno",
-//     fechaCompra: "15/03/2023",
-//     imagen: cardImg,
-//   },
-//   {
-//     id: 2,
-//     nombre: "Kayak Aventura",
-//     modelo: "A-150",
-//     color: "Azul",
-//     longitud: "4m",
-//     capacidad: "2 personas",
-//     material: "Fibra de vidrio",
-//     fechaCompra: "22/07/2022",
-//     imagen: cardImg,
-//   },
-//   {
-//     id: 3,
-//     nombre: "Kayak Marino",
-//     modelo: "M-300",
-//     color: "Verde",
-//     longitud: "4.2m",
-//     capacidad: "1 persona",
-//     material: "Polietileno",
-//     fechaCompra: "10/01/2023",
-//     imagen: cardImg,
-//   },
-//   {
-//     id: 4,
-//     nombre: "Kayak Rápido",
-//     modelo: "R-100",
-//     color: "Amarillo",
-//     longitud: "3.8m",
-//     capacidad: "1 persona",
-//     material: "Kevlar",
-//     fechaCompra: "05/11/2022",
-//     imagen: cardImg,
-//   },
-//   {
-//     id: 5,
-//     nombre: "Kayak Familiar",
-//     modelo: "F-250",
-//     color: "Naranja",
-//     longitud: "4.5m",
-//     capacidad: "3 personas",
-//     material: "Polietileno",
-//     fechaCompra: "30/04/2023",
-//     imagen: cardImg,
-//   },
-// ];
-//
 
 
 const KayaksDisponibles = () => {
@@ -85,27 +23,12 @@ const KayaksDisponibles = () => {
     }
   }, [isModalOpen]);
 
-  const handleAddKayak = (newKayak) => {
-    return;
-  }
 
   const handleGetKayaksDisponibles = async () => {
   try {
     const response = await getAvailableKayak();
 
-    const normalized = response.map(k => ({
-      id: k.id,
-      nombre: k.name,
-      modelo: k.model,
-      color: k.color,
-      capacidad: k.capacity,
-      longitud: k.length,
-      material: k.material,
-      fechaCompra: k.publicationDate.slice(0, 10),
-      imagen: cardImg,
-    }));
-
-    setKayakList(normalized);
+    setKayakList(response);
   } catch (error) {
     console.log(error);
   }
@@ -158,14 +81,12 @@ useEffect(() => {
             </p>
           </div>
         )}
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {filteredKayaks.map((kayak) => (
             <KayakCard key={kayak.id} kayak={kayak} onClick={() => setIsModalOpen(true)} />
           ))}
         </div>
       </div>
-      <AddKayakModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAddKayak={handleAddKayak}/>
     </div>
   )
 }

@@ -46,6 +46,7 @@ const AddKayakModal = ({ isOpen, onClose, perchaId }) => {
       await createKayak(kayakData);
       console.log("Kayak creado exitosamente");
       onClose();
+      navigate("/mis-kayaks", { state: { shouldRefresh: true } });
     } catch (error) {
       if (error.response && error.response.data) {
         console.error("Error detalle backend:", error.response.data);
@@ -199,7 +200,6 @@ const AddKayakModal = ({ isOpen, onClose, perchaId }) => {
               Cancelar
             </button>
             <button
-              onClick={() => navigate("/mis-kayaks")}
               type="submit"
               className="px-4 py-2 bg-gradient-to-r from-green-600 to-blue-500 text-white rounded-lg hover:from-blue-500 hover:to-green-600 font-medium shadow-sm cursor-pointer"
             >
