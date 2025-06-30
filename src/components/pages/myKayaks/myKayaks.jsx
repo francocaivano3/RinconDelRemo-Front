@@ -11,9 +11,11 @@ const MyKayaks = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [response, setResponse] = useState([]);
   const location = useLocation();
+
   const handleGetAll = async () => {
     try {
       const response = await getKayak();
+      console.log("🚀 ~ handleGetAll ~ response:", response);
       setResponse(response);
     } catch (error) {
       console.error(error);
@@ -96,7 +98,7 @@ const MyKayaks = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {filteredKayaks.map((kayak) => (
-            <KayakCard key={kayak.id} kayak={kayak} response={response} />
+            <KayakCard key={kayak.id} kayak={kayak} />
           ))}
         </div>
       </div>

@@ -4,11 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createKayakReservation } from "../../../service/kayakReservation";
 import { useAuth } from "../../context/authContext/AuthContext";
-import { disableKayak } from "../../../service/kayakDisponibles";
+import { disableKayak, enableKayak } from "../../../service/kayakDisponibles";
 import { useAlert } from "../../context/alertContext/AlertContext";
 
-const KayakCard = ({ kayak, response }) => {
-  console.log("lo que trae api", response);
+const KayakCard = ({ kayak }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { userInfo, token } = useAuth();
@@ -18,31 +17,56 @@ const KayakCard = ({ kayak, response }) => {
   const handleEditClick = () => {
     setShowEditModal(true);
   };
+
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
+
   const now = new Date();
-  const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000); // suma 1 hora
+  const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
 
   const stringNow = now.toISOString();
-  const stringOneHourLater = now.toISOString();
+  const stringOneHourLater = oneHourLater.toISOString();
 
   const data = {
-    fechaInicio: now.toISOString(),
-    fechaFin: oneHourLater.toISOString(),
+    fechaInicio: stringNow,
+    fechaFin: stringOneHourLater,
     kayakId: kayak.id,
     tenantId: userInfo.oid,
   };
-  console.log("Este es el json que envio para reservar: ", data);
+
   const handleReservationCofirm = async () => {
-    await createKayakReservation(data, config);
-    await disableKayak(kayak.id);
-    setShowEditModal(false);
-    showAlert("Registro exitoso", "success");
-    navigate("/KayaksDisponibles");
+    try {
+      await createKayakReservation(data, config);
+      await disableKayak(kayak.id);
+      setShowEditModal(false);
+      showAlert("Registro exitoso", "success");
+    } catch (err) {
+      console.error(err);
+      showAlert("Error al reservar el kayak", "error");
+    }
   };
+
+  const handleEnableKayak = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      console.log("🚀 ~ handleEnableKayak ~ kayak.id:", kayak.id);
+      await enableKayak(kayak.id, config);
+      console.log("Kayak habilitado correctamente", kayak.id);
+      showAlert("✅ Kayak habilitado correctamente", "success");
+    } catch (error) {
+      console.error("Error al habilitar kayak:", error);
+      showAlert("❌ No se pudo habilitar el kayak", "error");
+    }
+
+  };
+
   const colorMap = {
     Rojo: {
       bg: "bg-red-500",
@@ -110,19 +134,20 @@ const KayakCard = ({ kayak, response }) => {
         </div>
         <img
           src={cardImg}
-          alt={kayak.name}
+          alt={kayak.nombre}
           className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div
           className={`absolute top-4 left-4 ${colorStyle.light} ${colorStyle.text} px-2.5 py-1 rounded-full text-xs font-medium`}
         >
-          {kayak.model}
+          {kayak.modelo} {kayak.model}
         </div>
       </div>
+
       <div className="p-5">
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-lg font-bold text-gray-800 group-hover:text-gray-900 dark:text-white dark:group-hover:text-gray-300">
-            {kayak.name}
+            {kayak.nombre} {kayak.name}
           </h3>
           <div
             className={`flex items-center ${colorStyle.light} ${colorStyle.text} px-2.5 py-1 rounded-full text-xs font-medium`}
@@ -133,14 +158,19 @@ const KayakCard = ({ kayak, response }) => {
             {kayak.color}
           </div>
         </div>
+
         <div className="grid grid-cols-2 gap-3 mt-4">
           <div className="flex items-center text-gray-600 dark:text-gray-300">
             <Ruler size={18} className="mr-2 text-gray-400 dark:text-white" />
-            <span className="text-sm">{kayak.length}</span>
+            <span className="text-sm">
+              {kayak.longitud} {kayak.length}{" "}
+            </span>
           </div>
           <div className="flex items-center text-gray-600 dark:text-gray-300">
             <Users size={18} className="mr-2 text-gray-400 dark:text-white" />
-            <span className="text-sm">{kayak.capacity}</span>
+            <span className="text-sm">
+              {kayak.capacidad} {kayak.capacity}{" "}
+            </span>
           </div>
           <div className="flex items-center text-gray-600 dark:text-gray-300">
             <Package size={18} className="mr-2 text-gray-400 dark:text-white" />
@@ -152,14 +182,34 @@ const KayakCard = ({ kayak, response }) => {
               className="mr-2 text-gray-400 dark:text-white"
             />
             <span className="text-sm">
-              {new Date(kayak.publicationDate).toLocaleString("es-AR", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              })}
+              {kayak.fechaCompra
+                ? new Date(kayak.fechaCompra).toLocaleDateString("es-AR")
+                : kayak.publicationDate
+                ? new Date(kayak.publicationDate).toLocaleDateString("es-AR")
+                : "-"}
             </span>
           </div>
         </div>
+
+        {/* Disponibilidad */}
+        {location.pathname === "/mis-kayaks" && (
+          <div className="mt-4">
+            {kayak.isAvailable ? (
+              <span className="inline-block px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium dark:bg-green-900 dark:text-green-300">
+                Disponible
+              </span>
+            ) : (
+              <button
+                onClick={handleEnableKayak}
+                className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700"
+              >
+                Habilitar Kayak
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Botón para reservar */}
         {location.pathname.startsWith("/KayaksDisponibles/Reserva/") && (
           <div>
           <button
@@ -176,6 +226,8 @@ const KayakCard = ({ kayak, response }) => {
           </button>
           </div>
         )}
+
+        {/* Modal */}
         {showEditModal && (
           <>
             <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"></div>
@@ -197,7 +249,7 @@ const KayakCard = ({ kayak, response }) => {
                       size={18}
                       className="mr-2 text-gray-400 dark:text-white"
                     />
-                    <span className="text-sm">{kayak.capacidad}</span>
+                    <span className="text-sm">{kayak.capacidad} </span>
                   </div>
                   <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Package
@@ -219,7 +271,7 @@ const KayakCard = ({ kayak, response }) => {
                       className="mr-2 text-gray-400 dark:text-white"
                     />
                     <span className="text-sm">
-                      Tu reserva comienza : {stringNow}
+                      Tu reserva comienza: {stringNow}
                     </span>
                   </div>
                   <div className="flex items-center text-gray-600 dark:text-gray-300">
@@ -228,7 +280,7 @@ const KayakCard = ({ kayak, response }) => {
                       className="mr-2 text-gray-400 dark:text-white"
                     />
                     <span className="text-sm">
-                      Tu reserva finaliza : {stringOneHourLater}
+                      Tu reserva finaliza: {stringOneHourLater}
                     </span>
                   </div>
                 </div>
@@ -240,7 +292,7 @@ const KayakCard = ({ kayak, response }) => {
                     Cancelar
                   </button>
                   <button
-                    onClick={() => handleReservationCofirm()}
+                    onClick={handleReservationCofirm}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
                     Confirmar
