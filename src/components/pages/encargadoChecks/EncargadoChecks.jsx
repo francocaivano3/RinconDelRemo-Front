@@ -171,6 +171,8 @@ function EncargadoChecks() {
                       <option value="Rojo">Rojo</option>
                       <option value="Azul">Azul</option>
                       <option value="Verde">Verde</option>
+                      <option value="Amarillo">Amarillo</option>
+                      <option value="Naranja">Naranja</option>
                     </select>
                   </div>
                   {/* Material */}
@@ -185,6 +187,8 @@ function EncargadoChecks() {
                       <option value="Polietileno">Polietileno</option>
                       <option value="Fibra de vidrio">Fibra de vidrio</option>
                       <option value="Kevlar">Kevlar</option>
+                      <option value="Carbono">Carbono</option>
+                      <option value="Otros">Otros</option>
                     </select>
                   </div>
                   {/* Capacidad */}

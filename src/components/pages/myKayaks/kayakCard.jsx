@@ -183,11 +183,12 @@ const KayakCard = ({ kayak }) => {
             />
             <span className="text-sm">
               {kayak.fechaCompra
-                ? new Date(kayak.fechaCompra).toLocaleDateString("es-AR")
+                ? new Date(kayak.fechaCompra).toLocaleString("es-AR")
                 : kayak.publicationDate
-                ? new Date(kayak.publicationDate).toLocaleDateString("es-AR")
-                : "-"}
+                  ? new Date(kayak.publicationDate).toLocaleString("es-AR")
+                  : "-"}
             </span>
+
           </div>
         </div>
 
