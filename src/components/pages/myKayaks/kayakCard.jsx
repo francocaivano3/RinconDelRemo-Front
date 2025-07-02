@@ -162,18 +162,18 @@ const KayakCard = ({ kayak, response }) => {
         </div>
         {location.pathname.startsWith("/KayaksDisponibles/Reserva/") && (
           <div>
-          <button
-            className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
-            onClick={() => handleEditClick()}
-          >
-            Reservar
-          </button>
-          <button
-            className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
-            onClick={ () => navigate("/KayaksDisponibles")}
-          >
-            Cancelar
-          </button>
+            <button
+              className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
+              onClick={() => handleEditClick()}
+            >
+              Reservar
+            </button>
+            <button
+              className="bg-[#003459] dark:bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-1.5 px-4 rounded w-20 flex justify-center items-center mt-5"
+              onClick={() => navigate("/KayaksDisponibles")}
+            >
+              Cancelar
+            </button>
           </div>
         )}
         {showEditModal && (
@@ -182,7 +182,7 @@ const KayakCard = ({ kayak, response }) => {
             <div className="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white dark:bg-[#1e293b] p-6 rounded-2xl w-[90%] sm:w-[900px] shadow-xl">
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
-                  Confirmar reserva del kayak : {kayak.nombre}
+                  Confirmar reserva del kayak : {kayak.nombre} {kayak.name}
                 </h3>
                 <div className="grid grid-cols-2 gap-3 m-7">
                   <div className="flex items-center text-gray-600 dark:text-gray-300">
@@ -190,14 +190,14 @@ const KayakCard = ({ kayak, response }) => {
                       size={18}
                       className="mr-2 text-gray-400 dark:text-white"
                     />
-                    <span className="text-sm">{kayak.longitud}</span>
+                    <span className="text-sm">{kayak.length}</span>
                   </div>
                   <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Users
                       size={18}
                       className="mr-2 text-gray-400 dark:text-white"
                     />
-                    <span className="text-sm">{kayak.capacidad}</span>
+                    <span className="text-sm">{kayak.capacidad} {kayak.capacity}</span>
                   </div>
                   <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Package
@@ -211,7 +211,13 @@ const KayakCard = ({ kayak, response }) => {
                       size={18}
                       className="mr-2 text-gray-400 dark:text-white"
                     />
-                    <span className="text-sm">{kayak.fechaCompra}</span>
+                    <span className="text-sm">
+                      {kayak.fechaCompra
+                        ? new Date(kayak.fechaCompra).toLocaleDateString("es-AR")
+                        : kayak.publicationDate
+                          ? new Date(kayak.publicationDate).toLocaleDateString("es-AR")
+                          : "-"}
+                    </span>
                   </div>
                   <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Calendar
