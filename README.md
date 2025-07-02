@@ -16,10 +16,8 @@ Plataforma web diseñada para gestionar taquillas de kayaks, facilitar alquilere
 ### Frontend
 - **Framework:** React 18 + Vite
 - **Lenguaje:** JavaScript
-- **Estilos:** TailwindCSS + DaisyUI + Framer Motion
+- **Estilos:** TailwindCSS + Bootstrap CSS + Lucide React
 - **Ruteo:** React Router DOM
-- **Estado:** TanStack React Query
-- **Visualización de datos:** Recharts + Swiper
 
 ## 🛠 Instalación y ejecución
 
