@@ -1,27 +1,26 @@
 import { useState, useEffect } from "react";
+import { getOwner } from "../../../service/owner";
 import {
   getPerchas,
   crearPercha,
   deletePerchas,
 } from "../../../service/perchas";
 import { paymetMp } from "../../../service/paymet";
-import { useAuth } from "../../context/authContext/AuthContext";
 import { useTranslate } from "../../../hooks/useTranslate";
-import AddKayakModal from "../myKayaks/addKayakModal";
 
-export default function GuarderiaKayaks() {
+export default function PerchasDisponibles() {
   const [perchas, setPerchas] = useState([]);
   const [perchaSeleccionada, setPerchaSeleccionada] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
-  const [mostrarModalAddKayak, setMostrarModalAddKayak] = useState(false);
   const [showPaymet, setShowPaymet] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState([]);
   const [perchaId, setPerchaId] = useState(null);
   const [perchaALiberar, setPerchaALiberar] = useState(null);
   const [modalLiberarShow, setModalLiberarShow] = useState(false);
+  const [ownerAll, setOwnerAll] = useState([]);
+  const [ownerSelected, setOwnerSelected] = useState("");
 
   const translate = useTranslate();
-  const { userInfo } = useAuth();
 
   const ROWS = 10;
   const COLS = 10;
@@ -52,9 +51,9 @@ export default function GuarderiaKayaks() {
 
           if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
             grid[row][col] = {
-              id: percha.location, // ubicación para mostrar
+              id: percha.location,
               estado: percha.isOccupied ? "ocupado" : "disponible",
-              dbId: percha.id, // **ID interno para usar en API**
+              dbId: percha.id,
             };
           }
         });
@@ -68,7 +67,6 @@ export default function GuarderiaKayaks() {
     getAllPerchas();
   }, []);
 
-  // Actualizar total a pagar si cambia la cantidad de perchas ocupadas
   useEffect(() => {
     setFormData((prev) => ({ ...prev, amount: totalAPagar }));
   }, [totalAPagar]);
@@ -86,7 +84,6 @@ export default function GuarderiaKayaks() {
     if (!percha) return;
 
     if (percha.estado === "disponible") {
-      // Validar que no tenga percha ocupada ya seleccionada
       const tienePercha = perchas.some((fila) =>
         fila.some(
           (p) => p?.estado === "ocupado" && seleccionadas.includes(p.id)
@@ -109,7 +106,6 @@ export default function GuarderiaKayaks() {
       setPerchaSeleccionada({ row, col, id: percha.id });
       setMostrarModal(true);
     } else if (percha.estado === "ocupado") {
-      // Mostrar modal para liberar percha ocupada
       setPerchaALiberar(percha);
       setPerchaSeleccionada({ row, col, id: percha.id });
       setModalLiberarShow(true);
@@ -149,8 +145,23 @@ export default function GuarderiaKayaks() {
     }
   };
 
+  const handleOwnerGetAll = async () => {
+    try {
+      const response = await getOwner();
+      console.log("🚀 ~ handleGetAll ~ response:", response);
+      setOwnerAll(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    handleOwnerGetAll();
+  }, []);
+
   const handleCreate = async () => {
     try {
+      console.log("ownerSelected en handleCreate:", ownerSelected);
       if (!perchaSeleccionada) return;
 
       const tienePercha = perchas.some((fila) =>
@@ -168,20 +179,20 @@ export default function GuarderiaKayaks() {
         return;
       }
 
+      if (!ownerSelected) {
+        console.error("No se encontró el ID del dueño seleccionado");
+        alert("Error: No se pudo obtener el ID del dueño seleccionado");
+        return;
+      }
+
       const id = perchaSeleccionada.id;
       const row = parseInt(id.slice(0, -1));
       const column = id.slice(-1);
 
-      if (!userInfo?.oid) {
-        console.error("No se encontró el ID del usuario");
-        alert("Error: No se pudo obtener el ID del usuario");
-        return;
-      }
-
       const data = {
         Row: row,
         Column: column,
-        OwnerId: userInfo.oid,
+        OwnerId: ownerSelected,
       };
 
       const response = await crearPercha(data);
@@ -204,7 +215,6 @@ export default function GuarderiaKayaks() {
       }
 
       setMostrarModal(false);
-      setMostrarModalAddKayak(true);
     } catch (error) {
       console.error("Error creando percha:", error);
       alert("Error al crear la percha. Por favor, intenta nuevamente.");
@@ -227,7 +237,6 @@ export default function GuarderiaKayaks() {
       setModalLiberarShow(false);
       setPerchaALiberar(null);
 
-      // Actualizar estado local como antes, usando la ubicación para el grid:
       const filaNum =
         parseInt((perchaALiberar || perchaSeleccionada).id.slice(0, -1)) - 1;
       const colLetra = (perchaALiberar || perchaSeleccionada).id.slice(-1);
@@ -236,7 +245,7 @@ export default function GuarderiaKayaks() {
       const actualizadas = [...perchas];
       if (actualizadas[filaNum] && actualizadas[filaNum][colNum]) {
         actualizadas[filaNum][colNum].estado = "disponible";
-        actualizadas[filaNum][colNum].dbId = null; // Limpiar ID interno
+        actualizadas[filaNum][colNum].dbId = null;
         setPerchas(actualizadas);
 
         setSeleccionadas((prev) =>
@@ -253,10 +262,6 @@ export default function GuarderiaKayaks() {
     }
   };
 
-  const handlePagar = () => {
-    setShowPaymet(true);
-  };
-
   return (
     <div className="flex flex-col items-center p-8 min-h-screen bg-blue-100 dark:bg-[#003459] relative">
       <div className="max-w-4xl w-full space-y-6">
@@ -269,6 +274,34 @@ export default function GuarderiaKayaks() {
               "Seleccione una percha disponible para guardar su kayak"
             )}
           </p>
+        </div>
+
+        <div className="p-4">
+          <label
+            htmlFor="selectOwner"
+            className="block text-sm font-medium text-gray-200 mb-2"
+          >
+            Selecciona un dueño de kayak:
+          </label>
+
+          <select
+            id="selectOwner"
+            value={ownerSelected}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onChange={(e) => {
+              setOwnerSelected(e.target.value);
+              console.log("ownerSelected cambiado a:", e.target.value);
+            }}
+          >
+            <option value="" className="text-gray-400">
+              -- Selecciona un dueño --
+            </option>
+            {ownerAll.map((owner) => (
+              <option key={owner.id} value={owner.id}>
+                {owner.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Leyenda */}
@@ -327,7 +360,6 @@ export default function GuarderiaKayaks() {
                         "bg-blue-300 hover:bg-blue-400 border border-blue-400";
                     else if (percha.estado === "ocupado")
                       estilo = "bg-black cursor-pointer border border-gray-700";
-                    // Cambié cursor para que se pueda clickear y abra modal
                     else if (percha.estado === "seleccionado")
                       estilo = "bg-pink-400 border border-pink-500";
 
@@ -371,19 +403,6 @@ export default function GuarderiaKayaks() {
                   ))}
               </div>
             )}
-          </div>
-
-          <div className="flex justify-between items-center border-t pt-4 mt-2">
-            <p className="text-md font-semibold text-gray-700">
-              {translate("Total a pagar:")}
-              <span className="text-blue-700 ml-2">${totalAPagar}</span>
-            </p>
-            <button
-              onClick={handlePagar}
-              className="bg-green-500 hover:bg-green-600 cursor-pointer text-white text-sm font-medium px-4 py-2 rounded shadow"
-            >
-              {translate("Pagar")}
-            </button>
           </div>
         </div>
       </div>
@@ -440,7 +459,10 @@ export default function GuarderiaKayaks() {
               </button>
               <button
                 onClick={handleCreate}
-                className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600 shadow-sm"
+                disabled={!ownerSelected}
+                className={`bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600 shadow-sm ${
+                  !ownerSelected ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 Confirmar
               </button>
@@ -536,12 +558,6 @@ export default function GuarderiaKayaks() {
           </div>
         </div>
       )}
-
-      <AddKayakModal
-        isOpen={mostrarModalAddKayak}
-        onClose={() => setMostrarModalAddKayak(false)}
-        perchaId={perchaId}
-      />
     </div>
   );
 }

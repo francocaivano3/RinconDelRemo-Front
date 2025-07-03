@@ -7,8 +7,6 @@ import { useTranslate } from "../../hooks/useTranslate";
 const determineUserType = (userInfo) => {
   if (!userInfo) return null;
 
-  
-
   // Si tiene roles, usamos el primero (para admin y encargado)
   if (userInfo.roles && userInfo.roles.length > 0) {
     return userInfo.roles[0].toLowerCase(); // "admin" o "encargado"
@@ -25,15 +23,15 @@ const determineUserType = (userInfo) => {
 };
 
 const NAV_ITEMS = {
-  
   admin: [
-    { path: "/dashboard", icon: Home, label: "Inicio"},
-    { path: "/sysadmin", icon: History, label: "Administración"},
+    { path: "/dashboard", icon: Home, label: "Inicio" },
+    { path: "/sysadmin", icon: History, label: "Administración" },
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
   encargado: [
     { path: "/dashboard", icon: Home, label: "Inicio" },
     { path: "/EncargadoChecks", icon: CalendarCheck, label: "Check-In/out" },
+    { path: "/perchasDisponibles", icon: CalendarCheck, label: "Perchas" },
     { path: "/configuracion", icon: User, label: "Configuración" },
   ],
   cliente: [
