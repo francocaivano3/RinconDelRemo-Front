@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import KayakCard from "../myKayaks/kayakCard";
+import AddKayakModal from "../myKayaks/addKayakModal";
+import cardImg from "../../../assets/imagen-de-dos-kayaks-desde-arriba.jpg";
+
 
 import { getAvailableKayak } from "../../../service/kayakDisponibles";
 import { useTranslate } from "../../../hooks/useTranslate";
