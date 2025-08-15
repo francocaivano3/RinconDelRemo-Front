@@ -22,6 +22,6 @@ Plataforma web diseñada para gestionar taquillas de kayaks, facilitar alquilere
 ## 🛠 Instalación y ejecución
 
 1. Descargar Node.js 18 o superior.  
-2. Cloná los repositorios del backend y frontend en la misma carpeta.  
+2. Cloná los repositorios del <a href="https://github.com/FrancoBerlochi/RinconDelRemo-Back.git">backend</a> y frontend en la misma carpeta.  
 3. Ejecutar el archivo .bat que esta en la carpeta donde clonaste los repositorios.
 4. Abrir los links de localhost que se muentran en las consolas.
